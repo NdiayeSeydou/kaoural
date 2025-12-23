@@ -1,123 +1,87 @@
 <?php
+
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\StocksController;
-use App\Http\Controllers\Admin\ProductsController;
-use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Landing\AboutController;
+use App\Http\Controllers\Landing\ServiceController;
+use App\Http\Controllers\Landing\ContactController;
+use App\Http\Controllers\Landing\HomeController;
+use App\Http\Controllers\Landing\ProduitController;
+use App\Http\Controllers\Landing\BlogController;
 
 
 
 
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-//route pour la page d'accueil
-Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
-
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-
-// Authentification (traitement du formulaire de connexion)
-Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
-
-// Déconnexion
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/about',[AboutController::class,'about'])->name('about');
+Route::get('/services',[ServiceController::class,'service'])->name('service');
+Route::get('/contact',[ContactController::class,'contact'])->name('contact');
+Route::get('/',[HomeController::class,'home'])->name('home');
+Route::get('/produit',[ProduitController::class,'produit'])->name('produit');
+Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 
 
-// Protéger toutes les routes suivantes — l'accès requiert une connexion
-Route::middleware([\App\Http\Middleware\EnsureAuthenticated::class])->group(function () {
-
-// les produits (ventes)
-
-// affiche de la listes des produits (ventes) avec les produits venant de la bdd
-Route::get('/products', [ProductsController::class, 'index'])->name('admin.products.index');
-
-// ajouté un nouveau produit (juste la vue)
-Route::get('/products/create', [ProductsController::class, 'create'])->name('admin.products.create');
-
-// ajouter un nouveau produit(avex les données du formulaire)
-Route::post('/products/store', [ProductsController::class, 'store'])->name('admin.products.store');
-
-// affiche les détails d'un produit (ID chiffré)
-Route::get('/products/{encryptedId}', [ProductsController::class, 'show'])->name('admin.products.show');
-
-// affiche de la page de modification d'un produit
-Route::get('/products/{product}/edit',[ProductsController::class, 'edit'])->name('admin.products.edit');
-
-// modifie un produit (avec les nouveaux données saisir)
-Route::put('/products/{product}/update',[ProductsController::class, 'update'])->name('admin.products.update');
-
-//supprime un produit des ventes 
-Route::delete('/products/delete/{stock}', [ProductsController::class, 'destroy'])->name('admin.products.destroy');
-
-// fin des ventes 
-
-
-
-
-//les stocks 
-// affiche de la listes des stocks avec les produits venant de la bdd
-Route::get('/stocks', [StocksController::class, 'index'])->name('admin.stocks.index');
-
-// ajouté un nouveau stock (juste la vue)
-Route::get('/stocks/create', [StocksController::class, 'create'])->name('admin.stocks.create');
-
-// modifier un stock (juste la vue)
-Route::get('/stocks/update/{stock}', [StocksController::class, 'edit'])->name('admin.stocks.update');
-
-
-// ajouté un nouveau stock(avex les données du formulaire)
-Route::post('/stocks/store', [StocksController::class, 'store'])->name('admin.stocks.store');
-
-// affiche de details d'un stock 
-Route::get('/stocks/{encryptedId}', [StocksController::class, 'show'])->name('admin.stocks.show');
-
-// édition d'une entrée historique 
-Route::get('/stocks/entry/{encryptedId}/edit', [StocksController::class, 'editEntry'])->name('admin.stocks.entry.edit');
-
-Route::put('/stocks/entry/{encryptedId}/update', [StocksController::class, 'updateEntry'])->name('admin.stocks.entry.update');
-              
-Route::delete('/stocks/entry/{encryptedId}', [StocksController::class, 'deleteEntry'])
-    ->name('admin.stocks.entry.delete');
-
-
-// supprimer toutes les entrées d'un produit pour une date donnée
-Route::delete('/stocks/{encryptedId}/history/{date}/delete', [StocksController::class, 'deleteEntriesByDate'])->name('admin.stocks.history.delete');
-
-//modifie un stock (avec les nouveaux données saisir)
-Route::put('/stocks/update/{encryptedId}', [StocksController::class, 'update'])->name('admin.stocks.update.post');
-
-// ajouter de la quantité à un stock existant
-Route::put('/stocks/add-quantity', [StocksController::class, 'addQuantity'])->name('admin.stocks.addquantite');
-
-// Suppression d'un stock
-Route::delete('/stocks/delete/{encryptedId}', [StocksController::class, 'destroy'])->name('admin.stocks.destroy');
-
-// fin des stocks
-
-
-
-
-//mon profil
-
-
-// affiche les paramètres de mon profil
-Route::get('/settings', [SettingsController::class, 'settings'])->name('admin.settings');
-
-// pas encore fais le reste update, delete etc...
-
-// Mise à jour des paramètres utilisateur (profil)
-Route::post('/settings/update', [SettingsController::class, 'update'])->name('admin.settings.update');
-
-// fin de mon profil 
-
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
+
+//les routes pour l'authentification avec breeze
+require __DIR__.'/auth.php';
+
+
+//les routes de l'admin 
+require __DIR__.'/Admin/admin.php';
+require __DIR__.'/Admin/stock.php';
+require __DIR__.'/Admin/fournisseur.php';
+require __DIR__.'/Admin/produit.php';
+require __DIR__.'/Admin/bon.php';
+require __DIR__.'/Admin/facture.php';
+require __DIR__.'/Admin/materiel.php';
+require __DIR__.'/Admin/profil.php';
+require __DIR__.'/Admin/transaction.php';
+require __DIR__.'/Admin/quincaillerie.php';
+require __DIR__.'/Admin/client.php';
+
+
+
+
+
+
+//les routes du superadmin
+require __DIR__.'/SuperAdmin/superadmin.php';
+require __DIR__.'/SuperAdmin/bon.php';
+require __DIR__.'/SuperAdmin/facture.php';
+require __DIR__.'/SuperAdmin/materiel.php';
+require __DIR__.'/SuperAdmin/profil.php';
+require __DIR__.'/SuperAdmin/transaction.php';
+require __DIR__.'/SuperAdmin/quincaillerie.php';
+require __DIR__.'/SuperAdmin/client.php';
+require __DIR__.'/SuperAdmin/user.php';
+require __DIR__.'/SuperAdmin/stock.php';
+require __DIR__.'/SuperAdmin/produit.php';
+
+
+
+
+
+//les routes du client
+require __DIR__.'/Client/client.php';
+require __DIR__.'/Client/dette.php';
+require __DIR__.'/Client/facture.php';
+require __DIR__.'/Client/devis.php';
+require __DIR__.'/Client/historique.php';
+require __DIR__.'/Client/panier.php';
+require __DIR__.'/Client/profil.php';

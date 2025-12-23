@@ -21,7 +21,7 @@ class ProductsController extends Controller
         foreach ($products as $product) {
             $product->stock = Stock::where('nom_produit', $product->nom_produit)->first();
         }
-        return view('produits.listes', compact('products'));
+        return view('admin.produits.listes', compact('products'));
     }
 
 
@@ -32,7 +32,7 @@ class ProductsController extends Controller
         $produit = Product::findOrFail($id);
         $produit->stock = Stock::where('nom_produit', $produit->nom_produit)->first();
 
-        return view('produits.show', compact('produit'));
+        return view('admin.produits.show', compact('produit'));
     }
 
     // affiche la page d'ajout du produit 
@@ -40,7 +40,7 @@ class ProductsController extends Controller
     {
         // Pour proposer une liste des produits disponibles dans le stock
         $stocks = Stock::all();
-        return view('produits.add', compact('stocks'));
+        return view('admin.produits.add', compact('stocks'));
     }
 
     // add le produit 
@@ -114,7 +114,7 @@ class ProductsController extends Controller
     {
         $id = Crypt::decrypt($encryptedId);
         $produit = Product::findOrFail($id);
-        return view('produits.update', compact('produit'));
+        return view('admin.produits.update', compact('produit'));
     }
 
     // update le produit 

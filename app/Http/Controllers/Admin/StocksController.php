@@ -7,24 +7,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Stock;
+use App\Models\StockEntry;
 use App\Models\Product;
 
 class StocksController extends Controller
 {
 
-    //  Liste des stocks
+    // Liste des stocks
     public function index()
     {
         $stocks = Stock::latest()->paginate(12);
-        return view('stocks.listes', compact('stocks'));
+        return view('admin.stocks.listes', compact('stocks'));
     }
 
 
-    //  Formulaire d’ajout
+    // Formulaire d’ajout
     public function create()
     {
         $stocks = Stock::all();
-        return view('stocks.add', compact('stocks'));
+        return view('admin.stocks.add', compact('stocks'));
     }
 
     // voir un stock 
@@ -33,22 +34,28 @@ class StocksController extends Controller
         // Décrypter l'ID
         $id = Crypt::decrypt($encryptedId);
 
-        // Récupérer le stock principal
+        // Stock principal
         $stock = Stock::findOrFail($id);
 
         // Quantité restante
         $qtyRemaining = $stock->quantite_entree - $stock->quantite_sortie;
 
-        // Toutes les entrées pour ce produit
-        $entries = Stock::where('nom_produit', $stock->nom_produit)
+        //Historique des entrées (relation)
+        $entries = $stock->entries()
             ->orderBy('date', 'desc')
             ->get();
 
-        // Les entrées sans date (optionnel)
+        // entrées sans date
         $noDateEntries = $entries->whereNull('date');
 
-        return view('stocks.show', compact('stock', 'qtyRemaining', 'entries', 'noDateEntries'));
+        return view('admin.stocks.show', compact(
+            'stock',
+            'qtyRemaining',
+            'entries',
+            'noDateEntries'
+        ));
     }
+
 
 
     // Affiche toutes les entrées pour un produit à une date donnée (YYYY-MM-DD)
@@ -65,7 +72,7 @@ class StocksController extends Controller
             ->orderBy('date', 'desc')
             ->get();
 
-        return view('stocks.show', compact('stock', 'entries', 'day'));
+        return view('admin.stocks.show', compact('stock', 'entries', 'day'));
     }
 
     // Supprimer toutes les entrées pour un produit à une date donnée
@@ -89,34 +96,61 @@ class StocksController extends Controller
     public function editEntry($encryptedId)
     {
         $id = Crypt::decrypt($encryptedId);
-        $entry = Stock::findOrFail($id);
 
-        return view('stocks.update_entry', compact('entry'));
+        // On récupère l'entrée avec le stock associé
+        $entry = StockEntry::with('stock')->findOrFail($id);
+
+        return view('admin.stocks.update_entry', compact('entry'));
     }
+
 
     // Mise à jour d'une entrée spécifique
     public function updateEntry(Request $request, $encryptedId)
     {
         $id = Crypt::decrypt($encryptedId);
+
+        // Ici on récupère l'entrée spécifique
         $entry = Stock::findOrFail($id);
 
-        $data = $request->validate([
-
+        $validated = $request->validate([
             'quantite_entree' => 'required|integer|min:0',
             'date' => 'nullable|date',
         ]);
 
+        // Normaliser la date
         if ($request->filled('date')) {
-            $data['date'] = date('Y-m-d H:i:s', strtotime($request->input('date')));
+            $validated['date'] = date('Y-m-d H:i:s', strtotime($request->input('date')));
+        } else {
+            $validated['date'] = $entry->date;
         }
 
-        // Mettre à jour le prix total pour cette entrée
+        // Calcul de la différence avec l'ancienne quantité
+        $ancienneQuantite = $entry->quantite_entree;
+        $nouvelleQuantite = $validated['quantite_entree'];
+        $difference = $nouvelleQuantite - $ancienneQuantite;
 
-        $entry->update($data);
+        // Mettre à jour le stock principal
+        $stockPrincipal = Stock::where('nom_produit', $entry->nom_produit)
+            ->orderBy('id', 'asc')
+            ->first();
 
-        return redirect()->route('admin.stocks.show', Crypt::encrypt($entry->id))
-            ->with('success', 'Entrée mise à jour.');
+        if ($stockPrincipal) {
+            $stockPrincipal->quantite_entree += $difference;
+            $stockPrincipal->prix_total = $stockPrincipal->quantite_entree * $stockPrincipal->prix_unitaire;
+            $stockPrincipal->save();
+        }
+
+        // Mettre à jour l'entrée
+        $entry->update([
+            'quantite_entree' => $nouvelleQuantite,
+            'date' => $validated['date'],
+            'prix_total' => $nouvelleQuantite * $entry->prix_unitaire, // si tu as prix_unitaire à l'entrée
+        ]);
+
+        return redirect()->route('admin.stocks.show', Crypt::encrypt($stockPrincipal->id))
+            ->with('success', 'Entrée mise à jour et stock principal ajusté.');
     }
+
 
     //supprimé une entrée de stock
     public function deleteEntry($encryptedId)
@@ -147,29 +181,43 @@ class StocksController extends Controller
         $images = $request->file('images');
 
         foreach ($nomProduits as $index => $nom) {
-            $data = [
-                'nom_produit' => $nom,
-                'quantite_entree' => $quantites[$index],
-                'quantite_sortie' => 0,
-                'prix_unitaire' => $prixUnitaires[$index],
-                'alerte_stock' => 5,
-            ];
+            $qty = (int) $quantites[$index];
 
-            // Upload image si présente
-            if (isset($images[$index]) && $images[$index]) {
-                $data['image'] = $images[$index]->store('stocks', 'public');
+            // Chercher un stock principal existant pour ce produit
+            $existing = Stock::where('nom_produit', $nom)
+                ->orderBy('id', 'asc')
+                ->first();
+
+            if ($existing) {
+                // Si existe, incrémenter la quantité et mettre à jour le prix total
+                $existing->quantite_entree += $qty;
+                $existing->prix_total = $existing->quantite_entree * $existing->prix_unitaire;
+                $existing->save();
+            } else {
+                $data = [
+                    'nom_produit' => $nom,
+                    'quantite_entree' => $qty,
+                    'quantite_sortie' => 0,
+                    'prix_unitaire' => $prixUnitaires[$index],
+                    'alerte_stock' => 5,
+                ];
+
+                // Upload image si présente
+                if (isset($images[$index]) && $images[$index]) {
+                    $data['image'] = $images[$index]->store('stocks', 'public');
+                }
+
+                // Calcul prix total
+                $data['prix_total'] = $data['quantite_entree'] * $data['prix_unitaire'];
+
+                // date de l'entrée si fournie
+                if (isset($request->date[$index]) && $request->date[$index]) {
+                    $data['date'] = date('Y-m-d H:i:s', strtotime($request->date[$index]));
+                }
+
+                // Créer le stock
+                Stock::create($data);
             }
-
-            // Calcul prix total
-            $data['prix_total'] = $data['quantite_entree'] * $data['prix_unitaire'];
-
-            // date de l'entrée si fournie
-            if (isset($request->date[$index]) && $request->date[$index]) {
-                $data['date'] = date('Y-m-d H:i:s', strtotime($request->date[$index]));
-            }
-
-            // Créer le stock
-            Stock::create($data);
         }
 
         return redirect()->route('admin.stocks.index')->with('success', 'Stocks enregistrés avec succès.');
@@ -181,10 +229,8 @@ class StocksController extends Controller
         $id = Crypt::decrypt($encryptedId);
         $stock = Stock::findOrFail($id);
 
-        return view('stocks.update', compact('stock'));
+        return view('admin.stocks.update', compact('stock'));
     }
-
-
 
     //Mise à jour du stock
     public function update(Request $request, $encryptedId)
@@ -233,8 +279,6 @@ class StocksController extends Controller
             ->with('success', 'Stock mis à jour.');
     }
 
-
-
     //  Supprimer un stock
     public function destroy($encryptedId)
     {
@@ -250,7 +294,6 @@ class StocksController extends Controller
     }
 
 
-
     //Ajouter une quantité a un produit existant
     public function addQuantity(Request $request)
     {
@@ -260,36 +303,22 @@ class StocksController extends Controller
             'date' => 'nullable|date',
         ]);
 
-        // Récupérer le stock principal
         $stock = Stock::findOrFail($request->stock_id);
 
-        // 🔥 1. CRÉER UNE NOUVELLE LIGNE D'HISTORIQUE (sans écraser)
-        $nouvelleEntree = new Stock();
-        $nouvelleEntree->nom_produit = $stock->nom_produit;
-        $nouvelleEntree->quantite_entree = $request->quantite_entree;
-        $nouvelleEntree->quantite_sortie = 0;
+        // Enregistrer l’historique
+        StockEntry::create([
+            'stock_id' => $stock->id,
+            'quantite' => $request->quantite_entree,
+            'date' => $request->date ?? now(),
+        ]);
 
-        // important : on utilise le prix unitaire du stock principal
-        $nouvelleEntree->prix_unitaire = $stock->prix_unitaire;
-        $nouvelleEntree->prix_total = $request->quantite_entree * $stock->prix_unitaire;
-
-        // Gestion de la date
-        if ($request->filled('date')) {
-            $nouvelleEntree->date = date('Y-m-d H:i:s', strtotime($request->date));
-        } else {
-            $nouvelleEntree->date = now();
-        }
-
-        $nouvelleEntree->save();
-
-
-        // 🔥 2. METTRE À JOUR LE STOCK PRINCIPAL
+        // Mettre à jour le stock principal
         $stock->quantite_entree += $request->quantite_entree;
         $stock->prix_total = $stock->quantite_entree * $stock->prix_unitaire;
         $stock->save();
 
-        return redirect()->route('admin.stocks.index')
-            ->with('success', 'Nouvelle quantité ajoutée avec succès.');
+        return redirect()->route('admin.stocks.index', Crypt::encrypt($stock->id))
+            ->with('success', 'Quantité ajoutée avec succès.');
     }
 
 
@@ -322,4 +351,5 @@ class StocksController extends Controller
 
         return $total;
     }
+    
 }

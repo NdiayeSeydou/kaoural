@@ -18,6 +18,6 @@ class HomeController extends Controller
         foreach ($products as $product) {
             $product->stock = Stock::where('nom_produit', $product->nom_produit)->first();
         }
-        return view('dashboard', compact('products'));
+        return view('admin.interface.dashboard', compact('products'));
     }
 }

@@ -19,4 +19,10 @@ class Stock extends Model
         'alerte_stock',
         'date',
     ];
+
+    public function entries()
+    {
+        return $this->hasMany(StockEntry::class);
+    }
+    
 }
