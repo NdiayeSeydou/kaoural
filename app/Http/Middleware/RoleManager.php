@@ -43,7 +43,7 @@ class RoleManager
             case 0:
                 return redirect()->route('superadmin.dashboard');
             case 1:
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('dashboard');
             case 2:
                 return redirect()->route('client.dashboard');
         }

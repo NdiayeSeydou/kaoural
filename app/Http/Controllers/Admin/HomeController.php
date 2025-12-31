@@ -20,4 +20,9 @@ class HomeController extends Controller
         }
         return view('admin.interface.dashboard', compact('products'));
     }
+
+    public function dashboard()
+    {
+        return view('admin.interface.dashboard');
+    }
 }

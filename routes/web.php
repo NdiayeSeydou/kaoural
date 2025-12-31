@@ -72,9 +72,13 @@ require __DIR__.'/SuperAdmin/client.php';
 require __DIR__.'/SuperAdmin/user.php';
 require __DIR__.'/SuperAdmin/stock.php';
 require __DIR__.'/SuperAdmin/produit.php';
+require __DIR__.'/SuperAdmin/vente.php';
+require __DIR__.'/SuperAdmin/newsletter.php';
 
 
 
+
+ 
 
 
 //les routes du client
