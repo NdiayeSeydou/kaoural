@@ -150,6 +150,7 @@ class StocksController extends Controller
         return redirect()->route('admin.stocks.show', Crypt::encrypt($stockPrincipal->id))
             ->with('success', 'Entrée mise à jour et stock principal ajusté.');
     }
+    
 
 
     //supprimé une entrée de stock
