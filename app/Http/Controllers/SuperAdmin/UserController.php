@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     //listes des utilisateurs 
-    public function users()
+    public function user()
     {
         return view('superadmin.interface.user.listes');
     }

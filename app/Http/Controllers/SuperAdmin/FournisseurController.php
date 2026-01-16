@@ -8,27 +8,33 @@ use Illuminate\Http\Request;
 class FournisseurController extends Controller
 {
     // Méthode pour afficher la liste des fournisseurs
-    public function index()
+    public function fournisseur()
     {
         return view('superadmin.interface.fournisseur.listes');
     }
 
     // Méthode pour afficher le formulaire de création d'un nouveau fournisseur
-    public function create()
+    public function addFournisseur()
     {
         return view('superadmin.interface.fournisseur.create');
     }
 
     //modifier un fournisseur
-    public function edit()
+    public function editFournisseur()
     {
         return view('superadmin.interface.fournisseur.edit');
     }
 
     //methode pour afficher les détails d'un fournisseur spécifique
-    public function show()
+    public function detailsFournisseur()
     {
         return view('superadmin.interface.fournisseur.show');
+    }
+
+    //modifier une entrée 
+    public function editEntry()
+    {
+        return view('superadmin.interface.fournisseur.edit_entry');
     }
     
 }

@@ -41,7 +41,17 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('dash/assets/css/theme.min.css') }}">
 
+
+    <!-- intl-tel-input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css" />
+
+    <!-- intl-tel-input JS -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+
+
     
+
+
 
 </head>
 
@@ -82,207 +92,295 @@
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Ventes</span>
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="6" cy="19" r="2" />
+                                    <circle cx="17" cy="19" r="2" />
+                                    <path d="M17 17h-11l-1 -12h-2" />
+                                    <path d="M6 5h16l-1 7h-13" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Ventes</span>
+                        </div>
+
+                        <!-- ICÔNE FLÈCHE PERSONNALISÉE -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
                     </a>
+
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Listes</a>
+                            <a class="nav-link" href="{{ route('superadmin.vente.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Ajouter</a>
+                            <a class="nav-link" href="{{ route('superadmin.vente.create') }}">Ajouter</a>
                         </li>
-
                     </ul>
                 </li>
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Stocks</span>
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Stocks -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icon-tabler-box">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 3l8 4l-8 4l-8 -4z" />
+                                    <path d="M4 7v10l8 4l8 -4v-10" />
+                                    <path d="M12 11v10" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Stocks</span>
+                        </div>
+
+                        <!-- ICÔNE FLÈCHE -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
                     </a>
+
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Listes</a>
+                            <a class="nav-link" href="{{ route('superadmin.stock.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Ajouter</a>
+                            <a class="nav-link" href="{{ route('superadmin.stock.create') }}">Ajouter</a>
                         </li>
-
                     </ul>
                 </li>
+
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Fournisseurs</span>
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Fournisseurs -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icon-tabler-users">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M17 11a4 4 0 1 0 -4 -4" />
+                                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    <path d="M15 21v-2a4 4 0 0 1 4 -4h2a4 4 0 0 1 4 4v2" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Fournisseurs</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
                     </a>
+
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Listes</a>
+                            <a class="nav-link" href="{{ route('superadmin.fournisseur.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Ajouter</a>
+                            <a class="nav-link" href="{{ route('superadmin.fournisseur.create') }}">Ajouter</a>
                         </li>
-
                     </ul>
                 </li>
-
-                <!-- Nav item -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-invoice">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                <path
-                                    d="M19 12v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-14a2 2 0 0 1 2 -2h7l5 5v4.25" />
-                            </svg>
-                        </span>
-                        <span class="text">Factures</span>
-                    </a>
-                    <ul class="dropdown-menu flex-column">
-                        <li class="nav-item">
-                            <a class='nav-link' href='apps/invoice/invoice-list.html'>Listes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class='nav-link' href='apps/invoice/invoice-detail.html'>Créer</a>
-                        </li>
-
-                    </ul>
-                </li>
-                <!-- Nav item -->
-
-                <!-- Nav item -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Bons</span>
-                    </a>
-                    <ul class="dropdown-menu flex-column">
-                        <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Listes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Créer</a>
-                        </li>
-
-                    </ul>
-                </li>
-
-
-
-
-
-                <!-- Nav item -->
 
 
                 <!-- Nav item -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Quincaillerie partenaire</span>
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Factures -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                    <path
+                                        d="M19 12v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-14a2 2 0 0 1 2 -2h7l5 5v4.25" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Factures</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
                     </a>
+
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Status</a>
+                            <a class="nav-link" href="{{ route('superadmin.facture.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
+                            <a class="nav-link" href="{{ route('superadmin.facture.create') }}">Créer</a>
                         </li>
-
                     </ul>
                 </li>
+                <!-- Nav item -->
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Bons de commande -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 4h16v16h-16z" />
+                                    <path d="M8 8h8" />
+                                    <path d="M8 12h8" />
+                                    <path d="M8 16h5" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Bons de commande</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
+
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('superadmin.bon.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('superadmin.bon.create') }}">Créer</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
+
+
+                <!-- Nav item -->
+
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Quincaillerie -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icon-tabler-tool">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M14 6l7 7l-4 4l-7 -7" />
+                                    <path d="M8 8l-5 5l4 4l5 -5" />
+                                    <path d="M9 17l-2 2l-4 -4l2 -2" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Quincaillerie partenaire</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
+
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('superadmin.quincaillerie.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('superadmin.quincaillerie.create') }}">Ajouter</a>
+                        </li>
+                    </ul>
+                </li>
+
 
 
 
                 <!-- Nav item -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Gestion des créances</span>
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Créances -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 3v18" />
+                                    <path d="M16 7h-5a3 3 0 0 0 0 6h2a3 3 0 0 1 0 6h-5" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Gestion des créances</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
                     </a>
+
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Status</a>
+                            <a class="nav-link" href="{{ route('superadmin.creance.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
+                            <a class="nav-link" href="{{ route('superadmin.creance.create') }}">Ajouter</a>
                         </li>
-
                     </ul>
                 </li>
+
 
                 <!-- Nav item -->
 
@@ -293,63 +391,92 @@
                     <div class="nav-heading">Commande</div>
                     <hr class="mx-5 nav-line mb-1" />
                 </li>
+
                 <!-- Nav item -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Commande</span>
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Commande -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icon-tabler-file-text">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                    <line x1="9" y1="9" x2="10" y2="9" />
+                                    <line x1="9" y1="13" x2="15" y2="13" />
+                                    <line x1="9" y1="17" x2="15" y2="17" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Commande</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
                     </a>
+
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Status</a>
+                            <a class="nav-link" href="{{ route('superadmin.order.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
+                            <a class="nav-link" href="{{ route('superadmin.order.status') }}">Status</a>
                         </li>
-
                     </ul>
                 </li>
 
 
 
+
                 <!-- Nav item -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                <path d="M3 7l9 6l9 -6" />
-                            </svg>
-                        </span>
-                        <span class="text">Demande de devis</span>
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Demande de devis -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icon-tabler-table">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                    <line x1="3" y1="9" x2="21" y2="9" />
+                                    <line x1="3" y1="15" x2="21" y2="15" />
+                                    <line x1="9" y1="3" x2="9" y2="21" />
+                                    <line x1="15" y1="3" x2="15" y2="21" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Demande de devis</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
                     </a>
+
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail'>Status</a>
+                            <a class="nav-link" href="{{ route('superadmin.demande.index') }}">Listes</a>
                         </li>
-                        <li class="nav-item">
-                            <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
-                        </li>
-
                     </ul>
                 </li>
+
 
                 <!-- Nav item -->
                 <li class="nav-item">
@@ -358,7 +485,7 @@
                 </li>
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon"><svg
+                    <a class='nav-link' href='{{ route('superadmin.blog.index') }}'><span class="nav-icon"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -376,49 +503,49 @@
 
 
                 <li class="nav-item">
-                    <a class='nav-link' href='dashboard/finance.html'><span class="nav-icon"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-mastercard">
+                    <a class='nav-link' href='{{ route('superadmin.produit.index') }}'><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-shopping-bag">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M14 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                <path d="M12 9.765a3 3 0 1 0 0 4.47" />
-                                <path
-                                    d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                            </svg></span> <span class="text">Produits</span></a>
+                                <path d="M6 7l1 -3h10l1 3" />
+                                <path d="M3 7h18v13a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-13z" />
+                                <path d="M9 11v2" />
+                                <path d="M15 11v2" />
+                            </svg>
+                        </span> <span class="text">Produits</span></a>
                 </li>
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-news">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
-                                <path d="M8 8l4 0" />
-                                <path d="M8 12l4 0" />
-                                <path d="M8 16l4 0" />
-                            </svg></span> <span class="text">Catégories</span></a>
+                    <a class='nav-link' href='{{ route('superadmin.categorie.index') }}'><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-grid">
+                                <rect x="4" y="4" width="6" height="6" rx="1" />
+                                <rect x="14" y="4" width="6" height="6" rx="1" />
+                                <rect x="4" y="14" width="6" height="6" rx="1" />
+                                <rect x="14" y="14" width="6" height="6" rx="1" />
+                            </svg>
+                        </span> <span class="text">Catégories</span></a>
                 </li>
 
 
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-news">
+                    <a class='nav-link' href='{{ route('superadmin.user.index') }}'><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-users-group">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
-                                <path d="M8 8l4 0" />
-                                <path d="M8 12l4 0" />
-                                <path d="M8 16l4 0" />
-                            </svg></span> <span class="text">Utilisateurs</span></a>
+                                <circle cx="9" cy="7" r="4" />
+                                <circle cx="17" cy="7" r="4" />
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h0a4 4 0 0 1 4 4v2" />
+                                <path d="M14 21v-2a4 4 0 0 1 4 -4h0a4 4 0 0 1 4 4v2" />
+                            </svg>
+                        </span> <span class="text">Utilisateurs</span></a>
 
                 </li>
 
@@ -428,31 +555,31 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class='nav-link' href='dashboard/finance.html'><span class="nav-icon"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-mastercard">
+                    <a class='nav-link' href='{{ route('superadmin.monprofil') }}'><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-settings">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M14 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                <path d="M12 9.765a3 3 0 1 0 0 4.47" />
                                 <path
-                                    d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                            </svg></span> <span class="text">Profil</span></a>
+                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a2 2 0 0 0 2.9 1.222c1.52 -.878 3.316 .918 2.438 2.438a2 2 0 0 0 1.222 2.9c1.756 .426 1.756 2.924 0 3.35a2 2 0 0 0 -1.222 2.9c.878 1.52 -.918 3.316 -2.438 2.438a2 2 0 0 0 -2.9 1.222c-.426 1.756 -2.924 1.756 -3.35 0a2 2 0 0 0 -2.9 -1.222c-1.52 .878 -3.316 -.918 -2.438 -2.438a2 2 0 0 0 -1.222 -2.9c-1.756 -.426 -1.756 -2.924 0 -3.35a2 2 0 0 0 1.222 -2.9c-.878 -1.52 .918 -3.316 2.438 -2.438a2 2 0 0 0 2.9 -1.222z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </span> <span class="text">Profil</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class='nav-link' href='dashboard/finance.html'><span class="nav-icon"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-mastercard">
+                    <a class='nav-link' href=''><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-lock">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M14 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                <path d="M12 9.765a3 3 0 1 0 0 4.47" />
-                                <path
-                                    d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                            </svg></span> <span class="text">Fermer ma section</span></a>
+                                <rect x="5" y="11" width="14" height="10" rx="2" />
+                                <circle cx="12" cy="16" r="1" />
+                                <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
+                            </svg>
+                        </span> <span class="text">Fermer ma section</span></a>
                 </li>
 
 
@@ -808,8 +935,8 @@
                     </li>
                     <!-- Nav item -->
                     <li class="nav-item">
-                        <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"
                                     class="icon icon-tabler icons-tabler-outline icon-tabler-news">
@@ -819,7 +946,8 @@
                                     <path d="M8 8l4 0" />
                                     <path d="M8 12l4 0" />
                                     <path d="M8 16l4 0" />
-                                </svg></span> <span class="text">Catégories</span></a>
+                                </svg>
+                            </span> <span class="text">Catégories</span></a>
                     </li>
 
 
@@ -1011,7 +1139,8 @@
 
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-md p-0">
                                 <div>
-                                    <div class="d-flex gap-3 align-items-center border-dashed border-bottom px-4 py-4">
+                                    <div
+                                        class="d-flex gap-3 align-items-center border-dashed border-bottom px-4 py-4">
                                         <img src="assets/images/avatar/avatar-1.jpg" alt=""
                                             class="avatar avatar-md rounded-circle" />
                                         <div>
@@ -1023,8 +1152,8 @@
                                         <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
                                             <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                     height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-home-2">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
@@ -1037,8 +1166,8 @@
                                         <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
                                             <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                     height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-inbox">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
@@ -1051,8 +1180,8 @@
                                         <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
                                             <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                     height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-message">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M8 9h8" />
@@ -1066,8 +1195,8 @@
                                         <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
                                             <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                     height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-activity">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M3 12h4l3 8l4 -16l3 8h4" />
@@ -1078,8 +1207,8 @@
                                         <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
                                             <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                     height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
@@ -1093,9 +1222,10 @@
                                     <div class="border-dashed border-top mb-4 pt-4 px-6">
                                         <a href="#!" class="text-secondary d-flex align-items-center gap-2">
                                             <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                    height="20" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-login-2">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
@@ -1944,15 +2074,22 @@
 
     </div>
 
-    <!-- Libs JS -->
+
     <script src="{{ asset('dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+
     <script src="{{ asset('dash/assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
 
     <!-- Theme JS -->
     <script src="{{ asset('dash/assets/js/theme.min.js') }}"></script>
+    <!-- jsvectormap -->
     <script src="{{ asset('dash/assets/js/vendors/sidebarnav.js') }}"></script>
+    <script src="{{ asset('dash/assets/libs/jsvectormap/dist/js/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('dash/assets/libs/jsvectormap/dist/maps/world.js') }}"></script>
+    <script src="{{ asset('dash/assets/libs/jsvectormap/dist/maps/world-merc.js') }}"></script>
     <script src="{{ asset('dash/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('dash/assets/js/vendors/chart.js') }}"></script>
+    <script src="{{ asset('dash/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script src="{{ asset('dash/assets/js/vendors/choice.js') }}"></script>
     <script src="{{ asset('dash/assets/libs/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('dash/assets/js/vendors/swiper.js') }}"></script>
 

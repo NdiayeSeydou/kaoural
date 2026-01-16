@@ -8,23 +8,24 @@ use Illuminate\Http\Request;
 class ProduitController extends Controller
 {
     //liste des produits
-    public function index()
+    public function produit()
     {
         return view('superadmin.interface.produit.listes');
     }
 
     //ajout de produit
-    public function create(){
+    public function addProduit(){
         return view('superadmin.interface.produit.create');
     }
 
-    //edition de produit
-    public function edit(){
+    //modifier de produit
+    public function editProduit(){
         return view('superadmin.interface.produit.edit');
     }
 
-    //detail de produit
-    public function show(){
+    //detail d'un produit
+    public function detailsProduit(){
         return view('superadmin.interface.produit.show');
     }
+    
 }

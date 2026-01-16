@@ -74,6 +74,17 @@ require __DIR__.'/SuperAdmin/stock.php';
 require __DIR__.'/SuperAdmin/produit.php';
 require __DIR__.'/SuperAdmin/vente.php';
 require __DIR__.'/SuperAdmin/newsletter.php';
+require __DIR__.'/SuperAdmin/order.php';
+require __DIR__.'/SuperAdmin/fournisseur.php';
+require __DIR__.'/SuperAdmin/creance.php';
+require __DIR__.'/SuperAdmin/demande.php';
+require __DIR__.'/SuperAdmin/blog.php';
+require __DIR__.'/SuperAdmin/categorie.php';
+
+
+
+
+
 
 
 

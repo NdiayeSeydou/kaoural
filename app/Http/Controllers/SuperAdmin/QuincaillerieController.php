@@ -30,4 +30,17 @@ class QuincaillerieController extends Controller
     {
         return view('superadmin.interface.quincaillerie.editQuincaillerie');
     }
+
+
+    //retrait de produit 
+    public function retraitProduit()
+    {
+        return view('superadmin.interface.quincaillerie.retrait');
+    }
+
+    //modifier un retrait 
+    public function editRetrait()
+    {
+        return view('superadmin.interface.quincaillerie.edit_retrait');
+    }
 }
