@@ -1,58 +1,39 @@
-<!DOCTYPE html>
-<html lang="fr">
+@extends('emails.layouts.navbar')
+@section('title', 'Bienvenue à la quincaillerie kaoural')
+@section('suite')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Bienvenue chez Too Good</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fff8f0;
-            color: #333;
-            padding: 20px;
-        }
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
 
-        h2 {
-            color: violet;
-        }
 
-        a {
-            display: block;
-            background: violet;
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
-</head>
+    <div class="container-fluid bg-light py-5 my-5 mt-0">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <!-- Texte de bienvenue -->
+                <div class="col-lg-7 col-md-12">
+                    <h1 class="display-4 mb-4 animated bounceInDown">
+                        Bienvenue chez <span class="text-primary">Quincaillerie Kaoural</span> 👋
+                    </h1>
+                    <p class="lead mb-4">
+                        Bonjour {{ $user->name ?? 'cher client' }}, nous sommes ravis de vous compter parmi nos clients !
+                        Avec votre compte, vous pourrez suivre vos commandes, profiter d’offres exclusives et bénéficier
+                        d’un service rapide et sécurisé.
+                    </p>
+                    <a href="" class="btn btn-primary btn-lg"   >
+                        Accéder à mon compte
+                    </a>
+                </div>
 
-<body>
-    <div class="container">
-        <h2>Bonjour {{ $user['name'] }},</h2>
-
-        <p>Merci de vous être inscrit sur <strong>Too Good</strong>, votre pâtisserie en ligne !</p>
-        <p>Nous sommes ravis de vous accueillir dans notre communauté de gourmands.</p>
-        <h4>Ce que vous pouvez faire :</h4>
-        <ul>
-            <li>Explorer notre catalogue de douceurs sucrées</li>
-            <li>Passer vos commandes en ligne, en toute sécurité</li>
-            <li>Suivre vos commandes depuis votre espace client</li>
-        </ul>
-        <p>Besoin d’aide ? N’hésitez pas à nous contacter !</p>
-        <p>À très bientôt,<br>L’équipe Too Good</p>
+                <!-- Image -->
+                <div class="col-lg-5 col-md-12 mt-3">
+                    <img src="{{ url('kaoural/image1.webp') }}" class="img-fluid rounded animated zoomIn"
+                        alt="Bienvenue chez Kaoural">
+                </div>
+            </div>
+        </div>
     </div>
-</body>
 
-</html>
+
+
+
+
+@endsection

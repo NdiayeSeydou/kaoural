@@ -6,18 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::table('stocks', function (Blueprint $table) {
-            // date d'entrée en stock (nullable pour rétrocompatibilité)
-            $table->dateTime('date')->nullable()->after('image');
+            
+              $table->string('public_id')->unique()->after('id');
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::table('stocks', function (Blueprint $table) {
-            $table->dropColumn('date');
+            //
         });
     }
 };

@@ -22,5 +22,10 @@ Route::prefix('superadmin')->group(function () {
 
         // Modifier une entrée spécifique
         Route::get('/fournisseur/modifier/entrée/spécifique', [FournisseurController::class, 'editEntry'])->name('superadmin.fournisseur.edit_entry');
+
+        Route::post('/fournisseur/ajouter/fournisseur', [FournisseurController::class, 'store'])->name('superadmin.fournisseur.store');
+
+
+
     });
 });

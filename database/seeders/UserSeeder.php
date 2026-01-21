@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,11 +15,10 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'kourekama',
-            'email' => 'kourekama@gmail.com',
-            'password' => Hash::make('kourekama123'), // change le mot de passe après
-           
-        ]);
+
+      //rien ici 
+
+       
+       
     }
 }

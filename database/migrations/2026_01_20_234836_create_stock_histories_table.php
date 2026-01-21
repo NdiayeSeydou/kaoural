@@ -11,19 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stock_entries', function (Blueprint $table) {
+        Schema::create('stock_histories', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('stock_id')->constrained()->onDelete('cascade');
-            $table->integer('quantite');
-            $table->dateTime('date');
+
+            $table->foreignId('fournisseur_id')->constrained()->onDelete('cascade');
+
+            $table->integer('quantite_entree');
+
+            $table->enum('emplacement', ['boutique', 'magasin']);
+
+            $table->date('date');
+            
             $table->timestamps();
-        });    }
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('stock_entries');
+        Schema::dropIfExists('stock_histories');
     }
 };

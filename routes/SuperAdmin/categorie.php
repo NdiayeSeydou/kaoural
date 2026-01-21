@@ -18,6 +18,9 @@ Route::prefix('superadmin')->group(function () {
         // voir le details d'une catégorie
         Route::get('/details/categorie', [CategorieController::class, 'detailsCategorie'])->name('superadmin.categorie.show');
 
+        Route::post('/creer/categorie/ajout', [CategorieController::class, 'store'])->name('superadmin.categorie.store');
+
+
 
     });
     

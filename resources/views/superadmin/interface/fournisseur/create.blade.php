@@ -16,77 +16,137 @@
 
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Accueil</a></li>
 
-                        <li class="breadcrumb-item"><a href="{{ route('superadmin.fournisseur.index') }}">Fournisseurs</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('superadmin.fournisseur.index') }}">Fournisseurs</a>
+                        </li>
                         <li class="breadcrumb-item active">Ajouter</li>
                     </ol>
                 </nav>
 
-                <!-- ================== FORMULAIRE FOURNISSEUR ================== -->
-                <div class="mb-5">
-                    <h3>Nouveau fournisseur</h3>
+                <form action="{{ route('superadmin.fournisseur.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-5">
+                        <h3>Nouveau fournisseur</h3>
 
-                    <div class="row g-4">
+                        <div class="row g-4">
 
-                        <!-- Nom du fournisseur -->
-                        <div class="col-md-6">
-                            <label class="form-label">Nom du fournisseur</label>
-                            <input type="text" class="form-control" placeholder="Ex: Seydou Traoré">
+                            <!-- Nom du fournisseur -->
+                            <div class="col-md-6">
+                                <label class="form-label">Nom du fournisseur</label>
+                                <input type="text" name="name"
+                                    class="form-control @error('name') is-invalid @enderror" placeholder="Ex: Seydou Traoré"
+                                    value="{{ old('name') }}" required>
+                            </div>
+
+
+
+
+                            <!-- Adresse -->
+                            <div class="col-md-6">
+                                <label class="form-label">Adresse</label>
+                                <input type="text" name="adresse" class="form-control"
+                                    placeholder="Ex: Bamako, Bacodjicoroni golf" value="{{ old('adresse') }}">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Numéro de téléphone</label>
+
+                                <input type="tel" id="phone" name="telephone"
+                                    class="form-control @error('telephone') is-invalid @enderror"
+                                    value="{{ old('telephone') }}" required>
+
+                                {{-- Erreur Laravel --}}
+                                @error('telephone')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
+                                {{-- Erreur JS --}}
+                                <div class="invalid-feedback d-none" id="phone-error">
+                                    Numéro de téléphone invalide
+                                </div>
+                            </div>
+
+
+                            <!-- Catégorie -->
+                            <div class="col-md-6">
+                                <label class="form-label">Catégorie</label>
+
+                                <select name="categorie_id" class="form-select @error('categorie_id') is-invalid @enderror"
+                                    required>
+                                    <option value="" disabled selected>-- Sélectionner une catégorie --</option>
+
+                                    @foreach ($categories as $categorie)
+                                        <option value="{{ $categorie->id }}"
+                                            {{ old('categorie_id') == $categorie->id ? 'selected' : '' }}>
+                                            {{ $categorie->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('categorie_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+
+
+
+                            <!-- Bouton -->
+                            <div class="col-12 text-end">
+                                <button class="btn btn-success">
+                                    Enregistrer le fournisseur
+                                </button>
+                            </div>
+
                         </div>
-
-                        <!-- Numéro de téléphone avec indicatif -->
-                      
-
-                        <!-- Adresse -->
-                        <div class="col-md-6">
-                            <label class="form-label">Adresse</label>
-                            <input type="text" class="form-control" placeholder="Ex: Bamako, Kalaban Coura">
-                        </div>
-
-                         <div class="col-md-6">
-                            <label class="form-label">Numéro de téléphone</label>
-                            <input type="number" id="phone" class="form-control" placeholder="Numéro de téléphone">
-                        </div>
-
-                        <!-- Catégorie -->
-                        <div class="col-md-6">
-                            <label class="form-label">Catégorie</label>
-                            <select class="form-select">
-                                <option selected disabled>-- Sélectionner une catégorie --</option>
-                                <option>Accessoires</option>
-                                <option>Électronique</option>
-                                <option>Vêtements</option>
-                                <option>Cosmétiques</option>
-                            </select>
-                        </div>
-
-                         
-
-                        <!-- Bouton -->
-                        <div class="col-12 text-end">
-                            <button class="btn btn-success">
-                                Enregistrer le fournisseur
-                            </button>
-                        </div>
-
                     </div>
-                </div>
+
+                </form>
 
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+
     <script>
         const phoneInput = document.querySelector("#phone");
+        const phoneError = document.querySelector("#phone-error");
 
-        window.intlTelInput(phoneInput, {
-            initialCountry: "ml", // Mali par défaut
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
             separateDialCode: true,
-            preferredCountries: ["ml", "sn", "ci", "fr"],
-            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
+            nationalMode: false,
+            preferredCountries: ["ml", "sn", "ci", "fr", "us"],
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            geoIpLookup: function(callback) {
+                fetch("https://ipapi.co/json")
+                    .then(res => res.json())
+                    .then(data => callback(data.country_code))
+                    .catch(() => callback("ml"));
+            }
+        });
+
+        phoneInput.form.addEventListener("submit", function(e) {
+
+            phoneError.classList.add('d-none');
+            phoneInput.classList.remove('is-invalid');
+
+            if (!iti.isValidNumber()) {
+                e.preventDefault();
+
+                phoneError.classList.remove('d-none');
+                phoneInput.classList.add('is-invalid');
+
+            } else {
+                phoneInput.value = iti.getNumber(); // +223XXXXXXXX
+            }
         });
     </script>
-
 
 @endsection

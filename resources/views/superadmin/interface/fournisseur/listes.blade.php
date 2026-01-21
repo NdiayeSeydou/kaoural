@@ -2,6 +2,13 @@
 @section('title', 'Listes des fournisseurs | kaoural')
 @section('suite')
 
+    @if (session('ajoutfourn'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('ajoutfourn') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
 
 
     <div class="custom-container">
@@ -128,67 +135,82 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>seydou</td>
-                                <td>Dakar</td>
-                                <td>77889900</td>
-                                <td>Accessoires</td>
-                                <td>
+                            @forelse ($fournisseurs as $index => $fournisseur)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
 
-                                    <a href="/superadmin/fournisseur/details"
-                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="viewOne">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
-                                            width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
-                                            <path
-                                                d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
-                                        </svg>
-                                        <div id="viewOne" class="d-none">
-                                            <span>Voir</span>
-                                        </div>
-                                    </a>
-                                    <a href="/superadmin/fournisseur/modifier"
-                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-edit" width="16" height="16"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                            <path
-                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                            <path d="M16 5l3 3" />
-                                        </svg>
-                                        <div id="editOne" class="d-none"> <span>Modifier</span> </div>
-                                    </a>
+                                    <td>{{ $fournisseur->name }}</td>
 
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="trashTwo">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
-                                            width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 7l16 0" />
-                                            <path d="M10 11l0 6" />
-                                            <path d="M14 11l0 6" />
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                        </svg>
-                                        <div id="trashTwo" class="d-none">
-                                            <span>Delete</span>
-                                        </div>
-                                    </a>
+                                    <td>{{ $fournisseur->adresse }}</td>
+
+                                    <td>{{ $fournisseur->telephone }}</td>
+
+                                        <td>{{ $fournisseur->categorie->name ?? '__' }}</td>
+
+                                    <td>
+
+                                        <a href="/superadmin/fournisseur/details"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="viewOne">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
+                                                width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
+                                                <path
+                                                    d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
+                                            </svg>
+                                            <div id="viewOne" class="d-none">
+                                                <span>Voir</span>
+                                            </div>
+                                        </a>
+                                        <a href="/superadmin/fournisseur/modifier"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-edit" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                <path
+                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                <path d="M16 5l3 3" />
+                                            </svg>
+                                            <div id="editOne" class="d-none"> <span>Modifier</span> </div>
+                                        </a>
+
+                                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="trashTwo">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-trash" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M4 7l16 0" />
+                                                <path d="M10 11l0 6" />
+                                                <path d="M14 11l0 6" />
+                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                            </svg>
+                                            <div id="trashTwo" class="d-none">
+                                                <span>Delete</span>
+                                            </div>
+                                        </a>
 
 
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+
+                            @empty
+
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        Aucun fournisseur enregistré
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

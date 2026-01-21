@@ -735,148 +735,147 @@
     <!-- fin de notre produit -->
 
 
-<!-- modal de produit -->
-<div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
+    <!-- modal de produit -->
+    <div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
 
-            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+                <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
 
-            <div class="modal-body">
-                <div class="quickview_body">
-                    <div class="container">
-                        <div class="row">
+                <div class="modal-body">
+                    <div class="quickview_body">
+                        <div class="container">
+                            <div class="row">
 
-                            <!-- IMAGES PRODUIT -->
-                            <div class="col-12 col-lg-5">
-                                <div class="quickview_pro_img">
+                                <!-- IMAGES PRODUIT -->
+                                <div class="col-12 col-lg-5">
+                                    <div class="quickview_pro_img">
 
-                                    <!-- Image principale -->
-                                    <img class="first_img" id="mainProductImage"
-                                        src="{{ asset('kaoural/img/product-img/1.jpg') }}" alt="">
+                                        <!-- Image principale -->
+                                        <img class="first_img" id="mainProductImage"
+                                            src="{{ asset('kaoural/img/product-img/1.jpg') }}" alt="">
 
-                                    <!-- Image hover (design original conservé) -->
-                                   
+                                        <!-- Image hover (design original conservé) -->
 
-                                    <!-- Miniatures défilantes -->
-                                    <div class="quickview_thumbnails">
-                                        <img src="{{ asset('kaoural/img/product-img/1.jpg') }}"
-                                            onclick="changeImage(this)">
-                                        <img src="{{ asset('kaoural/img/product-img/2.jpg') }}"
-                                            onclick="changeImage(this)">
-                                        <img src="{{ asset('kaoural/img/product-img/2.jpg') }}"
-                                            onclick="changeImage(this)">
-                                        <img src="{{ asset('kaoural/img/product-img/4.jpg') }}"
-                                            onclick="changeImage(this)">
+
+                                        <!-- Miniatures défilantes -->
+                                        <div class="quickview_thumbnails">
+                                            <img src="{{ asset('kaoural/img/product-img/1.jpg') }}"
+                                                onclick="changeImage(this)">
+                                            <img src="{{ asset('kaoural/img/product-img/2.jpg') }}"
+                                                onclick="changeImage(this)">
+                                            <img src="{{ asset('kaoural/img/product-img/2.jpg') }}"
+                                                onclick="changeImage(this)">
+                                            <img src="{{ asset('kaoural/img/product-img/4.jpg') }}"
+                                                onclick="changeImage(this)">
+                                        </div>
+
+                                        <!-- Badge -->
+                                        <div class="product_badge">
+                                            <span class="badge-new">New</span>
+                                        </div>
+
                                     </div>
-
-                                    <!-- Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">New</span>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <!-- DESCRIPTION PRODUIT -->
-                            <div class="col-12 col-lg-7">
-                                <div class="quickview_pro_des">
-                                    <h4 class="title">Boutique Silk Dress</h4>
-
-                                    <div class="top_seller_product_rating mb-15">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-
-                                    <h5 class="price">$120.99 <span>$130</span></h5>
-
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Mollitia expedita quibusdam aspernatur, sapiente consectetur
-                                        accusantium perspiciatis praesentium eligendi, in fugiat?
-                                    </p>
-
-                                    <a href="#">View Full Product Details</a>
                                 </div>
 
-                                <!-- Add to Cart Form -->
-                                <form class="cart" method="post">
-                                    <div class="quantity">
-                                        <input type="number" class="qty-text" id="qty" step="1"
-                                            min="1" max="12" name="quantity" value="1">
+                                <!-- DESCRIPTION PRODUIT -->
+                                <div class="col-12 col-lg-7">
+                                    <div class="quickview_pro_des">
+                                        <h4 class="title">Boutique Silk Dress</h4>
+
+                                        <div class="top_seller_product_rating mb-15">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+
+                                        <h5 class="price">$120.99 <span>$130</span></h5>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Mollitia expedita quibusdam aspernatur, sapiente consectetur
+                                            accusantium perspiciatis praesentium eligendi, in fugiat?
+                                        </p>
+
+                                        <a href="#">View Full Product Details</a>
                                     </div>
 
-                                    <button type="submit" name="addtocart" value="5"
-                                        class="cart-submit">
-                                        Add to cart
-                                    </button>
+                                    <!-- Add to Cart Form -->
+                                    <form class="cart" method="post">
+                                        <div class="quantity">
+                                            <input type="number" class="qty-text" id="qty" step="1"
+                                                min="1" max="12" name="quantity" value="1">
+                                        </div>
 
-                                    <!-- Wishlist -->
-                                    <div class="modal_pro_wishlist">
-                                        <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                    </div>
+                                        <button type="submit" name="addtocart" value="5" class="cart-submit">
+                                            Add to cart
+                                        </button>
 
-                                    <!-- Compare -->
-                                    
-                                </form>
+                                        <!-- Wishlist -->
+                                        <div class="modal_pro_wishlist">
+                                            <a href="wishlist.html"><i class="icofont-heart"></i></a>
+                                        </div>
 
-                                <!-- Share -->
+                                        <!-- Compare -->
 
+                                    </form>
+
+                                    <!-- Share -->
+
+
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
-<!-- CSS ajouté sans modifier le thème -->
-<style>
-    .quickview_thumbnails {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-        overflow-x: auto;
-    }
+    <!-- CSS ajouté sans modifier le thème -->
+    <style>
+        .quickview_thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto;
+        }
 
-    .quickview_thumbnails img {
-        width: 65px;
-        height: 65px;
-        object-fit: cover;
-        cursor: pointer;
-        border: 1px solid #eee;
-        transition: 0.3s;
-    }
+        .quickview_thumbnails img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
 
-    .quickview_thumbnails img:hover {
-        border-color: #000;
-    }
+        .quickview_thumbnails img:hover {
+            border-color: #000;
+        }
 
-    .quickview_thumbnails::-webkit-scrollbar {
-        height: 5px;
-    }
+        .quickview_thumbnails::-webkit-scrollbar {
+            height: 5px;
+        }
 
-    .quickview_thumbnails::-webkit-scrollbar-thumb {
-        background: #ccc;
-    }
-</style>
+        .quickview_thumbnails::-webkit-scrollbar-thumb {
+            background: #ccc;
+        }
+    </style>
 
-<!-- JS simple -->
-<script>
-    function changeImage(el) {
-        document.getElementById('mainProductImage').src = el.src;
-    }
-</script>
+    <!-- JS simple -->
+    <script>
+        function changeImage(el) {
+            document.getElementById('mainProductImage').src = el.src;
+        }
+    </script>
 
 
 

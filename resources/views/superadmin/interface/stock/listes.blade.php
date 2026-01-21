@@ -1,7 +1,40 @@
 @extends('superadmin.layout.navbar')
+
 @section('title', 'Listes des stocks | kaoural')
+
 @section('suite')
 
+    @if (session('stockajoutnew'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('stockajoutnew') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    @if (session('stockupdt'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('stockupdt') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+
+    @if (session('stockdel'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('stockdel') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    @if (session('ajoutstockaancien'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('ajoutstockaancien') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
 
 
     <div class="custom-container">
@@ -14,9 +47,10 @@
 
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                  <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Accueil</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Accueil</a></li>
 
-                                <li class="breadcrumb-item active"><a href="{{ route('superadmin.stock.index') }}">Stocks</a>
+                                <li class="breadcrumb-item active"><a
+                                        href="{{ route('superadmin.stock.index') }}">Stocks</a>
                                 </li>
 
                             </ol>
@@ -142,81 +176,149 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>205</td>
-                                <td>
-                                    <img src="../../assets/images/ecommerce/product-1.jpg" class="rounded-3" width="56"
-                                        height="56">
-                                </td>
-                                <td>Transparent Sunglasses</td>
-                                <td>Accessoires</td>
-                                <td>2</td>
-                                <td>2700 </td>
 
-                                <td>Boutique </td>
+                            @forelse ($stocksBoutique as $index => $stock)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
 
-                                <td>2</td>
-                                <td>5400 FCFA</td>
-                                <td>
-                                    <span class="badge bg-success">Disponible</span>
-                                <td>
+                                    <td>{{ $stock->code_article }}</td>
+                                    <td>
+                                        @if ($stock->image)
+                                            <img src="{{ asset('storage/' . $stock->image) }}" class="rounded-3"
+                                                width="56" height="56">
+                                        @endif
+                                    </td>
 
-                                    <a href="/superadmin/stock/details" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="viewOne">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
-                                            width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
-                                            <path
-                                                d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
-                                        </svg>
-                                        <div id="viewOne" class="d-none">
-                                            <span>Voir</span>
-                                        </div>
-                                    </a>
-                                    <a href="/superadmin/stock/modifier" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-edit" width="16" height="16"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                            <path
-                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                            <path d="M16 5l3 3" />
-                                        </svg>
-                                        <div id="editOne" class="d-none"> <span>Modifier</span> </div>
-                                    </a>
 
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="trashTwo">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
-                                            width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 7l16 0" />
-                                            <path d="M10 11l0 6" />
-                                            <path d="M14 11l0 6" />
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                        </svg>
-                                        <div id="trashTwo" class="d-none">
-                                            <span>Delete</span>
-                                        </div>
-                                    </a>
+                                    <td>{{ ucwords($stock->designation) }}</td>
+
+
+                                    <td>{{ $stock->categorie->name ?? '-' }}</td>
+
+                                    <td>{{ $stock->stock_initial }}</td>
+
+                                    <td>{{ $stock->quantite_entree }}</td>
+
+                                    <td>
+                                        {{ $stock->emplacement === 'boutique' ? 'Boutique' : '' }}
+                                    </td>
 
 
 
-                                </td>
-                            </tr>
+                                    <td>{{ $stock->quantite_sortie }}</td>
+
+                                    <td>{{ $stock->quantite_calculee }}</td>
+
+                                    <td>
+                                        @if ($stock->status === 'disponible')
+                                            <span class="badge bg-success">Disponible</span>
+                                        @elseif($stock->status === 'baisse')
+                                            <span class="badge bg-warning">Stock en baisse</span>
+                                        @else
+                                            <span class="badge bg-danger">Rupture</span>
+                                        @endif
+
+                                    </td>
+
+                                    <td>
+
+                                        <a href="{{ route('superadmin.stock.show', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="viewOne">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
+                                                width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
+                                                <path
+                                                    d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
+                                            </svg>
+                                            <div id="viewOne" class="d-none">
+                                                <span>Voir</span>
+                                            </div>
+                                        </a>
+                                        <a href="{{ route('superadmin.stock.edit', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-edit" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                <path
+                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                <path d="M16 5l3 3" />
+                                            </svg>
+                                            <div id="editOne" class="d-none"> <span>Modifier</span> </div>
+                                        </a>
+
+                                        <form id="delete-form-{{ $stock->public_id }}"
+                                            action="{{ route('superadmin.stock.supprimer', $stock->public_id) }}"
+                                            method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#"
+                                                class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                                onclick="confirmDelete('{{ $stock->public_id }}')"
+                                                data-template="trashTwo">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-trash" width="16"
+                                                    height="16" viewBox="0 0 24 24" stroke-width="1.5"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 7l16 0" />
+                                                    <path d="M10 11l0 6" />
+                                                    <path d="M14 11l0 6" />
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                </svg>
+                                                <div id="trashTwo" class="d-none"><span>Supprimer</span></div>
+                                            </a>
+                                        </form>
+
+
+
+
+
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        Aucun stock disponible en boutique
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
+
+
                     </table>
 
                 </div>
+
+                <nav aria-label="Page navigation example" class="mt-4">
+                    <ul class="pagination justify-content-center mb-0">
+                        {{-- Lien précédent --}}
+                        <li class="page-item {{ $stocksBoutique->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $stocksBoutique->previousPageUrl() }}">Précedent</a>
+                        </li>
+
+                        {{-- Pages --}}
+                        @foreach ($stocksBoutique->getUrlRange(1, $stocksBoutique->lastPage()) as $page => $url)
+                            <li class="page-item {{ $stocksBoutique->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        {{-- Lien suivant --}}
+                        <li class="page-item {{ $stocksBoutique->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $stocksBoutique->nextPageUrl() }}">Suivant</a>
+                        </li>
+                    </ul>
+                </nav>
+
 
             </div>
 
@@ -240,94 +342,151 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>205</td>
-                                <td>
-                                    <img src="../../assets/images/ecommerce/product-1.jpg" class="rounded-3"
-                                        width="56" height="56">
-                                </td>
-                                <td>Transparent Sunglasses</td>
-                                <td>Accessoires</td>
-                                <td>2</td>
-                                <td>2700 </td>
 
-                                <td>Magasin </td>
+                            @forelse ($stocksMagasin as $index => $stock)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
 
-                                <td>2</td>
-                                <td>5400 FCFA</td>
-                                <td>
-                                    <span class="badge bg-success">Disponible</span>
-                                <td>
+                                    <td>{{ $stock->code_article }}</td>
 
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="viewOne">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
-                                            width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
-                                            <path
-                                                d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
-                                        </svg>
-                                        <div id="viewOne" class="d-none">
-                                            <span>Voir</span>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-edit" width="16" height="16"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                            <path
-                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                            <path d="M16 5l3 3" />
-                                        </svg>
-                                        <div id="editOne" class="d-none"> <span>Modifier</span> </div>
-                                    </a>
+                                    <td>
+                                        @if ($stock->image)
+                                            <img src="{{ asset('storage/' . $stock->image) }}" class="rounded-3"
+                                                width="56" height="56">
+                                        @endif
+                                    </td>
 
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="trashTwo">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
-                                            width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 7l16 0" />
-                                            <path d="M10 11l0 6" />
-                                            <path d="M14 11l0 6" />
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                        </svg>
-                                        <div id="trashTwo" class="d-none">
-                                            <span>Delete</span>
-                                        </div>
-                                    </a>
+                                    <td>{{ ucwords($stock->designation) }}</td>
+
+
+                                    <td>{{ $stock->categorie->name ?? '-' }}</td>
+
+
+                                    <td>{{ $stock->stock_initial }}</td>
+
+                                    <td>{{ $stock->quantite_entree }}</td>
+
+                                    <td>
+                                        {{ $stock->emplacement === 'magasin' ? 'Magasin' : '' }}
+                                    </td>
 
 
 
-                                </td>
-                            </tr>
+                                    <td>{{ $stock->quantite_sortie }}</td>
+
+                                    <td>{{ $stock->quantite_restante }}</td>
+
+                                    <td>
+                                        @if ($stock->status === 'disponible')
+                                            <span class="badge bg-success">Disponible</span>
+                                        @elseif($stock->status === 'baisse')
+                                            <span class="badge bg-warning">Stock en baisse</span>
+                                        @else
+                                            <span class="badge bg-danger">Rupture</span>
+                                        @endif
+
+                                    </td>
+
+                                    <td>
+
+                                        <a href="{{ route('superadmin.stock.show', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="viewOne">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-eye" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
+                                                <path
+                                                    d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
+                                            </svg>
+                                            <div id="viewOne" class="d-none">
+                                                <span>Voir</span>
+                                            </div>
+                                        </a>
+                                        <a href="{{ route('superadmin.stock.edit', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-edit" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                <path
+                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                <path d="M16 5l3 3" />
+                                            </svg>
+                                            <div id="editOne" class="d-none"> <span>Modifier</span> </div>
+                                        </a>
+
+                                        <form id="delete-form-{{ $stock->public_id }}"
+                                            action="{{ route('superadmin.stock.supprimer', $stock->public_id) }}"
+                                            method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#"
+                                                class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                                onclick="confirmDelete('{{ $stock->public_id }}')"
+                                                data-template="trashTwo">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-trash" width="16"
+                                                    height="16" viewBox="0 0 24 24" stroke-width="1.5"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 7l16 0" />
+                                                    <path d="M10 11l0 6" />
+                                                    <path d="M14 11l0 6" />
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                </svg>
+                                                <div id="trashTwo" class="d-none"><span>Supprimer</span></div>
+                                            </a>
+                                        </form>
+
+
+
+
+
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        Aucun stock disponible au magasin
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
+
                     </table>
                 </div>
+
+                <nav aria-label="Page navigation example" class="mt-4">
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item {{ $stocksMagasin->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $stocksMagasin->previousPageUrl() }}">Précedent</a>
+                        </li>
+
+                        @foreach ($stocksMagasin->getUrlRange(1, $stocksMagasin->lastPage()) as $page => $url)
+                            <li class="page-item {{ $stocksMagasin->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        <li class="page-item {{ $stocksMagasin->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $stocksMagasin->nextPageUrl() }}">Suivant</a>
+                        </li>
+                    </ul>
+                </nav>
+
 
             </div>
 
 
-            <nav aria-label="Page navigation example" class="mt-4">
-                <ul class="pagination justify-content-center mb-0">
-                    <li class="page-item"><a class="page-link disabled" href="#">Précedent</a></li>
-                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
-                </ul>
-            </nav>
 
 
 
@@ -363,6 +522,46 @@
                 btnBoutique.classList.add('btn-outline-dark');
                 btnBoutique.classList.remove('btn-dark');
             });
+        </script>
+
+
+
+        <script>
+            function confirmDelete(public_id) {
+                Swal.fire({
+                    title: 'Êtes-vous sûr de supprimer ce stock?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + public_id).submit();
+                    }
+                });
+            }
+        </script>
+
+        <script>
+            function confirmDelete(public_id) {
+                Swal.fire({
+                    title: 'Êtes-vous sûr de supprimer ce stock?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + public_id).submit();
+                    }
+                });
+            }
         </script>
 
 

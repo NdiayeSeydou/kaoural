@@ -12,7 +12,7 @@
                             <a href="{{ route('home') }}">
                                 <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="40" alt="logo">
                             </a>
-                        </header>
+                        </header>   
 
                         <div class="col-12">
                             <!-- Eyeball Heading -->
