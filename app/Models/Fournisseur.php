@@ -32,7 +32,7 @@ class Fournisseur extends Model
 
             if (!$model->public_id) {
 
-                $model->public_id = Str::random(10); 
+                $model->public_id = Str::random(10);
             }
         });
     }
@@ -41,5 +41,25 @@ class Fournisseur extends Model
     {
 
         return $this->belongsTo(Categorie::class, 'categorie_id');
+    }
+
+    public function stockHistories()
+    {
+        return $this->hasMany(StockHistory::class);
+    }
+
+    public function getTelephoneFormatteAttribute()
+    {
+        $tel = $this->telephone;
+
+        if (str_starts_with($tel, '+223')) {
+            return '🇲🇱 +223 ' . implode(' ', str_split(substr($tel, 4), 2));
+        }
+
+        if (str_starts_with($tel, '+33')) {
+            return '🇫🇷 +33 ' . implode(' ', str_split(substr($tel, 3), 2));
+        }
+
+        return $tel;
     }
 }

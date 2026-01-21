@@ -10,6 +10,30 @@
     @endif
 
 
+    @if (session('fourjour'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('fourjour') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    @if (session('fourdel'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('fourdel') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+     @if (session('fouranl'))
+        <div class="alert alert-danger  alert-dismissible fade show">
+            {{ session('fouranl') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
 
     <div class="custom-container">
         <div class="row">
@@ -139,19 +163,22 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
 
-                                    <td>{{ $fournisseur->name }}</td>
+                                    <td>{{ ucwords($fournisseur->name) }}</td>
+
 
                                     <td>{{ $fournisseur->adresse }}</td>
 
-                                    <td>{{ $fournisseur->telephone }}</td>
+                                    <td>{{ $fournisseur->telephone_formatte }}</td>
 
-                                        <td>{{ $fournisseur->categorie->name ?? '__' }}</td>
+
+                                    <td>{{ $fournisseur->categorie->name ?? '__' }}</td>
 
                                     <td>
 
-                                        <a href="/superadmin/fournisseur/details"
+                                        <a href="{{ route('superadmin.fournisseur.show', $fournisseur->public_id) }}"
                                             class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="viewOne">
+                                            data-template="viewOne-{{ $fournisseur->public_id }}">
+
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
                                                 width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
                                                 stroke="currentColor" fill="none" stroke-linecap="round"
@@ -161,27 +188,38 @@
                                                 <path
                                                     d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
                                             </svg>
-                                            <div id="viewOne" class="d-none">
-                                                <span>Voir</span>
+
+                                            <div id="viewOne-{{ $fournisseur->public_id }}" class="d-none">
+                                                <span>Details</span>
                                             </div>
                                         </a>
-                                        <a href="/superadmin/fournisseur/modifier"
+
+                                        <a href="{{ route('superadmin.fournisseur.edit', $fournisseur->public_id) }}"
                                             class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
+                                            data-template="editOne-{{ $fournisseur->public_id }}">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-edit" width="16" height="16"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round">
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
                                                 <path
                                                     d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
                                                 <path d="M16 5l3 3" />
                                             </svg>
-                                            <div id="editOne" class="d-none"> <span>Modifier</span> </div>
+
+                                            <div id="editOne-{{ $fournisseur->public_id }}" class="d-none">
+                                                <span>Modifier</span>
+                                            </div>
                                         </a>
 
-                                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="trashTwo">
+
+                                        <a href="#!"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip "
+                                            data-template="trashTwo-{{ $fournisseur->public_id }}"
+                                            onclick="event.preventDefault(); confirmDeleteFournisseur('{{ $fournisseur->public_id }}')">
+
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-trash" width="16" height="16"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -193,10 +231,18 @@
                                                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                             </svg>
-                                            <div id="trashTwo" class="d-none">
-                                                <span>Delete</span>
+
+                                            <div id="trashTwo-{{ $fournisseur->public_id }}" class="d-none">
+                                                <span>Supprimer</span>
                                             </div>
                                         </a>
+                                        <form id="delete-fournisseur-{{ $fournisseur->public_id }}"
+                                            action="{{ route('superadmin.fournisseur.delete', $fournisseur->public_id) }}"
+                                            method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
 
 
 
@@ -269,6 +315,29 @@
                 btnBoutique.classList.remove('btn-dark');
             });
         </script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            function confirmDeleteFournisseur(publicId) {
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Ce fournisseur sera définitivement supprimé !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-fournisseur-' + publicId).submit();
+                    }
+                });
+            }
+        </script>
+
 
 
 

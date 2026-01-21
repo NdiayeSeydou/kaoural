@@ -3,11 +3,31 @@
 @section('suite')
 
 
-    @if (session('ajoutcat'))
-        <div class="alert alert-success">
-            {{ session('ajoutcat') }}
+   @if (session('ajoutcateg'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('ajoutcateg') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
+
+
+    
+   @if (session('catjour'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('catjour') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+
+     @if (session('catdel'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('catdel') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
 
     <div class="custom-container">
         <div class="row">

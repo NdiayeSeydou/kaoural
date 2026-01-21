@@ -17,18 +17,17 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Accueil</a></li>
-
                         <li class="breadcrumb-item"><a href="{{ route('superadmin.fournisseur.index') }}">Fournisseurs</a>
                         </li>
                         <li class="breadcrumb-item active">Ajouter</li>
                     </ol>
                 </nav>
 
-                <form action="{{ route('superadmin.fournisseur.store') }}" method="POST">
+                <!-- FORMULAIRE -->
+                <form action="{{ route('superadmin.fournisseur.store') }}" method="POST" id="fournisseur-form" novalidate>
                     @csrf
                     <div class="mb-5">
                         <h3>Nouveau fournisseur</h3>
-
                         <div class="row g-4">
 
                             <!-- Nom du fournisseur -->
@@ -37,10 +36,10 @@
                                 <input type="text" name="name"
                                     class="form-control @error('name') is-invalid @enderror" placeholder="Ex: Seydou Traoré"
                                     value="{{ old('name') }}" required>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-
-
 
                             <!-- Adresse -->
                             <div class="col-md-6">
@@ -49,35 +48,29 @@
                                     placeholder="Ex: Bamako, Bacodjicoroni golf" value="{{ old('adresse') }}">
                             </div>
 
+                            <!-- Téléphone avec validation JS + Laravel -->
                             <div class="col-md-6">
                                 <label class="form-label">Numéro de téléphone</label>
-
                                 <input type="tel" id="phone" name="telephone"
                                     class="form-control @error('telephone') is-invalid @enderror"
-                                    value="{{ old('telephone') }}" required>
+                                    value="{{ old('telephone', $fournisseur->telephone ?? '') }}" required>
 
                                 {{-- Erreur Laravel --}}
                                 @error('telephone')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
 
                                 {{-- Erreur JS --}}
-                                <div class="invalid-feedback d-none" id="phone-error">
+                                <div class="invalid-feedback" id="phone-error" style="display: none;">
                                     Numéro de téléphone invalide
                                 </div>
                             </div>
-
-
                             <!-- Catégorie -->
                             <div class="col-md-6">
                                 <label class="form-label">Catégorie</label>
-
                                 <select name="categorie_id" class="form-select @error('categorie_id') is-invalid @enderror"
                                     required>
                                     <option value="" disabled selected>-- Sélectionner une catégorie --</option>
-
                                     @foreach ($categories as $categorie)
                                         <option value="{{ $categorie->id }}"
                                             {{ old('categorie_id') == $categorie->id ? 'selected' : '' }}>
@@ -85,68 +78,66 @@
                                         </option>
                                     @endforeach
                                 </select>
-
                                 @error('categorie_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-
-
-
                             <!-- Bouton -->
                             <div class="col-12 text-end">
-                                <button class="btn btn-success">
+                                <button type="submit" class="btn btn-success">
                                     Enregistrer le fournisseur
                                 </button>
                             </div>
 
                         </div>
                     </div>
-
                 </form>
 
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    {{-- JS pour intl-tel-input --}}
+   
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("fournisseur-form");
+    const phoneInput = document.getElementById("phone");
+    const phoneError = document.getElementById("phone-error");
 
-    <script>
-        const phoneInput = document.querySelector("#phone");
-        const phoneError = document.querySelector("#phone-error");
+    const iti = window.intlTelInput(phoneInput, {
+        initialCountry: "auto",
+        separateDialCode: true,
+        nationalMode: false,
+        preferredCountries: ["ml", "sn", "ci", "fr", "us"],
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        geoIpLookup: function(callback) {
+            fetch("https://ipapi.co/json")
+                .then(res => res.json())
+                .then(data => callback(data.country_code))
+                .catch(() => callback("ml"));
+        }
+    });
 
-        const iti = window.intlTelInput(phoneInput, {
-            initialCountry: "auto",
-            separateDialCode: true,
-            nationalMode: false,
-            preferredCountries: ["ml", "sn", "ci", "fr", "us"],
-            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-            geoIpLookup: function(callback) {
-                fetch("https://ipapi.co/json")
-                    .then(res => res.json())
-                    .then(data => callback(data.country_code))
-                    .catch(() => callback("ml"));
-            }
-        });
+    form.addEventListener("submit", function (e) {
+        // Réinitialise l'affichage
+        phoneError.style.display = "none";
+        phoneInput.classList.remove("is-invalid");
 
-        phoneInput.form.addEventListener("submit", function(e) {
+        // Validation
+        if (!iti.isValidNumber()) {
+            e.preventDefault();
+            phoneError.style.display = "block";   // Affiche le message
+            phoneInput.classList.add("is-invalid"); // style rouge Bootstrap
+            phoneInput.focus();                     // focus sur le champ
+            return false;
+        }
 
-            phoneError.classList.add('d-none');
-            phoneInput.classList.remove('is-invalid');
-
-            if (!iti.isValidNumber()) {
-                e.preventDefault();
-
-                phoneError.classList.remove('d-none');
-                phoneInput.classList.add('is-invalid');
-
-            } else {
-                phoneInput.value = iti.getNumber(); // +223XXXXXXXX
-            }
-        });
-    </script>
-
+        // Remplacer la valeur par le format international
+        phoneInput.value = iti.getNumber();
+    });
+});
+</script>   
 @endsection

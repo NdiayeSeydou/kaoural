@@ -70,7 +70,7 @@ class CategorieController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('superadmin.categorie.index')->with('success', 'Catégorie mise à jour avec succès');
+        return redirect()->route('superadmin.categorie.index')->with('catjour', 'Catégorie mise à jour avec succès');
     }
 
 
@@ -100,6 +100,6 @@ class CategorieController extends Controller
 
         $categorie->delete();
 
-        return redirect()->route('superadmin.categorie.index')->with('success', 'Catégorie supprimée avec succès');
+        return redirect()->route('superadmin.categorie.index')->with('catdel', 'Catégorie supprimée avec succès');
     }
 }
