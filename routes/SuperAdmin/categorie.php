@@ -6,6 +6,7 @@ use App\Http\Controllers\SuperAdmin\CategorieController;
 Route::prefix('superadmin')->group(function () {
 
     Route::controller(CategorieController::class)->group(function () {
+
         // Listes des catégories 
         Route::get('/categories', [CategorieController::class, 'categorie'])->name('superadmin.categorie.index');
 
@@ -13,15 +14,19 @@ Route::prefix('superadmin')->group(function () {
         Route::get('/creer/categorie', [CategorieController::class, 'addCategorie'])->name('superadmin.categorie.create');
 
         // modifier une catégorie
-        Route::get('/modifier/categorie', [CategorieController::class, 'editCategorie'])->name('superadmin.categorie.edit');
+        Route::get('/modifier//{public_id}/categorie', [CategorieController::class, 'editCategorie'])->name('superadmin.categorie.edit');
 
-        // voir le details d'une catégorie
-        Route::get('/details/categorie', [CategorieController::class, 'detailsCategorie'])->name('superadmin.categorie.show');
+        //envoie des infos de modif 
+        Route::put('categorie/{public_id}/update', [CategorieController::class, 'updateCategorie'])->name('superadmin.categorie.update');
+
+
+        //details d'une catégorie 
+        Route::get('/details/categorie/{public_id}', [CategorieController::class, 'detailsCategorie'])->name('superadmin.categorie.show');
 
         Route::post('/creer/categorie/ajout', [CategorieController::class, 'store'])->name('superadmin.categorie.store');
 
 
-
+        // Suppression
+        Route::delete('categorie/{public_id}/delete', [CategorieController::class, 'deleteCategorie'])->name('superadmin.categorie.delete');
     });
-    
 });

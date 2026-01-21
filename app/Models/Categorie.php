@@ -27,7 +27,7 @@ class Categorie extends Model
 
             if (!$model->public_id) {
 
-                $model->public_id = Str::random(10); 
+                $model->public_id = Str::random(10);
             }
         });
     }
@@ -35,5 +35,10 @@ class Categorie extends Model
     public function categorie()
     {
         return $this->belongsTo(Categorie::class);
+    }
+
+     public function stocks()
+    {
+        return $this->hasMany(Stock::class, 'categorie_id');
     }
 }

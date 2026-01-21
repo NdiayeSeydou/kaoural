@@ -14,9 +14,10 @@ class CategorieController extends Controller
     public function categorie()
     {
 
-        $categories = Categorie::all();
+        $categories = Categorie::withCount('stocks')->orderBy('name', 'asc')->paginate(12, ['*'], 'categoriePage');    
 
-        return view('superadmin.interface.categories.index', compact('categories'));
+        return view('superadmin.interface.categories.index', compact('categories'));    
+
     }
 
     // ajouter une catégorie
@@ -42,17 +43,63 @@ class CategorieController extends Controller
 
         ]);
 
-        return redirect()->route('superadmin.categorie.index')->with('  ', 'Catégorie ajoutée avec succès');
+        return redirect()->route('superadmin.categorie.index')->with('ajoutcateg', 'Catégorie ajoutée avec succès');
     }
 
     // modifier une catégorie
-    public function editCategorie()
+    public function editCategorie($public_id)
     {
-        return view('superadmin.interface.categories.edit');
+        $categorie = Categorie::where('public_id', $public_id)->firstOrFail();
+        return view('superadmin.interface.categories.edit', compact('categorie'));
     }
-    //voir le details d'une catégorie
-    public function detailsCategorie()
+
+
+
+    public function updateCategorie(Request $request, $public_id)
     {
-        return view('superadmin.interface.categories.show');
+        $categorie = Categorie::where('public_id', $public_id)->firstOrFail();
+
+        $request->validate([
+
+
+            'name' => 'required|string|max:255|unique:categories,name,' . $categorie->id,
+        ]);
+
+        $categorie->update([
+
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('superadmin.categorie.index')->with('success', 'Catégorie mise à jour avec succès');
+    }
+
+
+    public function detailsCategorie($public_id)
+    {
+        $categorie = Categorie::where('public_id', $public_id)->firstOrFail();
+
+
+        $stocks = $categorie->stocks;
+
+        return view('superadmin.interface.categories.show', compact('categorie', 'stocks'));
+    }
+
+
+
+    //voir le details d'une catégorie
+    public function deleteCategorie($public_id)
+    {
+        $categorie = Categorie::where('public_id', $public_id)->firstOrFail();
+
+
+
+        if ($categorie->stocks()->count() > 0) {
+
+            return redirect()->route('superadmin.categorie.index')->with('error', 'Impossible de supprimer cette catégorie car elle contient des stocks.');
+        }
+
+        $categorie->delete();
+
+        return redirect()->route('superadmin.categorie.index')->with('success', 'Catégorie supprimée avec succès');
     }
 }
