@@ -164,7 +164,7 @@ class FournisseurController extends Controller
             // Retour avec message d'erreur
             return redirect()
                 ->route('superadmin.fournisseur.index')
-                ->with('fouranl', "Impossible de supprimer ce fournisseur : il est associé à $stockCount stock(s).");
+                ->with('error', "Impossible de supprimer ce fournisseur : il est associé à $stockCount stock(s).");
         }
 
         // Suppression

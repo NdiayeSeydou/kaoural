@@ -86,14 +86,18 @@
                         <h5>Image du produit</h5>
                     </div>
 
-                    <div class="card-body px-6 py-5 text-center">
-                        @if ($stock->image)
-                            <img src="{{ asset('storage/' . $stock->image) }}" class="img-fluid rounded-4 shadow-sm"
-                                width="180" alt="{{ $stock->designation }}">
-                        @else
-                            <div class="text-muted">Aucune image disponible</div>
-                        @endif
-                    </div>
+                   <div class="card-body px-6 py-5 text-center">
+    @if ($stock->image)
+        <img 
+            src="{{ asset('storage/' . $stock->image) }}" 
+            class="img-fluid rounded-4 shadow-sm w-100"
+            style="max-height: 350px; object-fit: contain;"
+            alt="{{ $stock->designation }}">
+    @else
+        <div class="text-muted">Aucune image disponible</div>
+    @endif
+</div>
+
 
                 </div>
 

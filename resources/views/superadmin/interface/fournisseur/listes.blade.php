@@ -26,9 +26,9 @@
     @endif
 
 
-     @if (session('fouranl'))
+     @if (session('error'))
         <div class="alert alert-danger  alert-dismissible fade show">
-            {{ session('fouranl') }}
+            {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif

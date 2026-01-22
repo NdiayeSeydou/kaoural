@@ -54,6 +54,8 @@ require __DIR__.'/Admin/profil.php';
 require __DIR__.'/Admin/transaction.php';
 require __DIR__.'/Admin/quincaillerie.php';
 require __DIR__.'/Admin/client.php';
+require __DIR__.'/Admin/blog.php';
+
 
 
 

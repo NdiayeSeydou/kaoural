@@ -29,6 +29,15 @@
     @endif
 
 
+    
+     @if (session(key: 'error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
     <div class="custom-container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
@@ -434,16 +443,16 @@
 
     <script>
         function confirmDelete(publicId, hasStocks) {
-            if (hasStocks) {
-                // Message si la catégorie contient des stocks
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Impossible de supprimer',
-                    text: 'Cette catégorie contient des stocks et ne peut pas être supprimée.',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                });
-            } else {
+            // if (hasStocks) {
+            //     // Message si la catégorie contient des stocks
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Impossible de supprimer',
+            //         text: 'Cette catégorie contient des stocks et ne peut pas être supprimée.',
+            //         confirmButtonColor: '#3085d6',
+            //         confirmButtonText: 'OK'
+            //     });
+            // } else {
                 // Confirmation normale de suppression
                 Swal.fire({
                     title: 'Êtes-vous sûr de supprimer cette catégorie ?',
@@ -459,7 +468,7 @@
                         document.getElementById('delete-form-' + publicId).submit();
                     }
                 });
-            }
+            // }
         }
     </script>
 
