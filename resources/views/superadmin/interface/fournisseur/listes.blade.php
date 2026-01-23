@@ -326,10 +326,10 @@
                     text: "Ce fournisseur sera définitivement supprimé !",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Oui, supprimer',
-                    cancelButtonText: 'Annuler'
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById('delete-fournisseur-' + publicId).submit();

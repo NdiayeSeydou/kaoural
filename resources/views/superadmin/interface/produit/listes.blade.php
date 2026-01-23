@@ -2,6 +2,34 @@
 @section('title', 'Listes des factures | kaoural')
 @section('suite')
 
+
+    @if (session('prodadd'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('prodadd') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    @if (session('proedit'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('proedit') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+
+    @if (session('prodel'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('prodel') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+
+
     <div class="custom-container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
@@ -18,7 +46,7 @@
                             </ol>
                         </nav>
                     </div>
-                                        <div>
+                    <div>
                         <div>
                             <a class="btn btn-dark d-md-flex align-items-center gap-2"
                                 href="{{ route('superadmin.produit.create') }}">
@@ -29,15 +57,15 @@
                                     <path d="M12 5l0 14" />
                                     <path d="M5 12l14 0" />
                                 </svg>
-                                Ajouter un nouveau produit 
+                                Ajouter un nouveau produit
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
-        
+
         <div>
             <!-- row -->
             <div class="row g-6 mb-6">
@@ -253,32 +281,53 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
+
+
                             <tbody class="list">
-                                <tr>
 
-                                    <td class="ps-0 invoice_number">
-                                        <a href="#!">#88120</a>
-                                    </td>
-                                    <td class="invoice_status">
-                                        <span
-                                            class="badge text-warning-emphasis bg-warning-subtle rounded-pill">Pending</span>
-                                    </td>
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Jan Harmon</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="invoice_date">19 Apr 2025</td>
+                                @forelse ($produits as $index => $produit)
+                                    <tr>
 
 
-                                    <td class="invoice_amount">$35.99</td>
-                                    <td>
-                                        <div>
+                                        <td>{{ $index + 1 }}</td>
+
+
+                                        {{-- Image --}}
+                                        <td>
+                                            @if ($produit->image)
+                                                <img src="{{ asset('storage/' . $produit->image) }}" class="rounded-3"
+                                                    width="56" height="56" alt="{{ $produit->designation }}">
+                                            @else
+                                                <span class="text-muted">—</span>
+                                            @endif
+                                        </td>
+
+                                        {{-- Référence / ID public --}}
+                                        <td>
+                                            <a href="{{ route('superadmin.produit.show', $produit->public_id) }}">
+                                                #{{ $produit->public_id }}
+                                            </a>
+                                        </td>
+
+                                        {{-- Catégorie --}}
+                                        <td class="">
+                                            <span class="fw-semibold">{{ $produit->categorie->name ?? '—' }}</span>
+                                        </td>
+
+                                        {{-- Désignation --}}
+                                        <td>
+                                            {{ $produit->designation }}
+                                        </td>
+
+                                        {{-- Prix --}}
+                                        <td class="invoice_amount">
+                                            {{ number_format($produit->prix_unitaire, 2, ',', ' ') }} F CFA
+                                        </td>
+
+                                        {{-- Actions --}}
+                                        <td>
                                             <div class="dropdown">
-                                                <a class="btn btn-ghost btn-icon rounded-circle" href="#!"
+                                                <a class="btn btn-ghost btn-icon rounded-circle" href="#"
                                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                         class="icon icon-tabler icon-tabler-dots-vertical" width="20"
@@ -293,190 +342,38 @@
                                                 </a>
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item d-flex align-items-center" href="/superadmin/facture/details">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-eye" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                <path
-                                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                            </svg>
-                                                        </span>
+
+                                                    {{-- Détails --}}
+                                                    <a class="dropdown-item d-flex align-items-center"
+                                                        href="{{ route('superadmin.produit.show', $produit->public_id) }}">
                                                         <span class="ms-2">Détails</span>
                                                     </a>
 
-                                                    <a class="dropdown-item d-flex align-items-center" href="/superadmin/facture/modifier">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-edit" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path
-                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                <path
-                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                <path d="M16 5l3 3" />
-                                                            </svg>
-                                                        </span>
+                                                    {{-- Modifier --}}
+                                                    <a class="dropdown-item d-flex align-items-center"
+                                                        href="{{ route('superadmin.produit.edit', $produit->public_id) }}">
                                                         <span class="ms-2">Modifier</span>
                                                     </a>
 
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-download"
-                                                                width="16" height="16" viewBox="0 0 24 24"
-                                                                stroke-width="1.5" stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-                                                                <path d="M7 11l5 5l5 -5" />
-                                                                <path d="M12 4l0 12" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Télécharger</span>
-                                                    </a>
-
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-trash" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M4 7l16 0" />
-                                                                <path d="M10 11l0 6" />
-                                                                <path d="M14 11l0 6" />
-                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                            </svg>
-                                                        </span>
+                                                    <a href="javascript:void(0);"
+                                                        class="dropdown-item d-flex align-items-center text-danger"
+                                                        onclick="confirmDeleteProduit('{{ $produit->public_id }}')">
                                                         <span class="ms-2">Supprimer</span>
                                                     </a>
+
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
 
-                                <tr>
+                                    </tr>
 
-                                    <td class="ps-0 invoice_number">
-                                        <a href="#!">#88119</a>
-                                    </td>
-                                    <td class="invoice_status">
-                                        <span
-                                            class="badge text-success-emphasis bg-success-subtle rounded-pill">Paid</span>
-                                    </td>
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Helen Mullins</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="invoice_date">18 Apr 2025</td>
-
-                                    <td class="invoice_amount">$135.99</td>
-                                    <td>
-                                        <div>
-                                            <div class="dropdown">
-                                                <a class="btn btn-ghost btn-icon rounded-circle" href="#!"
-                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                        height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                        <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                        <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                    </svg>
-                                                </a>
-
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-eye" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                <path
-                                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Détails</span>
-                                                    </a>
-
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-edit" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path
-                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                <path
-                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                <path d="M16 5l3 3" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Modifier</span>
-                                                    </a>
-
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-download"
-                                                                width="16" height="16" viewBox="0 0 24 24"
-                                                                stroke-width="1.5" stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-                                                                <path d="M7 11l5 5l5 -5" />
-                                                                <path d="M12 4l0 12" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Télécharger</span>
-                                                    </a>
-
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-trash" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M4 7l16 0" />
-                                                                <path d="M10 11l0 6" />
-                                                                <path d="M14 11l0 6" />
-                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Supprimer</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted py-4">
+                                            Aucun produit disponible
+                                        </td>
+                                    </tr>
+                                @endforelse
 
                             </tbody>
 
@@ -485,11 +382,19 @@
 
                         <nav aria-label="Page navigation example" class="mt-4">
                             <ul class="pagination justify-content-center mb-0">
-                                <li class="page-item"><a class="page-link disabled" href="#">Précedent</a></li>
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
+                                <li class="page-item {{ $produits->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $produits->previousPageUrl() }}">Précedent</a>
+                                </li>
+
+                                @foreach ($produits->getUrlRange(1, $produits->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $produits->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                <li class="page-item {{ $produits->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $produits->nextPageUrl() }}">Suivant</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -499,6 +404,49 @@
         </div>
     </div>
     </div>
+
+
+
+    <script>
+        function confirmDeleteProduit(public_id) {
+            Swal.fire({
+                title: 'Supprimer ce produit ?',
+                text: "Cette action est irréversible !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Oui, supprimer',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    const url = "{{ route('superadmin.produit.delete', ':id') }}"
+                        .replace(':id', public_id);
+
+                    const form = document.createElement('form');
+                    form.action = url;
+                    form.method = 'POST';
+
+                    const token = document.createElement('input');
+                    token.type = 'hidden';
+                    token.name = '_token';
+                    token.value = '{{ csrf_token() }}';
+
+                    const method = document.createElement('input');
+                    method.type = 'hidden';
+                    method.name = '_method';
+                    method.value = 'DELETE';
+
+                    form.appendChild(token);
+                    form.appendChild(method);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+    </script>
+
 
 
 @endsection

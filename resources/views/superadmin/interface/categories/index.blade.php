@@ -458,11 +458,11 @@
                     title: 'Êtes-vous sûr de supprimer cette catégorie ?',
                     text: "Cette action est irréversible !",
                     icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Oui, supprimer !',
-                    cancelButtonText: 'Annuler'
+                     showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById('delete-form-' + publicId).submit();

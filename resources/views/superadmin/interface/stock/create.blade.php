@@ -62,26 +62,25 @@
 
                             </div>
 
-                       <div class="col-md-6">
-    <label class="form-label">Catégorie</label>
+                            <div class="col-md-6">
+                                <label class="form-label">Catégorie</label>
 
-    <select name="categorie_id"
-            class="form-select @error('categorie_id') is-invalid @enderror"
-            required>
-        <option value="">-- Choisir une catégorie --</option>
+                                <select name="categorie_id" class="form-select @error('categorie_id') is-invalid @enderror"
+                                    required>
+                                    <option value="">-- Choisir une catégorie --</option>
 
-        @foreach ($categories as $categorie)
-            <option value="{{ $categorie->id }}"
-                {{ old('categorie_id') == $categorie->id ? 'selected' : '' }}>
-                {{ $categorie->name }}
-            </option>
-        @endforeach
-    </select>
+                                    @foreach ($categories as $categorie)
+                                        <option value="{{ $categorie->id }}"
+                                            {{ old('categorie_id') == $categorie->id ? 'selected' : '' }}>
+                                            {{ $categorie->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
 
-    @error('categorie_id')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
+                                @error('categorie_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                             <div class="col-md-6">
 
@@ -131,27 +130,26 @@
 
                             </div>
 
-                         <div class="col-md-6">
-    <label class="form-label">Fournisseur</label>
+                            <div class="col-md-6">
+                                <label class="form-label">Fournisseur</label>
 
-    <select name="fournisseur_id"
-            class="form-select @error('fournisseur_id') is-invalid @enderror"
-            required>
-        <option value="">-- Choisir un fournisseur --</option>
+                                <select name="fournisseur_id"
+                                    class="form-select @error('fournisseur_id') is-invalid @enderror" required>
+                                    <option value="">-- Choisir un fournisseur --</option>
 
-        @foreach ($fournisseurs as $fournisseur)
-            <option value="{{ $fournisseur->id }}"
-                {{ old('fournisseur_id') == $fournisseur->id ? 'selected' : '' }}>
-                {{ $fournisseur->name }}
-            </option>
-        @endforeach
-    </select>
+                                    @foreach ($fournisseurs as $fournisseur)
+                                        <option value="{{ $fournisseur->id }}"
+                                            {{ old('fournisseur_id') == $fournisseur->id ? 'selected' : '' }}>
+                                            {{ $fournisseur->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
 
-    @error('fournisseur_id')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
-    
+                                @error('fournisseur_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
 
                             <div class="col-md-6">
 

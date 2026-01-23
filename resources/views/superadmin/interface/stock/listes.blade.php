@@ -526,24 +526,24 @@
 
 
 
-        <script>
+        {{-- <script>
             function confirmDelete(public_id) {
                 Swal.fire({
                     title: 'Êtes-vous sûr de supprimer ce stock?',
                     text: "Cette action est irréversible !",
                     icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Oui, supprimer',
-                    cancelButtonText: 'Annuler'
+                   showCancelButton: true,
+            confirmButtonColor:  '#6c757d',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById('delete-form-' + public_id).submit();
                     }
                 });
             }
-        </script>
+        </script> --}}
 
         <script>
             function confirmDelete(public_id) {
@@ -552,8 +552,8 @@
                     text: "Cette action est irréversible !",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
                     confirmButtonText: 'Oui, supprimer',
                     cancelButtonText: 'Annuler'
                 }).then((result) => {
