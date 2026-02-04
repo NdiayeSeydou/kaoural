@@ -54,7 +54,7 @@ class Stock extends Model
 
             if (!$model->public_id) {
 
-                $model->public_id = Str::random(10); 
+                $model->public_id = Str::random(10);
             }
         });
     }
@@ -66,8 +66,20 @@ class Stock extends Model
 
     public function getQuantiteCalculeeAttribute()
     {
-        return $this->stock_initial + $this->quantite_entree - $this->quantite_sortie;
+        return $this->stock_initial + $this->quantite_entree - $this->retraits()->sum('quantite_sortie');
     }
+
+    public function getStatusLabelAttribute()
+    {
+        if ($this->quantite_restante == 0) {
+            return 'rupture';
+        } elseif ($this->quantite_restante <= 5) {
+            return 'baisse';
+        } else {
+            return 'disponible';
+        }
+    }
+
     public function categorie()
     {
         return $this->belongsTo(Categorie::class, 'categorie_id');
@@ -83,5 +95,11 @@ class Stock extends Model
     public function histories()
     {
         return $this->hasMany(StockHistory::class);
+    }
+
+
+    public function retraits()
+    {
+        return $this->hasMany(RetraitStock::class, 'stock_public_id', 'public_id');
     }
 }

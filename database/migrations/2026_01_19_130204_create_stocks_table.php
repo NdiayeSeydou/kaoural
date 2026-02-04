@@ -25,21 +25,21 @@ return new class extends Migration
 
             $table->foreignId('categorie_id')->constrained('categories')->cascadeOnDelete();
 
-            $table->integer('stock_initial');
+            $table->decimal('stock_initial', 10, 2);
 
-            $table->integer('quantite_entree')->default(0);
+            $table->decimal('quantite_entree', 10, 2)->default(0);
 
-            $table->integer('quantite_sortie')->default(0);
+            $table->decimal('quantite_sortie', 10, 2)->default(0);
 
-            $table->integer('prix_unitaire')->default(0);
+            $table->decimal('prix_unitaire', 12,2)->default(0);
 
-            $table->integer('prix_total')->default(0);
+            $table->decimal('prix_total', 14,2)->default(0);
 
             $table->foreignId('fournisseur_id')->constrained('fournisseurs')->cascadeOnDelete();
 
             $table->enum('emplacement', ['boutique', 'magasin']);
 
-            $table->integer('quantite_restante');
+            $table->decimal('quantite_restante', 10, 2)->default(0);
 
             $table->enum('status', ['disponible', 'rupture', 'baisse']);
     

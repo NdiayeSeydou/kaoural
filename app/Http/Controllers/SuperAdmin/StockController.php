@@ -29,7 +29,7 @@ class StockController extends Controller
 
         $categories = Categorie::all();
 
-        $fournisseurs = Fournisseur::all();
+        $fournisseurs = Fournisseur::all(); 
 
         return view('superadmin.interface.stock.listes', compact('stocksBoutique', 'categories', 'fournisseurs', 'stocksMagasin'));
     }
@@ -69,7 +69,7 @@ class StockController extends Controller
 
             'emplacement' => 'required|in:boutique,magasin',
 
-            'stock_initial' => 'required|integer|min:0',
+            'stock_initial' => 'required|numeric|min:0',
 
             'prix_unitaire' => 'required|numeric|min:0',
 
@@ -81,7 +81,9 @@ class StockController extends Controller
 
         ]);
 
-        // Génération code article
+        $stock_initial = floatval(str_replace(',', '.', $request->stock_initial));
+
+        $prix_unitaire = floatval(str_replace(',', '.', $request->prix_unitaire));
 
         $lastStock = Stock::latest('id')->first();
 
@@ -89,22 +91,16 @@ class StockController extends Controller
 
         $codeArticle = str_pad($nextId, 6, '0', STR_PAD_LEFT);
 
-        // Quantités
-
-        $stock_initial = $request->stock_initial;
-
         $quantite_entree = 0;
 
         $quantite_sortie = 0;
 
         $quantite_restante = $stock_initial + $quantite_entree - $quantite_sortie;
 
-        // Prix
-
+        
         $prixTotal = $quantite_entree * $request->prix_unitaire;
 
-        // Status automatique
-
+   
         if ($quantite_restante == 0) {
 
             $status = 'rupture';
@@ -179,29 +175,32 @@ class StockController extends Controller
 
             'code_article'   => 'required|exists:stocks,code_article',
 
-            'quantite'       => 'required|integer|min:1',
+            'quantite'       => 'required|numeric|min:0.01',
 
             'fournisseur_id' => 'required|exists:fournisseurs,public_id',
 
             'date'           => 'required|date',
+
         ]);
 
 
-
+      $quantite = floatval(str_replace(',', '.', $request->quantite));
 
 
         $stock = Stock::where('code_article', $request->code_article)->firstOrFail();
 
-        $stock->quantite_entree += $request->quantite;
+        $stock->quantite_entree += $quantite;
 
-        $stock->quantite_restante += $request->quantite;
+        $stock->quantite_restante += $quantite;
 
         if ($stock->quantite_restante == 0) {
 
             $stock->status = 'rupture';
+
         } elseif ($stock->quantite_restante <= 5) {
 
             $stock->status = 'baisse';
+            
         } else {
 
             $stock->status = 'disponible';
@@ -209,8 +208,8 @@ class StockController extends Controller
 
         $stock->save();
 
-        $fournisseur = Fournisseur::where('public_id', $request->fournisseur_id)->firstOrFail();
 
+        $fournisseur = Fournisseur::where('public_id', $request->fournisseur_id)->firstOrFail();
 
 
         StockHistory::create([
@@ -219,20 +218,19 @@ class StockController extends Controller
 
             'fournisseur_id' => $fournisseur->id,
 
-            'quantite_entree' => $request->quantite,
 
+            'quantite_entree' => $quantite,
 
             'emplacement' => $stock->emplacement,
 
             'date' => $request->date,
 
             'public_id' => Str::random(10),
-
-
         ]);
 
         return redirect()->route('superadmin.stock.index')->with('ajoutstockaancien', 'Stock mis à jour avec succès');
     }
+
 
 
 
@@ -278,7 +276,7 @@ class StockController extends Controller
 
         $stock = Stock::with(['categorie', 'fournisseur'])->where('public_id', $public_id)->firstOrFail();
 
-        //la date en français 
+
 
         Carbon::setLocale('fr');
 
@@ -335,56 +333,57 @@ class StockController extends Controller
 
         $request->validate([
 
-            'designation' => 'required|string|max:255',
+            'designation'   => 'required|string|max:255',
 
-            'categorie_id' => 'required|exists:categories,public_id',
+            'categorie_id'  => 'required|exists:categories,public_id',
 
-            'emplacement' => 'required|in:boutique,magasin',
+            'emplacement'   => 'required|in:boutique,magasin',
 
-            'quantite' => 'required|numeric|min:0',
+            'quantite'      => 'required|numeric|min:0',
 
             'prix_unitaire' => 'required|numeric|min:0',
 
             'fournisseur_id' => 'required|exists:fournisseurs,public_id',
 
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+
+
+        $quantite = floatval(str_replace(',', '.', $request->quantite));
+
+        $prix_unitaire = floatval(str_replace(',', '.', $request->prix_unitaire));
 
 
 
         $categorie = Categorie::where('public_id', $request->categorie_id)->firstOrFail();
 
-
         $fournisseur = Fournisseur::where('public_id', $request->fournisseur_id)->firstOrFail();
 
-        // Mise à jour
+
         $stock->designation = $request->designation;
 
-        $stock->categorie_id = $request->categorie_id;
+        $stock->categorie_id = $categorie->id;
 
         $stock->emplacement = $request->emplacement;
 
-        $stock->stock_initial = $request->quantite;
+        $stock->stock_initial = $quantite;
 
-        $stock->quantite_restante = $request->quantite;
+        $stock->quantite_restante = $quantite;
 
-        $stock->prix_unitaire = $request->prix_unitaire;
+        $stock->prix_unitaire = $prix_unitaire;
 
-        $stock->prix_total = $request->quantite * $request->prix_unitaire;
-
-        $stock->categorie_id = $categorie->id;
+        $stock->prix_total = $quantite * $prix_unitaire;
 
         $stock->fournisseur_id = $fournisseur->id;
 
 
-
-        // Image
         if ($request->hasFile('image')) {
 
             $stock->image = $request->file('image')->store('stocks', 'public');
         }
 
-        // Statut
+
         if ($stock->quantite_restante == 0) {
 
             $stock->status = 'rupture';
@@ -400,6 +399,7 @@ class StockController extends Controller
 
         return redirect()->route('superadmin.stock.index')->with('stockupdt', 'Stock mis à jour avec succès');
     }
+
 
 
 
@@ -454,14 +454,15 @@ class StockController extends Controller
     // Mettre à jour l'historique
     public function updateHistory(Request $request, $historyPublicId)
     {
-        // Récupère l'historique via public_id
+
+
         $history = StockHistory::where('public_id', $historyPublicId)->firstOrFail();
 
         $request->validate([
 
             'date' => 'required|date',
 
-            'quantite_entree' => 'required|integer|min:1',
+            'quantite_entree' => 'required|numeric|min:0.01',
 
             'emplacement' => 'required|in:boutique,magasin',
 
@@ -469,15 +470,18 @@ class StockController extends Controller
         ]);
 
 
+
+        $quantite_entree = floatval(str_replace(',', '.', $request->quantite_entree));
+
+
+
         $fournisseur = Fournisseur::where('public_id', $request->fournisseur_id)->firstOrFail();
-
-
 
         $history->update([
 
             'date' => $request->date,
 
-            'quantite_entree' => $request->quantite_entree,
+            'quantite_entree' => $quantite_entree,
 
             'emplacement' => $request->emplacement,
 
@@ -505,9 +509,9 @@ class StockController extends Controller
 
         $stock->save();
 
-        return redirect()->route('superadmin.stock.show', $stock->public_id)
-            ->with('edithistory', 'Historique mis à jour avec succès');
+        return redirect()->route('superadmin.stock.show', $stock->public_id)->with('edithistory', 'Historique mis à jour avec succès');
     }
+
 
 
 

@@ -3,7 +3,7 @@
 @section('suite')
 
 
-   @if (session('ajoutcateg'))
+    @if (session('ajoutcateg'))
         <div class="alert alert-success alert-dismissible fade show">
             {{ session('ajoutcateg') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -11,8 +11,8 @@
     @endif
 
 
-    
-   @if (session('catjour'))
+
+    @if (session('catjour'))
         <div class="alert alert-success alert-dismissible fade show">
             {{ session('catjour') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -21,7 +21,7 @@
 
 
 
-     @if (session('catdel'))
+    @if (session('catdel'))
         <div class="alert alert-success alert-dismissible fade show">
             {{ session('catdel') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -29,8 +29,8 @@
     @endif
 
 
-    
-     @if (session(key: 'error'))
+
+    @if (session(key: 'error'))
         <div class="alert alert-danger alert-dismissible fade show">
             {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -142,8 +142,9 @@
                                         <span class="text-danger">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-arrow-down-right" width="16"
-                                                height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M7 7l10 10" />
                                                 <path d="M17 8l0 9l-9 0" />
@@ -299,7 +300,7 @@
                                         </td>
 
                                         <td class="invoice_status">
-                                           <span>{{ ucfirst($categorie->name) }}</span>
+                                            <span>{{ ucfirst($categorie->name) }}</span>
                                         </td>
                                         <td class="ps-1 invoice_info">
                                             <div class="d-flex align-items-center">
@@ -453,21 +454,21 @@
             //         confirmButtonText: 'OK'
             //     });
             // } else {
-                // Confirmation normale de suppression
-                Swal.fire({
-                    title: 'Êtes-vous sûr de supprimer cette catégorie ?',
-                    text: "Cette action est irréversible !",
-                    icon: 'warning',
-                     showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Oui, supprimer',
-            cancelButtonText: 'Annuler'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById('delete-form-' + publicId).submit();
-                    }
-                });
+            // Confirmation normale de suppression
+            Swal.fire({
+                title: 'Êtes-vous sûr de supprimer cette catégorie ?',
+                text: "Cette action est irréversible !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Oui, supprimer',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + publicId).submit();
+                }
+            });
             // }
         }
     </script>

@@ -2,207 +2,200 @@
 @section('title', 'Retrait de produits | kaoural')
 @section('suite')
 
-    <div class="custom-container">
+<form action="{{ route('superadmin.quincaillerie.ajoutstore', $quincaillerie->public_id) }}" method="POST">
+    @csrf
 
-        <!-- ================= TITRE ================= -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="mb-0">Retrait de produits</h3>
-
+    <!-- ================= QUINCAILLERIE, DATE & STATUT ================= -->
+    <div class="row g-3 mb-4">
+        <!-- Quincaillerie -->
+        <div class="col-md-4">
+            <label class="form-label fw-semibold">Quincaillerie</label>
+            <input type="text" class="form-control bg-light" value="{{ $quincaillerie->nom }}" readonly>
         </div>
 
-        <!-- ================= FORMULAIRE ================= -->
-        <form action="#" method="POST">
-            @csrf
+        <!-- Date -->
+        <div class="col-md-4">
+            <label class="form-label fw-semibold">Date du retrait</label>
+            <input type="date" name="date" class="form-control @error('date') is-invalid @enderror"
+                   value="{{ old('date', now()->format('Y-m-d')) }}" required>
+            @error('date')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
-            <!-- ================= QUINCAILLERIE ================= -->
-          <div class="card shadow-sm border-0 mb-4">
-    <div class="card-body p-4">
-        <h5 class="mb-4 d-flex align-items-center">
-            <i class="bi bi-info-circle me-2 text-primary"></i> Informations générales
-        </h5>
-
-        <div class="row g-3 align-items-end">
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Quincaillerie</label>
-                <input type="text" class="form-control bg-light" value="Quincaillerie La Paix" readonly>
-            </div>
-
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Date du retrait</label>
-                <input type="date" class="form-control" value="2026-01-15" required>
-            </div>
-
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Type de retrait (Statut)</label>
-                <select class="form-select border-primary-subtle" required>
-                    <option value="" selected disabled>Choisir le statut...</option>
-                    <option value="bon">Avec Bon de commande</option>
-                    <option value="sans_bon text-danger">Sans Bon (Retrait direct)</option>
-                </select>
-            </div>
+        <!-- Statut -->
+        <div class="col-md-4">
+            <label class="form-label fw-semibold">Statut</label>
+            <select name="status" class="form-select @error('status') is-invalid @enderror" required>
+                <option disabled selected>Choisir...</option>
+                <option value="bon" {{ old('status') == 'bon' ? 'selected' : '' }}>Avec bon</option>
+                <option value="sans bon" {{ old('status') == 'sans bon' ? 'selected' : '' }}>Sans bon</option>
+                <option value="payée" {{ old('status') == 'payée' ? 'selected' : '' }}>Payée</option>
+                <option value="impayée" {{ old('status') == 'impayée' ? 'selected' : '' }}>Impayée</option>
+            </select>
+            @error('status')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
     </div>
-</div>
 
+    <!-- ================= PRODUITS ================= -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
 
+            <!-- Afficher les erreurs globales -->
+         
 
-            <!-- ================= PRODUITS ================= -->
-            <div class="card shadow-sm border-0 mb-4">
-                <div class="card-body">
+            <div id="produitsContainer">
+                @php
+                    $produitsOld = old('produits', [[]]);
+                @endphp
 
+                @foreach ($produitsOld as $i => $oldProduit)
+                    <div class="card mb-3 produit-card p-3">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Produit</label>
+                            <select name="produits[{{ $i }}][stock_public_id]" 
+                                    class="form-select produit-select" 
+                                    required style="width:100%">
+                                @if(isset($oldProduit['stock_public_id']))
+                                    @php
+                                        $stock = $stocks->where('public_id', $oldProduit['stock_public_id'])->first();
+                                    @endphp
+                                    @if($stock)
+                                        <option value="{{ $stock->public_id }}" selected>
+                                            {{ $stock->designation }} ({{ $stock->quantite_restante }})
+                                        </option>
+                                    @endif
+                                @endif
+                            </select>
+                            @error("produits.$i.stock_public_id")
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-centered text-nowrap mb-0" id="tableRetrait">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Code article</th>
-                                    <th>Image</th>
-                                    <th>Désignation</th>
-                                    <th>Quantité</th>
-                                    <th>Prix unitaire</th>
-                                    <th>Emplacement</th>
-                                    <th>Prix total</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Quantité</label>
+                            <input type="text" name="produits[{{ $i }}][quantite_sortie]" 
+                                   class="form-control qty @error('produits.' . $i . '.quantite_sortie') is-invalid @enderror" 
+                                   value="{{ $oldProduit['quantite_sortie'] ?? '' }}" placeholder="Ex : 2,5">
+                            @error("produits.$i.quantite_sortie")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                            <tbody>
-                                <tr>
-                                    <td class="index">1</td>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Prix unitaire (FCFA)</label>
+                            <input type="number" name="produits[{{ $i }}][prix_unitaire]" 
+                                   class="form-control price" 
+                                   value="{{ $oldProduit['prix_unitaire'] ?? '' }}" placeholder="Optionnel">
+                            @error("produits.$i.prix_unitaire")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                                    <td>
-                                        <input type="text" class="form-control form-control-sm" placeholder="205">
-                                    </td>
-
-                                    <td>
-                                        <input type="file" class="form-control form-control-sm">
-                                    </td>
-
-                                    <td>
-                                        <input type="text" class="form-control form-control-sm"
-                                            placeholder="Désignation">
-                                    </td>
-
-                                    <td>
-                                        <input type="number" min="1" class="form-control form-control-sm qty"
-                                            value="1">
-                                    </td>
-
-                                    <td>
-                                        <input type="number" class="form-control form-control-sm price" placeholder="2700">
-                                    </td>
-
-                                    <td>
-                                        <select class="form-select form-select-sm">
-                                            <option>Boutique</option>
-                                            <option>Magasin</option>
-                                        </select>
-                                    </td>
-
-                                    <td>
-                                        <input type="text" class="form-control form-control-sm bg-light total"
-                                            value="0 FCFA" readonly>
-                                    </td>
-
-                                    <td>
-                                        <button type="button"
-                                            class="btn btn-ghost btn-icon btn-sm rounded-circle btn-delete">
-                                            <!-- ICON DELETE -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M4 7l16 0" />
-                                                <path d="M10 11l0 6" />
-                                                <path d="M14 11l0 6" />
-                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="mb-3 text-end">
+                            <button type="button" class="btn btn-ghost btn-sm btn-remove-produit">
+                                <i class="bi bi-trash text-danger fs-5"></i>
+                            </button>
+                        </div>
                     </div>
-
-                    <!-- BOUTON AJOUT -->
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-primary" id="addRow">
-                            <i class="bi bi-plus-circle"></i> Ajouter un produit
-                        </button>
-                    </div>
-
-
-                </div>
+                @endforeach
             </div>
 
-            <!-- ================= ACTIONS ================= -->
-            <div class="d-flex justify-content-end gap-2">
-                <button type="reset" class="btn btn-outline-secondary">Annuler</button>
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-check-circle"></i> Valider le retrait
-                </button>
+            <!-- AJOUTER UN PRODUIT -->
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary" id="addProduit">Ajouter un produit</button>
             </div>
 
-        </form>
+        </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    <!-- BOUTON ENVOYER -->
+    <div class="d-flex justify-content-end gap-2">
+        <a href="{{ route('superadmin.quincaillerie.show', $quincaillerie->public_id) }}" 
+           class="btn btn-outline-secondary">Annuler</a>
+        <button type="submit" class="btn btn-primary">Valider le retrait</button>
+    </div>
+</form>
 
-            const tableBody = document.querySelector('#tableRetrait tbody');
-            const addRowBtn = document.getElementById('addRow');
+<script>
+document.addEventListener('DOMContentLoaded', function() {
 
-            // ===== Calcul prix total =====
-            function calculateTotal(row) {
-                const qty = row.querySelector('.qty').value || 0;
-                const price = row.querySelector('.price').value || 0;
-                const total = qty * price;
-                row.querySelector('.total').value = total.toLocaleString() + ' FCFA';
+    function initSelect2(select) {
+        $(select).select2({
+            placeholder: 'Tapez le code ou la désignation',
+            minimumInputLength: 1,
+            ajax: {
+                url: '{{ route("superadmin.quincaillerie.searchStock") }}',
+                dataType: 'json',
+                delay: 300,
+                data: function(params) { return { q: params.term }; },
+                processResults: function(data) { return { results: data }; }
             }
+        }).on('select2:select', function(e) {
+            const data = e.params.data;
+            const card = e.target.closest('.produit-card');
+            if(card) {
+                // Crée un champ hidden code_article et designation si nécessaire
+                let codeInput = card.querySelector('.code-input');
+                let desigInput = card.querySelector('.designation-input');
+                if(!codeInput) {
+                    codeInput = document.createElement('input');
+                    codeInput.type = 'hidden';
+                    codeInput.name = e.target.name.replace('stock_public_id','code_article');
+                    codeInput.classList.add('code-input');
+                    card.appendChild(codeInput);
+                }
+                if(!desigInput) {
+                    desigInput = document.createElement('input');
+                    desigInput.type = 'hidden';
+                    desigInput.name = e.target.name.replace('stock_public_id','designation');
+                    desigInput.classList.add('designation-input');
+                    card.appendChild(desigInput);
+                }
 
-            // ===== Mise à jour numérotation =====
-            function updateIndexes() {
-                document.querySelectorAll('.index').forEach((el, i) => {
-                    el.textContent = i + 1;
-                });
+                codeInput.value = data.code_article;
+                desigInput.value = data.designation;
             }
-
-            // ===== Ajout nouvelle ligne =====
-            addRowBtn.addEventListener('click', function() {
-                const newRow = tableBody.rows[0].cloneNode(true);
-
-                newRow.querySelectorAll('input').forEach(input => {
-                    input.value = '';
-                });
-
-                newRow.querySelector('.qty').value = 1;
-                newRow.querySelector('.total').value = '0 FCFA';
-
-                tableBody.appendChild(newRow);
-                updateIndexes();
-            });
-
-            // ===== Events dynamiques =====
-            tableBody.addEventListener('input', function(e) {
-                const row = e.target.closest('tr');
-                if (e.target.classList.contains('qty') || e.target.classList.contains('price')) {
-                    calculateTotal(row);
-                }
-            });
-
-            // ===== Suppression ligne =====
-            tableBody.addEventListener('click', function(e) {
-                if (e.target.closest('.btn-delete')) {
-                    if (tableBody.rows.length > 1) {
-                        e.target.closest('tr').remove();
-                        updateIndexes();
-                    }
-                }
-            });
-
         });
-    </script>
+    }
 
+    const container = document.getElementById('produitsContainer');
+    const addBtn = document.getElementById('addProduit');
+
+    // Init tous les selects existants
+    container.querySelectorAll('.produit-select').forEach(initSelect2);
+
+    addBtn.addEventListener('click', function() {
+        const index = container.querySelectorAll('.produit-card').length;
+        const card = container.querySelector('.produit-card').cloneNode(true);
+
+        card.querySelectorAll('input, select').forEach(el => {
+            if(el.tagName === 'SELECT') {
+                $(el).empty().trigger('change');
+                el.name = el.name.replace(/\[\d+\]/, `[${index}]`);
+            } else {
+                el.value = '';
+                el.name = el.name.replace(/\[\d+\]/, `[${index}]`);
+            }
+        });
+
+        container.appendChild(card);
+        initSelect2(card.querySelector('.produit-select'));
+    });
+
+    // Supprimer une carte produit (ne fait rien si dernier)
+    container.addEventListener('click', function(e) {
+        if(e.target.closest('.btn-remove-produit')) {
+            const cards = container.querySelectorAll('.produit-card');
+            if(cards.length > 1) {
+                e.target.closest('.produit-card').remove();
+            }
+        }
+    });
+
+});
+</script>
 
 @endsection

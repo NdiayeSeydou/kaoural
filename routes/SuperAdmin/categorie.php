@@ -14,10 +14,10 @@ Route::prefix('superadmin')->group(function () {
         Route::get('/creer/categorie', [CategorieController::class, 'addCategorie'])->name('superadmin.categorie.create');
 
         // modifier une catégorie
-        Route::get('/modifier//{public_id}/categorie', [CategorieController::class, 'editCategorie'])->name('superadmin.categorie.edit');
+        Route::get('/modifier/categorie/{public_id}', [CategorieController::class, 'editCategorie'])->name('superadmin.categorie.edit');
 
         //envoie des infos de modif 
-        Route::put('categorie/{public_id}/update', [CategorieController::class, 'updateCategorie'])->name('superadmin.categorie.update');
+        Route::put('categorie/update/{public_id}', [CategorieController::class, 'updateCategorie'])->name('superadmin.categorie.update');
 
 
         //details d'une catégorie 
@@ -27,6 +27,8 @@ Route::prefix('superadmin')->group(function () {
 
 
         // Suppression
-        Route::delete('categorie/{public_id}/delete', [CategorieController::class, 'deleteCategorie'])->name('superadmin.categorie.delete');
+        Route::delete('categorie/delete/{public_id}', [CategorieController::class, 'deleteCategorie'])->name('superadmin.categorie.delete');
+
     });
+    
 });

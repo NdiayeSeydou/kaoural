@@ -140,7 +140,9 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ \Carbon\Carbon::parse($history->date)->translatedFormat('d F Y') }}</td>
+
                                             <td>{{ $history->stock->name ?? '—' }}</td>
+                                            
                                             <td>{{ $history->quantite_entree }}</td>
                                             <td>{{ ucfirst($history->emplacement) }}</td>
                                         </tr>

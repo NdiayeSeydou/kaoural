@@ -2,6 +2,32 @@
 @section('title', 'Listes des factures | kaoural')
 @section('suite')
 
+
+    @if (session('quinajout'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('quinajout') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    @if (session('quinmodif'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('quinmodif') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+
+
+    @if (session('quindel'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('quindel') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     <div class="custom-container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
@@ -42,6 +68,7 @@
 
         <div>
             <!-- row -->
+
             <div class="row g-6 mb-6">
                 <div class="col-xl-3 col-md-6 col-12">
                     <div class="card card-lg">
@@ -219,6 +246,7 @@
                 </div>
 
             </div>
+
             <div class="row">
                 <div class="col-12">
                     <!-- card -->
@@ -254,304 +282,127 @@
                                 <tr>
 
                                     <th class="" data-sort="invoice_number">Id Q</th>
+                                    <th class="" data-sort="invoice_info">Nom de la quincaillerie</th>
                                     <th class="" data-sort="invoice_status">Produits</th>
                                     <th class="" data-sort="invoice_status">Numero de télephone</th>
                                     <th class="" data-sort="invoice_status">Adressse</th>
-                                    <th class="" data-sort="invoice_info">Nom de la quincaillerie</th>
+
 
 
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <tr>
-
-                                    <td class="">
-                                        <a href="#!">#88120</a>
-                                    </td>
-                                    <td class="invoice_status">
-                                        <span
-                                            class="badge text-warning-emphasis bg-warning-subtle rounded-pill">Pending</span>
-                                    </td>
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Jan Harmon</a>
-                                            </div>
+                                @forelse ($quincailleries as $quincaillerie)
+                                    <tr>
+                                        {{-- ID --}}
+                                        <td>
+                                            <a href="{{ route('superadmin.quincaillerie.show', $quincaillerie->public_id) }}">#{{ $quincaillerie->public_id }}</a>
+                                        </td>
 
 
-                                        </div>
-                                    </td>
-
-
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Jan Harmon</a>
-                                            </div>
-
-
-                                        </div>
-                                    </td>
-
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Jan Harmon</a>
-                                            </div>
-
-
-                                        </div>
-                                    </td>
+                                        <td class="">
+                                            <strong>{{ $quincaillerie->nom }}</strong>
+                                        </td>
 
 
 
+                                        <td class="invoice_status">
+                                            <span class="badge text-info-emphasis bg-info-subtle rounded-pill">
+                                                {{ $quincaillerie->retraits_count ?? 0 }}
+                                                produit{{ ($quincaillerie->retraits_count ?? 0) > 1 ? 's' : '' }}
+                                            </span>
+                                        </td>
 
-                                    <td>
-                                        <div>
+
+                                        {{-- Téléphone --}}
+                                        <td class="text-center">
+                                            {{ $quincaillerie->telephone
+                                                ? preg_replace('/(\+\d{3})(\d{2})(\d{2})(\d{2})(\d{2})/', '$1 $2 $3 $4 $5', $quincaillerie->telephone)
+                                                : 'non renseigné' }}
+                                        </td>
+
+                                        {{-- Adresse --}}
+                                        <td class="text-center">
+                                            {{ $quincaillerie->adresse ?? 'non renseigné' }}
+                                        </td>
+
+                                        {{-- Nom --}}
+
+                                        {{-- Actions --}}
+                                        <td>
                                             <div class="dropdown">
                                                 <a class="btn btn-ghost btn-icon rounded-circle" href="#!"
-                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                        height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                        <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                        <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                    </svg>
+                                                    data-bs-toggle="dropdown">
+                                                    ⋮
                                                 </a>
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="/superadmin/quincaillerie/details">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-eye" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                <path
-                                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Détails</span>
+
+                                                    {{-- Détails --}}
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('superadmin.quincaillerie.show', $quincaillerie->public_id) }}">
+                                                        Détails
                                                     </a>
 
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="/superadmin/quincaillerie/modifier">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-edit" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path
-                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                <path
-                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                <path d="M16 5l3 3" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Modifier</span>
+                                                    {{-- Modifier --}}
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('superadmin.quincaillerie.edit', $quincaillerie->public_id) }}">
+                                                        Modifier
                                                     </a>
 
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="/superadmin/quincaillerie/retrait/produit">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-indent" width="24"
-                                                                height="24" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <!-- Ligne horizontale principale -->
-                                                                <path d="M4 6h16" />
-                                                                <path d="M4 12h8" />
-                                                                <path d="M4 18h16" />
-                                                                <!-- Flèche pour montrer le retrait -->
-                                                                <path d="M16 12l4 -2v4z" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Ajouter un retrait</span>
+                                                    {{-- Retrait --}}
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('superadmin.quincaillerie.retrait', $quincaillerie->public_id) }}">
+                                                        Ajouter un retrait
                                                     </a>
 
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-trash" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M4 7l16 0" />
-                                                                <path d="M10 11l0 6" />
-                                                                <path d="M14 11l0 6" />
-                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Supprimer</span>
-                                                    </a>
+                                                    {{-- Supprimer --}}
+                                                    <form method="POST"
+                                                        action="{{ route('superadmin.quincaillerie.delete', $quincaillerie->public_id) }}"
+                                                        onsubmit="return confirm('Supprimer cette quincaillerie ?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="dropdown-item text-danger">
+                                                            Supprimer
+                                                        </button>
+                                                    </form>
+
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-
-                                    <td class="">
-                                        <a href="#!">#88119</a>
-                                    </td>
-                                    <td class="invoice_status">
-                                        <span
-                                            class="badge text-success-emphasis bg-success-subtle rounded-pill">Paid</span>
-                                    </td>
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Helen Mullins</a>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Jan Harmon</a>
-                                            </div>
-
-
-                                        </div>
-                                    </td>
-                                    <td class="ps-1 invoice_info">
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="ms-2">
-                                                <a href="#!" class="text-inherit">Jan Harmon</a>
-                                            </div>
-
-
-                                        </div>
-                                    </td>
-
-
-                                    <td>
-                                        <div>
-                                            <div class="dropdown">
-                                                <a class="btn btn-ghost btn-icon rounded-circle" href="#!"
-                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                        height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                        <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                        <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                                    </svg>
-                                                </a>
-
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-eye" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                <path
-                                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Détails</span>
-                                                    </a>
-
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-edit" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path
-                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                <path
-                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                <path d="M16 5l3 3" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Modifier</span>
-                                                    </a>
-
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-download"
-                                                                width="16" height="16" viewBox="0 0 24 24"
-                                                                stroke-width="1.5" stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-                                                                <path d="M7 11l5 5l5 -5" />
-                                                                <path d="M12 4l0 12" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Ajouter</span>
-                                                    </a>
-
-                                                    <a class="dropdown-item d-flex align-items-center" href="#!">
-                                                        <span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="icon icon-tabler icon-tabler-trash" width="16"
-                                                                height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" fill="none"
-                                                                stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                <path d="M4 7l16 0" />
-                                                                <path d="M10 11l0 6" />
-                                                                <path d="M14 11l0 6" />
-                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="ms-2">Supprimer</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">
+                                            Aucune quincaillerie trouvée
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
+
 
 
                         </table>
 
                         <nav aria-label="Page navigation example" class="mt-4">
                             <ul class="pagination justify-content-center mb-0">
-                                <li class="page-item"><a class="page-link disabled" href="#">Précedent</a></li>
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
+                                <li class="page-item {{ $quincailleries->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $quincailleries->previousPageUrl() }}">Précedent</a>
+                                </li>
+
+                                @foreach ($quincailleries->getUrlRange(1, $quincailleries->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $quincailleries->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                <li class="page-item {{ $quincailleries->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $quincailleries->nextPageUrl() }}">Suivant</a>
+                                </li>
                             </ul>
                         </nav>
+
                     </div>
 
                 </div>

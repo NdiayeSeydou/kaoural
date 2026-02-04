@@ -204,19 +204,19 @@
                                     </td>
 
 
+                                    <td>{{ $stock->retraits()->sum('quantite_sortie') }}</td>
 
-                                    <td>{{ $stock->quantite_sortie }}</td>
-
-                                    <td>{{ $stock->quantite_calculee }}</td>
+                                    <td>{{ $stock->quantite_restante }}</td>
 
                                     <td>
-                                        @if ($stock->status === 'disponible')
+                                        @if ($stock->status_label === 'disponible')
                                             <span class="badge bg-success">Disponible</span>
-                                        @elseif($stock->status === 'baisse')
+                                        @elseif($stock->status_label === 'baisse')
                                             <span class="badge bg-warning">Stock en baisse</span>
                                         @else
                                             <span class="badge bg-danger">Rupture</span>
                                         @endif
+
 
                                     </td>
 
@@ -374,18 +374,19 @@
 
 
 
-                                    <td>{{ $stock->quantite_sortie }}</td>
+                                    <td>{{ $stock->retraits()->sum('quantite_sortie') }}</td>
 
                                     <td>{{ $stock->quantite_restante }}</td>
 
                                     <td>
-                                        @if ($stock->status === 'disponible')
+                                        @if ($stock->status_label === 'disponible')
                                             <span class="badge bg-success">Disponible</span>
-                                        @elseif($stock->status === 'baisse')
+                                        @elseif($stock->status_label === 'baisse')
                                             <span class="badge bg-warning">Stock en baisse</span>
                                         @else
                                             <span class="badge bg-danger">Rupture</span>
                                         @endif
+
 
                                     </td>
 

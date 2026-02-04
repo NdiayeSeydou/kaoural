@@ -34,13 +34,23 @@
                 <div class="card-body px-6 py-5">
                     <div class="row g-4">
                         <div class="col-md-4">
-                            <strong>ID du bon :</strong> BON-0001
+                            <strong>ID du bon :</strong> {{ $bon->public_id }}
                         </div>
+
                         <div class="col-md-4">
-                            <strong>Nom du destinataire :</strong> Jean Dupont
+                            <strong>Nom du destinataire :</strong> {{ $bon->destinataire }}
                         </div>
+
                         <div class="col-md-4">
-                            <strong>Status :</strong> Non livré
+                            <strong>Status :</strong>
+                            @php
+                                $badgeClass = $bon->status === 'livre'
+                                    ? 'bg-success-subtle text-success-emphasis'
+                                    : 'bg-warning-subtle text-warning-emphasis';
+                            @endphp
+                            <span class="badge rounded-pill {{ $badgeClass }}">
+                                {{ ucfirst(str_replace('_', ' ', $bon->status)) }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -59,18 +69,23 @@
                                 <tr>
                                     <th>Désignation</th>
                                     <th>Quantité</th>
+                                    <th>Libellé</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Transparent Sunglasses</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>Montre Bracelet</td>
-                                    <td>1</td>
-                                </tr>
-                                <!-- Ajouter ici les autres produits du bon -->
+                                @forelse ($bon->produits as $produit)
+                                    <tr>
+                                        <td>{{ $produit->produit }}</td>
+                                        <td>{{ $produit->quantite }}</td>
+                                        <td>{{ $produit->libelle }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="text-center text-muted">
+                                            Aucun produit associé à ce bon
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
