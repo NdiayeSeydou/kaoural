@@ -26,7 +26,7 @@
     @endif
 
 
-     @if (session('error'))
+    @if (session('error'))
         <div class="alert alert-danger  alert-dismissible fade show">
             {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -83,61 +83,60 @@
             <!-- FILTRES & RECHERCHE -->
             <div class="card mb-5 shadow-sm">
                 <div class="card-body">
-                    <div class="row g-3 align-items-end">
+                    <form action="{{ route('superadmin.fournisseur.index') }}" method="GET">
+                        <div class="row g-3 align-items-end">
 
-                        <!-- Recherche -->
-
-
-                        <!-- Filtre par date -->
-                        <div class="col-lg-2 col-md-6 col-12">
-                            <label class="form-label fw-semibold">Numero de télephone</label>
-                            <input type="number" class="form-control">
-                        </div>
-
-                        <!-- Filtre par produit -->
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <label class="form-label fw-semibold">Fournisseur</label>
-
-                            <div class="input-group">
-
-
-                                <input type="text" class="form-control" placeholder="Rechercher un fournisseur">
-
-                                <span class="input-group-text bg-white">
-                                    <!-- Icône recherche -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="11" cy="11" r="8" />
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                    </svg>
-                                </span>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Nom du fournisseur</label>
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control"
+                                        placeholder="Rechercher un nom..." value="{{ request('search') }}">
+                                    <span class="input-group-text bg-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
+
+                          <div class="col-lg-3 col-md-6 col-12">
+    <label class="form-label fw-semibold">Numéro de téléphone</label>
+    <input type="tel" id="phone_input" name="phone" class="form-control" 
+           value="{{ request('phone') }}">
+</div>
+
+                          
+
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Catégorie</label>
+                                <select name="categorie" class="form-select">
+                                    <option value="">Toutes les catégories</option>
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->id }}"
+                                            {{ request('categorie') == $cat->id ? 'selected' : '' }}>
+                                            {{ $cat->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12 d-flex gap-2">
+                                <button type="submit" class="btn btn-primary flex-grow-1">
+                                    Filtrer
+                                </button>
+                                <a href="{{ route('superadmin.fournisseur.index') }}"
+                                    class="btn btn-outline-danger flex-grow-1 text-center">
+                                    Reset
+                                </a>
+                            </div>
+
                         </div>
-
-
-                        <!-- Filtre par catégorie -->
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <label class="form-label fw-semibold">Catégorie</label>
-                            <select class="form-select">
-                                <option selected disabled>Choisir une catégorie</option>
-                                <option>Accessoires</option>
-                                <option>Électronique</option>
-                                <option>Mode</option>
-                            </select>
-                        </div>
-
-                        <!-- Bouton reset (optionnel UI) -->
-                        <div class="col-lg-1 col-md-12 col-12 d-grid">
-                            <button class="btn btn-outline-danger">
-                                Réinitialiser
-                            </button>
-                        </div>
-
-                    </div>
+                    </form>
                 </div>
             </div>
-
 
 
 
@@ -326,10 +325,10 @@
                     text: "Ce fournisseur sera définitivement supprimé !",
                     icon: 'warning',
                     showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Oui, supprimer',
-            cancelButtonText: 'Annuler'
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById('delete-fournisseur-' + publicId).submit();
@@ -337,6 +336,38 @@
                 });
             }
         </script>
+
+
+      <script>
+    const input = document.querySelector("#phone_input");
+    
+    const iti = window.intlTelInput(input, {
+        initialCountry: "auto",
+        // 1. On active le placeholder automatique
+        autoPlaceholder: "aggressive", 
+        // 2. On précise qu'on veut un exemple de numéro mobile
+        placeholderNumberType: "MOBILE",
+        
+        geoIpLookup: function(callback) {
+            fetch("https://ipapi.co/json")
+                .then(res => res.json())
+                .then(data => callback(data.country_code))
+                .catch(() => callback("ci")); // CI ou FR par défaut
+        },
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/utils.js",
+        separateDialCode: true,
+    });
+
+    // Optionnel : Si tu veux quand même que le champ ne soit pas vide 
+    // et affiche l'indicatif en plus du placeholder au changement de pays
+    input.addEventListener("countrychange", function() {
+        const countryData = iti.getSelectedCountryData();
+        // On réinitialise la valeur pour laisser voir le nouveau placeholder du pays
+        input.value = ""; 
+        // Si tu veux forcer l'indicatif dedans, décommente la ligne suivante :
+        // input.value = "+" + countryData.dialCode;
+    });
+</script>
 
 
 

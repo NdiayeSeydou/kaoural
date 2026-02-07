@@ -3,24 +3,46 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\VenteController;
 
+/*
+|--------------------------------------------------------------------------
+| Routes des Ventes - SuperAdmin
+|--------------------------------------------------------------------------
+*/
+
 Route::prefix('superadmin')->group(function () {
 
     Route::controller(VenteController::class)->group(function () {
 
-        // Listes des ventes
-        Route::get('/ventes', [VenteController::class, 'vente'])->name('superadmin.vente.index');
-
-
-        // Ajouter une vente
-        Route::get('/ventes/ajouter', [VenteController::class, 'addVente'])->name('superadmin.vente.create');
-
-
-        // Modifier une vente
-        Route::get('/ventes/modifier', [VenteController::class, 'editVente'])->name('superadmin.vente.edit');
-
-        // Voir les détails d'une vente
-        Route::get('/ventes/details', [VenteController::class, 'detailsVente'])->name('superadmin.vente.show');
-
+        // --- 1. ROUTES STATIQUES (Toujours en premier) ---
+        // Liste des ventes
+        Route::get('/ventes', 'vente')->name('superadmin.vente.index');
         
+        // Formulaire d'ajout
+        Route::get('/ventes/ajouter', 'addVente')->name('superadmin.vente.create');
+        
+        // Action d'enregistrement
+        Route::post('/ventes', 'store')->name('superadmin.vente.store');
+
+
+        // --- 2. ROUTES DYNAMIQUES (Avec Paramètres) ---
+        // Note: On utilise des préfixes ('details/', 'modifier/') pour éviter 
+        // toute collision avec les méthodes PUT ou DELETE.
+
+        // Afficher les détails d'une vente
+        Route::get('/ventes/details/{public_id}', 'detailsVente')
+            ->name('superadmin.vente.show');
+
+        // Formulaire de modification
+        Route::get('/ventes/modifier/{public_id}', 'editVente')
+            ->name('superadmin.vente.edit');
+
+        // Action de mise à jour (PUT)
+        Route::put('/ventes/{public_id}', 'updateVente')
+            ->name('superadmin.vente.update');
+
+        // Action de suppression (DELETE)
+        Route::delete('/ventes/{public_id}', 'destroy')
+            ->name('superadmin.vente.destroy');
+
     });
 });

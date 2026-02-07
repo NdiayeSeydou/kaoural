@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Helpers\Base62;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Stock extends Model
@@ -45,24 +44,20 @@ class Stock extends Model
 
     ];
 
-
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
 
-            if (!$model->public_id) {
+            if (! $model->public_id) {
 
                 $model->public_id = Str::random(10);
             }
         });
     }
 
-
-
     protected $appends = ['quantite_calculee'];
-
 
     public function getQuantiteCalculeeAttribute()
     {
@@ -72,10 +67,15 @@ class Stock extends Model
     public function getStatusLabelAttribute()
     {
         if ($this->quantite_restante == 0) {
+
             return 'rupture';
+
         } elseif ($this->quantite_restante <= 5) {
+
             return 'baisse';
+
         } else {
+
             return 'disponible';
         }
     }
@@ -91,15 +91,18 @@ class Stock extends Model
         return $this->belongsTo(Fournisseur::class, 'fournisseur_id');
     }
 
-
     public function histories()
     {
         return $this->hasMany(StockHistory::class);
     }
 
-
     public function retraits()
     {
         return $this->hasMany(RetraitStock::class, 'stock_public_id', 'public_id');
+    }
+
+    public function ventes()
+    {
+        return $this->hasMany(Vente::class, 'stock_id');
     }
 }

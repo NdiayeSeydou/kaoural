@@ -18,7 +18,9 @@ class FournisseurController extends Controller
 
         $fournisseurs = Fournisseur::with('categorie')->get();
 
-        return view('superadmin.interface.fournisseur.listes', compact('fournisseurs'));
+        $categories = Categorie::all();
+
+        return view('superadmin.interface.fournisseur.listes', compact('fournisseurs', 'categories'));
     }
 
     // Méthode pour afficher le formulaire de création d'un nouveau fournisseur

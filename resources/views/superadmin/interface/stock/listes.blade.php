@@ -81,63 +81,67 @@
 
 
             <!-- FILTRES & RECHERCHE -->
-            <div class="card mb-5 shadow-sm">
-                <div class="card-body">
-                    <div class="row g-3 align-items-end">
+          <div class="card mb-5 shadow-sm">
+    <div class="card-body">
+        <form action="{{ route('superadmin.stock.index') }}" method="GET">
+            <div class="row g-3 align-items-end">
 
-                        <!-- Recherche -->
-
-
-                        <!-- Filtre par date -->
-                        <div class="col-lg-2 col-md-6 col-12">
-                            <label class="form-label fw-semibold">Date</label>
-                            <input type="date" class="form-control">
-                        </div>
-
-                        <!-- Filtre par produit -->
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <label class="form-label fw-semibold">Produit</label>
-
-                            <div class="input-group">
-
-
-                                <input type="text" class="form-control" placeholder="Rechercher un produit">
-
-                                <span class="input-group-text bg-white">
-                                    <!-- Icône recherche -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="11" cy="11" r="8" />
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-
-
-                        <!-- Filtre par catégorie -->
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <label class="form-label fw-semibold">Catégorie</label>
-                            <select class="form-select">
-                                <option selected disabled>Choisir une catégorie</option>
-                                <option>Accessoires</option>
-                                <option>Électronique</option>
-                                <option>Mode</option>
-                            </select>
-                        </div>
-
-                        <!-- Bouton reset (optionnel UI) -->
-                        <div class="col-lg-1 col-md-12 col-12 d-grid">
-                            <button class="btn btn-outline-danger">
-                                Réinitialiser
-                            </button>
-                        </div>
-
+                <div class="col-lg-3 col-md-6 col-12">
+                    <label class="form-label fw-semibold">Recherche</label>
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Désignation, code..." value="{{ request('q') }}">
+                        <span class="input-group-text bg-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        </span>
                     </div>
                 </div>
-            </div>
 
+                <div class="col-lg-2 col-md-6 col-12">
+                    <label class="form-label fw-semibold">Catégorie</label>
+                    <select name="categorie" class="form-select">
+                        <option value="">Toutes</option>
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}" {{ request('categorie') == $cat->id ? 'selected' : '' }}>
+                                {{ $cat->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-12">
+                    <label class="form-label fw-semibold">Emplacement</label>
+                    <select name="emplacement" class="form-select">
+                        <option value="">Tous</option>
+                        <option value="boutique" {{ request('emplacement') == 'boutique' ? 'selected' : '' }}>Boutique</option>
+                        <option value="magasin" {{ request('emplacement') == 'magasin' ? 'selected' : '' }}>Magasin</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-12">
+                    <label class="form-label fw-semibold">Statut</label>
+                    <select name="status" class="form-select">
+                        <option value="">Tous</option>
+                        <option value="disponible" {{ request('status') == 'disponible' ? 'selected' : '' }}>Disponible</option>
+                        <option value="baisse" {{ request('status') == 'baisse' ? 'selected' : '' }}>En baisse</option>
+                        <option value="rupture" {{ request('status') == 'rupture' ? 'selected' : '' }}>Rupture</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-3 col-md-12 col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        Filtrer
+                    </button>
+                    <a href="{{ route('superadmin.stock.index') }}" class="btn btn-outline-danger w-100">
+                        Supprimer 
+                    </a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
 
             <!-- BOUTONS BOUTIQUE / MAGASIN -->
             <div class="d-flex justify-content-center gap-3 mb-4">
@@ -204,7 +208,8 @@
                                     </td>
 
 
-                                    <td>{{ $stock->retraits()->sum('quantite_sortie') }}</td>
+                                    <td>{{ $stock->ventes->sum('quantite') + $stock->retraits->sum('quantite_sortie') }}
+                                    </td>
 
                                     <td>{{ $stock->quantite_restante }}</td>
 
@@ -374,7 +379,8 @@
 
 
 
-                                    <td>{{ $stock->retraits()->sum('quantite_sortie') }}</td>
+                                    <td>{{ $stock->ventes->sum('quantite') + $stock->retraits->sum('quantite_sortie') }}
+                                    </td>
 
                                     <td>{{ $stock->quantite_restante }}</td>
 

@@ -23,10 +23,10 @@ class StockController extends Controller
     //liste des stocks
     public function stock()
     {
-        $stocksBoutique = Stock::with('categorie')->where('emplacement', 'boutique')->orderBy('code_article', 'asc')->paginate(12, ['*'], 'boutiquePage');
+        $stocksBoutique = Stock::with(['categorie', 'ventes'])->where('emplacement', 'boutique')->orderBy('code_article', 'asc')->paginate(12, ['*'], 'boutiquePage');
 
-        $stocksMagasin = Stock::with('categorie')->where('emplacement', 'magasin')->orderBy('code_article', 'asc')->paginate(12, ['*'], 'magasinPage');
-
+        $stocksMagasin = Stock::with(['categorie', 'ventes'])->where('emplacement', 'magasin')->orderBy('code_article', 'asc')->paginate(12, ['*'], 'magasinPage');
+    
         $categories = Categorie::all();
 
         $fournisseurs = Fournisseur::all(); 
