@@ -371,6 +371,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        
                                     </tr>
                                 @empty
                                     <tr>

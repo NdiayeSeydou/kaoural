@@ -81,67 +81,77 @@
 
 
             <!-- FILTRES & RECHERCHE -->
-          <div class="card mb-5 shadow-sm">
-    <div class="card-body">
-        <form action="{{ route('superadmin.stock.index') }}" method="GET">
-            <div class="row g-3 align-items-end">
+            <div class="card mb-5 shadow-sm">
+                <div class="card-body">
+                    <form action="{{ route('superadmin.stock.index') }}" method="GET">
+                        <div class="row g-3 align-items-end">
 
-                <div class="col-lg-3 col-md-6 col-12">
-                    <label class="form-label fw-semibold">Recherche</label>
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Désignation, code..." value="{{ request('q') }}">
-                        <span class="input-group-text bg-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-                            </svg>
-                        </span>
-                    </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Recherche</label>
+                                <div class="input-group">
+                                    <input type="text" name="q" class="form-control"
+                                        placeholder="Désignation, code..." value="{{ request('q') }}">
+                                    <span class="input-group-text bg-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Catégorie</label>
+                                <select name="categorie" class="form-select">
+                                    <option value="">Toutes</option>
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->id }}"
+                                            {{ request('categorie') == $cat->id ? 'selected' : '' }}>
+                                            {{ $cat->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Emplacement</label>
+                                <select name="emplacement" class="form-select">
+                                    <option value="">Tous</option>
+                                    <option value="boutique" {{ request('emplacement') == 'boutique' ? 'selected' : '' }}>
+                                        Boutique</option>
+                                    <option value="magasin" {{ request('emplacement') == 'magasin' ? 'selected' : '' }}>
+                                        Magasin</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Statut</label>
+                                <select name="status" class="form-select">
+                                    <option value="">Tous</option>
+                                    <option value="disponible" {{ request('status') == 'disponible' ? 'selected' : '' }}>
+                                        Disponible</option>
+                                    <option value="baisse" {{ request('status') == 'baisse' ? 'selected' : '' }}>En baisse
+                                    </option>
+                                    <option value="rupture" {{ request('status') == 'rupture' ? 'selected' : '' }}>Rupture
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-12 col-12 d-flex gap-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Filtrer
+                                </button>
+                                <a href="{{ route('superadmin.stock.index') }}" class="btn btn-outline-danger w-100">
+                                    Supprimer
+                                </a>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
-
-                <div class="col-lg-2 col-md-6 col-12">
-                    <label class="form-label fw-semibold">Catégorie</label>
-                    <select name="categorie" class="form-select">
-                        <option value="">Toutes</option>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->id }}" {{ request('categorie') == $cat->id ? 'selected' : '' }}>
-                                {{ $cat->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-lg-2 col-md-6 col-12">
-                    <label class="form-label fw-semibold">Emplacement</label>
-                    <select name="emplacement" class="form-select">
-                        <option value="">Tous</option>
-                        <option value="boutique" {{ request('emplacement') == 'boutique' ? 'selected' : '' }}>Boutique</option>
-                        <option value="magasin" {{ request('emplacement') == 'magasin' ? 'selected' : '' }}>Magasin</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-2 col-md-6 col-12">
-                    <label class="form-label fw-semibold">Statut</label>
-                    <select name="status" class="form-select">
-                        <option value="">Tous</option>
-                        <option value="disponible" {{ request('status') == 'disponible' ? 'selected' : '' }}>Disponible</option>
-                        <option value="baisse" {{ request('status') == 'baisse' ? 'selected' : '' }}>En baisse</option>
-                        <option value="rupture" {{ request('status') == 'rupture' ? 'selected' : '' }}>Rupture</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-3 col-md-12 col-12 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary w-100">
-                        Filtrer
-                    </button>
-                    <a href="{{ route('superadmin.stock.index') }}" class="btn btn-outline-danger w-100">
-                        Supprimer 
-                    </a>
-                </div>
-
             </div>
-        </form>
-    </div>
-</div>
 
             <!-- BOUTONS BOUTIQUE / MAGASIN -->
             <div class="d-flex justify-content-center gap-3 mb-4">
@@ -208,7 +218,10 @@
                                     </td>
 
 
-                                    <td>{{ $stock->ventes->sum('quantite') + $stock->retraits->sum('quantite_sortie') }}
+                                    <td>
+                                        {{ $stock->ventes->sum('quantite') +
+                                            $stock->retraits->sum('quantite_sortie') +
+                                            $stock->retraitsCreances->sum('quantite_sortie') }}
                                     </td>
 
                                     <td>{{ $stock->quantite_restante }}</td>
@@ -230,10 +243,10 @@
                                         <a href="{{ route('superadmin.stock.show', $stock->public_id) }}"
                                             class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
                                             data-template="viewOne">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
-                                                width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-eye" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
                                                 <path

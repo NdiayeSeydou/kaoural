@@ -105,4 +105,19 @@ class Stock extends Model
     {
         return $this->hasMany(Vente::class, 'stock_id');
     }
+
+    public function retraitsCreances()
+    {
+
+        return $this->hasMany(RetraisCreance::class, 'stock_public_id', 'public_id');
+    }
+
+    // Dans Stock.php
+    public function getQuantiteCalculerAttribute()
+    {
+        return $this->stock_initial
+               + $this->quantite_entree
+               - $this->retraits()->sum('quantite_sortie')
+               - $this->retraitsCreances()->sum('quantite_sortie');     
+    }
 }

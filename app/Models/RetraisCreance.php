@@ -4,66 +4,48 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RetraitStock extends Model
+class RetraisCreance extends Model
 {
-    protected $table = 'retraits_stock';
+    protected $table = 'retraiscreances';
+
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
-
         'public_id',
-
-        'quincaillerie_id',
-
+        'creance_id',
         'stock_public_id',
-
         'designation',
-
         'code_article',
-
         'image',
-
         'categorie_id',
-
         'stock_initial',
-
-        'quantite_entree',
-
         'quantite_sortie',
-
         'quantite_restante',
-
         'fournisseur_id',
-
         'emplacement',
-
         'status',
-
         'prix_unitaire',
-
         'prix_total',
-
         'date',
     ];
 
     protected $casts = [
-
         'date' => 'date',
-
-        'date_retrait' => 'date',
+        'prix_unitaire' => 'decimal:2',
+        'prix_total' => 'decimal:2',
+        'quantite_sortie' => 'decimal:2',
     ];
 
-    public function quincaillerie()
-    {
-        return $this->belongsTo(Quincaillerie::class);
-    }
+    /* ===================== RELATIONS ===================== */
 
     public function creance()
     {
-        return $this->belongsTo(Creance::class);
+        return $this->belongsTo(Creance::class, 'creance_id');
     }
 
-    public function retraits()
+    public function stock()
     {
-        return $this->hasMany(RetraitStock::class, 'stock_public_id', 'public_id');
+        return $this->belongsTo(Stock::class, 'stock_public_id', 'public_id');
     }
 }
