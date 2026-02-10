@@ -47,6 +47,41 @@
 
 <body>
 
+    <style>
+        /* 1. Définition de la police (Sécurité pour les systèmes sans MV Boli) */
+        @font-face {
+            font-family: 'MV Boli';
+            src: local('MV Boli'), local('Comic Sans MS');
+        }
+
+        /* 2. Application à TOUTE la page */
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span,
+        a,
+        div,
+        input,
+        button,
+        select,
+        textarea {
+            font-family: 'MV Boli', 'Comic Sans MS', cursive !important;
+        }
+
+        /* 3. Ajustement optionnel : la police manuscrite est souvent petite,
+       on augmente légèrement la lisibilité globale */
+        body {
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+
 
     <!-- Loader Wrapper -->
     <div

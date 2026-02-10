@@ -1,35 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\ProduitController;
 
-// les produits (ventes)
+Route::prefix('admin')->group(function () {
 
-// affiche la liste des produits
-Route::get('/products', [ProductsController::class, 'index'])
-    ->name('admin.products.index');
+    Route::controller(ProduitController::class)->group(function () {
 
-// vue ajout produit
-Route::get('/products/create', [ProductsController::class, 'create'])
-    ->name('admin.products.create');
+        // Listes des produits 
+        Route::get('/produits', [ProduitController::class, 'produit'])->name('admin.produit.index');
 
-// enregistrement produit
-Route::post('/products/store', [ProductsController::class, 'store'])
-    ->name('admin.products.store');
+        // ajouter un produit 
+        Route::get('/creer/produit', [ProduitController::class, 'addProduit'])->name('admin.produit.create');
 
-// détails produit (ID chiffré)
-Route::get('/products/{encryptedId}', [ProductsController::class, 'show'])
-    ->name('admin.products.show');
+        Route::post('/store/produit', [ProduitController::class, 'storeProduit'])->name('admin.produit.store');
 
-// page édition
-Route::get('/products/{product}/edit', [ProductsController::class, 'edit'])
-    ->name('admin.products.edit');
+        // modifier un produit
+        Route::get('/modifier/produit/{public_id}', [ProduitController::class, 'editProduit'])->name('admin.produit.edit');
 
-// mise à jour
-Route::put('/products/{product}/update', [ProductsController::class, 'update'])
-    ->name('admin.products.update');
+        Route::put('/update/produit/{public_id}', [ProduitController::class, 'updateProduit'])->name('admin.produit.update');
 
-// suppression
-Route::delete('/products/delete/{stock}', [ProductsController::class, 'destroy'])
-    ->name('admin.products.destroy');
-// fin des produits (ventes)
+        // voir le details d'un produit 
+        Route::get('/details/produit/{public_id}', [ProduitController::class, 'detailsProduit'])->name('admin.produit.show');
+
+        Route::delete('/delete/produit/{public_id}', [ProduitController::class, 'deleteProduit'])->name('admin.produit.delete');
+    });
+});

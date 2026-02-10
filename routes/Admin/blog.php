@@ -6,18 +6,29 @@ use App\Http\Controllers\Admin\BlogController;
 
 Route::prefix('admin')->group(function () {
 
+   
     Route::controller(BlogController::class)->group(function () {
 
-        // Listes des blogs 
-        Route::get('/blogs', [BlogController::class, 'blog'])->name('admin.blog.index');
+        
+        Route::get('/blogs', 'blog')->name('admin.blog.index');
+      
+        Route::get('/details/blog/{public_id}', 'detailsBlog')->name('admin.blog.show');
 
-        // ajouter un blog 
-        Route::get('/creer/blog', [BlogController::class, 'addBlog'])->name('admin.blog.create');
 
-        // modifier un blog
-        Route::get('/modifier/blog/{public_id}', [BlogController::class, 'editBlog'])->name('admin.blog.edit');
+        Route::get('/creer/blog', 'addBlog')->name('admin.blog.create');
+        
+      
+        Route::post('/creer/blog/store', 'storeBlog')->name('admin.blog.store');
 
-        // voir le details d'un blog 
-        Route::get('/details/blog/{public_id}', [BlogController::class, 'showBlog'])->name('admin.blog.show');
+
+   
+        Route::get('/modifier/blog/{public_id}', 'editBlog')->name('admin.blog.edit');
+        
+       
+        Route::put('/modifier/blog/{public_id}/update', 'updateBlog')->name('admin.blog.update');
+
+        Route::delete('/supprimer/blog/{public_id}', 'deleteBlog')->name('admin.blog.delete');
+
     });
+    
 });

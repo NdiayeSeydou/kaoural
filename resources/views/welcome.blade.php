@@ -2,23 +2,62 @@
 @section('title', 'Quincaillerie Kaoural | Bienvenue à la quincaillerie kaoural')
 @section('suite')
 
+    <style>
+        /* Importation de la police (si elle n'est pas installée localement,
+           le navigateur cherchera une police manuscrite similaire) */
+        @font-face {
+            font-family: 'MV Boli';
+            src: local('MV Boli'), local('Comic Sans MS');
+            /* Fallback si absent */
+        }
 
-    <!-- carousel  -->
-    <div class="container-fluid bg-light py-5 my-5 mt-0">
+        .hero-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url("{{ asset('kaoural/vis.jpg') }}");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            /* RÉDUCTION DE LA TAILLE : on passe de 80vh à 50vh */
+            min-height: 50vh;
+
+            display: flex;
+            align-items: center;
+            /* Application de la police MV Boli à toute la section */
+            font-family: 'MV Boli', 'Comic Sans MS', cursive;
+        }
+
+        .hero-header h1 {
+            font-weight: bold;
+            /* Un petit effet d'ombre pour que le texte ressorte encore mieux */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-primary {
+            color: #ffc107 !important;
+        }
+
+        /* Style du bouton pour qu'il s'accorde à la police */
+        .hero-header .btn {
+            font-family: 'MV Boli', sans-serif;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="container-fluid hero-header py-5 mb-5 mt-4">
         <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-7 col-md-12">
-                    <h1 class="display-4 mb-4 animated bounceInDown">
-                        Commander chez <span class="text-primary">Quincaillerie Kaoural </span> pour tous vos projets de
-                        bricolage et construction
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10">
+                    <h1 class="display-4 mb-3 animated bounceInDown text-white">
+                        Commander chez <span class="text-primary">Quincaillerie Kaoural</span> <br>
+                        pour tous vos projets de bricolage
                     </h1>
-                    <a href="#" class="btn btn-primary">
+                    <p class="text-light mb-4 fs-5 animated fadeInUp">
+                        Qualité garantie et livraison rapide pour tous vos travaux.
+                    </p>
+                    <a href="#" class="btn btn-primary py-2 px-4 animated zoomIn">
                         Commander maintenant
                     </a>
-
-                </div>
-                <div class="col-lg-5 col-md-12 mt-3">
-                    <img src="{{ asset('kaoural/image1.webp') }}" class="img-fluid rounded animated zoomIn" alt="Événement">
                 </div>
             </div>
         </div>
@@ -27,22 +66,49 @@
     <!--fin du carousel -->
 
     <!-- avantages de la quincaillerie kaoural-->
+    <style>
+        /* Application de la police MV Boli aux titres de cette section */
+        .advantages-title,
+        .service-item h5 {
+            font-family: 'MV Boli', 'Comic Sans MS', cursive;
+            font-weight: bold;
+        }
+
+        /* Effet au survol des cartes */
+        .service-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 3px solid transparent !important;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+            border-bottom: 3px solid #FFD700 !important;
+        }
+
+        /* Animation de l'icône lors du survol */
+        .service-item:hover i {
+            transform: scale(1.1);
+            transition: 0.3s;
+        }
+    </style>
+
     <div class="container-xxl py-5 bg-light">
         <div class="container">
-            <h1 class="display-5 mb-5 text-center">Les avantages de Quincaillerie Kaoural N'DIAYE & Frères</h1>
+            <h1 class="display-5 mb-5 text-center advantages-title">
+                Les avantages de Quincaillerie <span style="color: #FFD700;">Kaoural</span>
+            </h1>
 
             <div class="row g-4">
-                <!-- Avantage 1 -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item text-center bg-white border rounded shadow-sm p-4 h-100">
                         <i class="fas fa-hard-hat fa-3x mb-3" style="color: #FFD700;"></i>
                         <h5 class="mb-2">Expertise Locale</h5>
-                        <p class="text-muted small">Des années d’expérience dans le matériel de construction et
-                            bricolage.</p>
+                        <p class="text-muted small">Des années d’expérience dans le matériel de construction et bricolage.
+                        </p>
                     </div>
                 </div>
 
-                <!-- Avantage 2 -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="service-item text-center bg-white border rounded shadow-sm p-4 h-100">
                         <i class="fas fa-wrench fa-3x mb-3" style="color: #FFD700;"></i>
@@ -51,17 +117,14 @@
                     </div>
                 </div>
 
-                <!-- Avantage 3 -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="service-item text-center bg-white border rounded shadow-sm p-4 h-100">
                         <i class="fas fa-tools fa-3x mb-3" style="color: #FFD700;"></i>
                         <h5 class="mb-2">Conseils Personnalisés</h5>
-                        <p class="text-muted small">Un accompagnement sur mesure pour vos projets et besoins techniques.
-                        </p>
+                        <p class="text-muted small">Un accompagnement sur mesure pour vos projets et besoins techniques.</p>
                     </div>
                 </div>
 
-                <!-- Avantage 4 -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="service-item text-center bg-white border rounded shadow-sm p-4 h-100">
                         <i class="fas fa-handshake fa-3x mb-3" style="color: #FFD700;"></i>
@@ -70,7 +133,6 @@
                             clients.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

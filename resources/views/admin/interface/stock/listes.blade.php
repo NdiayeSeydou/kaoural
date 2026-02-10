@@ -1,0 +1,593 @@
+@extends('admin.layout.navbar')
+
+@section('title', 'Listes des stocks | kaoural')
+
+@section('suite')
+
+    @if (session('stockajoutnew'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('stockajoutnew') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    @if (session('stockupdt'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('stockupdt') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+
+    @if (session('stockdel'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('stockdel') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    @if (session('ajoutstockaancien'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('ajoutstockaancien') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <!-- Page header -->
+                <div class="mb-8 d-md-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="mb-3 h2">Listes des stocks</h1>
+
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Accueil</a></li>
+
+                                <li class="breadcrumb-item active"><a
+                                        href="{{ route('admin.stock.index') }}">Stocks</a>
+                                </li>
+
+                            </ol>
+                        </nav>
+
+                    </div>
+                    <div>
+                        <div>
+                            <a class="btn btn-dark d-md-flex align-items-center gap-2"
+                                href="{{ route('admin.stock.create') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 5l0 14" />
+                                    <path d="M5 12l14 0" />
+                                </svg>
+                                Ajouter un stock
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FILTRES & RECHERCHE -->
+            <div class="card mb-5 shadow-sm">
+                <div class="card-body">
+                    <form action="{{ route('admin.stock.index') }}" method="GET">
+                        <div class="row g-3 align-items-end">
+
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Recherche</label>
+                                <div class="input-group">
+                                    <input type="text" name="q" class="form-control"
+                                        placeholder="Désignation, code..." value="{{ request('q') }}">
+                                    <span class="input-group-text bg-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Catégorie</label>
+                                <select name="categorie" class="form-select">
+                                    <option value="">Toutes</option>
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->id }}"
+                                            {{ request('categorie') == $cat->id ? 'selected' : '' }}>
+                                            {{ $cat->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Emplacement</label>
+                                <select name="emplacement" class="form-select">
+                                    <option value="">Tous</option>
+                                    <option value="boutique" {{ request('emplacement') == 'boutique' ? 'selected' : '' }}>
+                                        Boutique</option>
+                                    <option value="magasin" {{ request('emplacement') == 'magasin' ? 'selected' : '' }}>
+                                        Magasin</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 col-12">
+                                <label class="form-label fw-semibold">Statut</label>
+                                <select name="status" class="form-select">
+                                    <option value="">Tous</option>
+                                    <option value="disponible" {{ request('status') == 'disponible' ? 'selected' : '' }}>
+                                        Disponible</option>
+                                    <option value="baisse" {{ request('status') == 'baisse' ? 'selected' : '' }}>En baisse
+                                    </option>
+                                    <option value="rupture" {{ request('status') == 'rupture' ? 'selected' : '' }}>Rupture
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-12 col-12 d-flex gap-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Filtrer
+                                </button>
+                                <a href="{{ route('admin.stock.index') }}" class="btn btn-outline-danger w-100">
+                                    Supprimer
+                                </a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- BOUTONS BOUTIQUE / MAGASIN -->
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <button id="btnBoutique" class="btn btn-dark px-4">
+                    Boutique
+                </button>
+                <button id="btnMagasin" class="btn btn-outline-dark px-4">
+                    Magasin
+                </button>
+            </div>
+
+
+
+
+
+            <div id="tableBoutique">
+
+                <div class="table-responsive">
+
+
+                    <table class="table table-centered text-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th>Numérotation</th>
+                                <th>Code article</th>
+                                <th>Image</th>
+                                <th>Désignation</th>
+                                <th>Catégorie</th>
+                                <th>Stock initial</th>
+                                <th>Quantité entrée</th>
+                                <th>Emplacement</th>
+                                <th>Quantité sortie</th>
+                                <th>Quantité restante</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @forelse ($stocksBoutique as $index => $stock)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+
+                                    <td>{{ $stock->code_article }}</td>
+                                    <td>
+                                        @if ($stock->image)
+                                            <img src="{{ asset('storage/' . $stock->image) }}" class="rounded-3"
+                                                width="56" height="56">
+                                        @endif
+                                    </td>
+
+
+                                    <td>{{ ucwords($stock->designation) }}</td>
+
+
+                                    <td>{{ $stock->categorie->name ?? '-' }}</td>
+
+                                    <td>{{ $stock->stock_initial }}</td>
+
+                                    <td>{{ $stock->quantite_entree }}</td>
+
+                                    <td>
+                                        {{ $stock->emplacement === 'boutique' ? 'Boutique' : '' }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ $stock->ventes->sum('quantite') +
+                                            $stock->retraits->sum('quantite_sortie') +
+                                            $stock->retraitsCreances->sum('quantite_sortie') }}
+                                    </td>
+
+                                    <td>{{ $stock->quantite_restante }}</td>
+
+                                    <td>
+                                        @if ($stock->status_label === 'disponible')
+                                            <span class="badge bg-success">Disponible</span>
+                                        @elseif($stock->status_label === 'baisse')
+                                            <span class="badge bg-warning">Stock en baisse</span>
+                                        @else
+                                            <span class="badge bg-danger">Rupture</span>
+                                        @endif
+
+
+                                    </td>
+
+                                    <td>
+
+                                        <a href="{{ route('admin.stock.show', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="viewOne">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-eye" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
+                                                <path
+                                                    d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
+                                            </svg>
+                                            <div id="viewOne" class="d-none">
+                                                <span>Voir</span>
+                                            </div>
+                                        </a>
+                                        <a href="{{ route('admin.stock.edit', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-edit" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                <path
+                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                <path d="M16 5l3 3" />
+                                            </svg>
+                                            <div id="editOne" class="d-none"> <span>Modifier</span> </div>
+                                        </a>
+
+                                        <form id="delete-form-{{ $stock->public_id }}"
+                                            action="{{ route('admin.stock.supprimer', $stock->public_id) }}"
+                                            method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#"
+                                                class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                                onclick="confirmDelete('{{ $stock->public_id }}')"
+                                                data-template="trashTwo">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-trash" width="16"
+                                                    height="16" viewBox="0 0 24 24" stroke-width="1.5"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 7l16 0" />
+                                                    <path d="M10 11l0 6" />
+                                                    <path d="M14 11l0 6" />
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                </svg>
+                                                <div id="trashTwo" class="d-none"><span>Supprimer</span></div>
+                                            </a>
+                                        </form>
+
+
+
+
+
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        Aucun stock disponible en boutique
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+
+                <nav aria-label="Page navigation example" class="mt-4">
+                    <ul class="pagination justify-content-center mb-0">
+                        {{-- Lien précédent --}}
+                        <li class="page-item {{ $stocksBoutique->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $stocksBoutique->previousPageUrl() }}">Précedent</a>
+                        </li>
+
+                        {{-- Pages --}}
+                        @foreach ($stocksBoutique->getUrlRange(1, $stocksBoutique->lastPage()) as $page => $url)
+                            <li class="page-item {{ $stocksBoutique->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        {{-- Lien suivant --}}
+                        <li class="page-item {{ $stocksBoutique->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $stocksBoutique->nextPageUrl() }}">Suivant</a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+            </div>
+
+            <div id="tableMagasin" class="d-none">
+
+                <div class="table-responsive">
+                    <table class="table table-centered text-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th>Numérotation</th>
+                                <th>Code article</th>
+                                <th>Image</th>
+                                <th>Désignation</th>
+                                <th>Catégorie</th>
+                                <th>Stock initial</th>
+                                <th>Quantité entrée</th>
+                                <th>Emplacement</th>
+                                <th>Quantité sortie</th>
+                                <th>Quantité restante</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @forelse ($stocksMagasin as $index => $stock)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+
+                                    <td>{{ $stock->code_article }}</td>
+
+                                    <td>
+                                        @if ($stock->image)
+                                            <img src="{{ asset('storage/' . $stock->image) }}" class="rounded-3"
+                                                width="56" height="56">
+                                        @endif
+                                    </td>
+
+                                    <td>{{ ucwords($stock->designation) }}</td>
+
+
+                                    <td>{{ $stock->categorie->name ?? '-' }}</td>
+
+
+                                    <td>{{ $stock->stock_initial }}</td>
+
+                                    <td>{{ $stock->quantite_entree }}</td>
+
+                                    <td>
+                                        {{ $stock->emplacement === 'magasin' ? 'Magasin' : '' }}
+                                    </td>
+
+
+
+                                   <td>
+                                        {{ $stock->ventes->sum('quantite') +
+                                            $stock->retraits->sum('quantite_sortie') +
+                                            $stock->retraitsCreances->sum('quantite_sortie') }}
+                                    </td>
+
+                                    <td>{{ $stock->quantite_restante }}</td>
+
+                                    <td>
+                                        @if ($stock->status_label === 'disponible')
+                                            <span class="badge bg-success">Disponible</span>
+                                        @elseif($stock->status_label === 'baisse')
+                                            <span class="badge bg-warning">Stock en baisse</span>
+                                        @else
+                                            <span class="badge bg-danger">Rupture</span>
+                                        @endif
+
+
+                                    </td>
+
+                                    <td>
+
+                                        <a href="{{ route('admin.stock.show', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="viewOne">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-eye" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M15 12a3 3 0 1 0 -6 0a3 3 0 0 0 6 0" />
+                                                <path
+                                                    d="M2 12c2.5 -4.5 6.5 -7 10 -7s7.5 2.5 10 7c-2.5 4.5 -6.5 7 -10 7s-7.5 -2.5 -10 -7" />
+                                            </svg>
+                                            <div id="viewOne" class="d-none">
+                                                <span>Voir</span>
+                                            </div>
+                                        </a>
+                                        <a href="{{ route('admin.stock.edit', $stock->public_id) }}"
+                                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                            data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-edit" width="16" height="16"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                <path
+                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                <path d="M16 5l3 3" />
+                                            </svg>
+                                            <div id="editOne" class="d-none"> <span>Modifier</span> </div>
+                                        </a>
+
+                                        <form id="delete-form-{{ $stock->public_id }}"
+                                            action="{{ route('admin.stock.supprimer', $stock->public_id) }}"
+                                            method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#"
+                                                class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                                onclick="confirmDelete('{{ $stock->public_id }}')"
+                                                data-template="trashTwo">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-trash" width="16"
+                                                    height="16" viewBox="0 0 24 24" stroke-width="1.5"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 7l16 0" />
+                                                    <path d="M10 11l0 6" />
+                                                    <path d="M14 11l0 6" />
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                </svg>
+                                                <div id="trashTwo" class="d-none"><span>Supprimer</span></div>
+                                            </a>
+                                        </form>
+
+
+
+
+
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        Aucun stock disponible au magasin
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <nav aria-label="Page navigation example" class="mt-4">
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item {{ $stocksMagasin->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $stocksMagasin->previousPageUrl() }}">Précedent</a>
+                        </li>
+
+                        @foreach ($stocksMagasin->getUrlRange(1, $stocksMagasin->lastPage()) as $page => $url)
+                            <li class="page-item {{ $stocksMagasin->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        <li class="page-item {{ $stocksMagasin->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $stocksMagasin->nextPageUrl() }}">Suivant</a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+        <script>
+            const btnBoutique = document.getElementById('btnBoutique');
+            const btnMagasin = document.getElementById('btnMagasin');
+
+            const tableBoutique = document.getElementById('tableBoutique');
+            const tableMagasin = document.getElementById('tableMagasin');
+
+            btnBoutique.addEventListener('click', () => {
+                tableBoutique.classList.remove('d-none');
+                tableMagasin.classList.add('d-none');
+
+                btnBoutique.classList.add('btn-dark');
+                btnBoutique.classList.remove('btn-outline-dark');
+
+                btnMagasin.classList.add('btn-outline-dark');
+                btnMagasin.classList.remove('btn-dark');
+            });
+
+            btnMagasin.addEventListener('click', () => {
+                tableMagasin.classList.remove('d-none');
+                tableBoutique.classList.add('d-none');
+
+                btnMagasin.classList.add('btn-dark');
+                btnMagasin.classList.remove('btn-outline-dark');
+
+                btnBoutique.classList.add('btn-outline-dark');
+                btnBoutique.classList.remove('btn-dark');
+            });
+        </script>
+
+
+
+        {{-- <script>
+            function confirmDelete(public_id) {
+                Swal.fire({
+                    title: 'Êtes-vous sûr de supprimer ce stock?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                   showCancelButton: true,
+            confirmButtonColor:  '#6c757d',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + public_id).submit();
+                    }
+                });
+            }
+        </script> --}}
+
+        <script>
+            function confirmDelete(public_id) {
+                Swal.fire({
+                    title: 'Êtes-vous sûr de supprimer ce stock?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + public_id).submit();
+                    }
+                });
+            }
+        </script>
+
+
+
+
+    @endsection

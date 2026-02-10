@@ -2,42 +2,83 @@
 @section('title', 'A propos de la quincaillerie Kaoural')
 @section('suite')
 
-    <section class="about_us_area section_padding_100">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-lg-6">
-                    <div class="about_us_content pb-5 pb-lg-0">
-                        <div class="row">
-                            <div class="col-6">
-                                <img src="{{ asset('kaoural/lavabo robinet.webp') }}" alt="">
-                            </div>
-                            <div class="col-6">
-                                <img src="{{ asset('kaoural/wc.webp') }}" alt="">
-                            </div>
-                            <div class="col-6">
-                                <img src="{{ asset('kaoural/ampoule.webp') }}" alt="">
-                            </div>
-                            <div class="col-6">
-                                <img src="{{ asset('kaoural/lustre.webp') }}" alt="">
-                            </div>
+
+  <style>
+    /* Application de la police MV Boli au texte de la section À Propos */
+    .about-text-content h5 {
+        font-family: 'MV Boli', 'Comic Sans MS', cursive;
+        font-size: 1.8rem;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .about-text-content p {
+        font-family: 'MV Boli', 'Comic Sans MS', cursive;
+        line-height: 1.8;
+        color: #555;
+    }
+
+    /* Style pour la grille d'images */
+    .about_us_content .col-6 {
+        padding: 10px; /* Espace entre les images */
+    }
+
+    .about_us_content img {
+        width: 100%;
+        height: 200px; /* Hauteur fixe pour l'harmonie */
+        object-fit: cover; /* Recadre l'image sans la déformer */
+        border-radius: 15px; /* Bordures arrondies */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .about_us_content img:hover {
+        transform: scale(1.05); /* Effet de zoom au survol */
+    }
+</style>
+
+<section class="about_us_area section_padding_100">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-6">
+                <div class="about_us_content pb-5 pb-lg-0">
+                    <div class="row g-0"> <div class="col-6">
+                            <img src="{{ asset('kaoural/lavabo robinet.webp') }}" alt="Lavabo">
+                        </div>
+                        <div class="col-6">
+                            <img src="{{ asset('kaoural/wc.webp') }}" alt="Sanitaire">
+                        </div>
+                        <div class="col-6">
+                            <img src="{{ asset('kaoural/ampoule.webp') }}" alt="Éclairage">
+                        </div>
+                        <div class="col-6">
+                            <img src="{{ asset('kaoural/lustre.webp') }}" alt="Décoration">
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <div class="about_us_content pl-0 pl-lg-5">
-                        <h5>La Quincaillerie Kaoural, plus de 20 ans d’expérience</h5>
-                        <p>Depuis plus de deux décennies, la quincaillerie Kaoural accompagne ses clients avec passion et
-                            professionnalisme.
-                            Nous proposons les meilleurs matériaux et équipements, alliant qualité, fiabilité et prix
-                            compétitifs, afin de répondre aux besoins des particuliers comme des professionnels.
-                            Notre engagement est simple : offrir le meilleur service et les produits les plus adaptés pour
-                            bâtir vos projets en toute confiance.</p>
-                       
-                    </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="about-text-content pl-0 pl-lg-5">
+                    <h5>La Quincaillerie Kaoural, plus de 20 ans d’expérience</h5>
+                    <p>
+                        Depuis plus de deux décennies, la quincaillerie Kaoural accompagne ses clients avec passion et
+                        professionnalisme. 
+                    </p>
+                    <p>
+                        Nous proposons les meilleurs matériaux et équipements, alliant qualité, fiabilité et prix
+                        compétitifs, afin de répondre aux besoins des particuliers comme des professionnels.
+                    </p>
+                    <p>
+                        Notre engagement est simple : offrir le meilleur service et les produits les plus adaptés pour
+                        bâtir vos projets en toute confiance.
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <!-- About Us Area -->
 
 

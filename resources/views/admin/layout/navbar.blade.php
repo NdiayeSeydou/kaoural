@@ -60,6 +60,10 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+
 
 
 
@@ -70,7 +74,7 @@
     <div>
         <div id="miniSidebar">
             <div class="brand-logo">
-                <a class='d-none d-md-flex align-items-center gap-2' href='{{ route('superadmin.dashboard') }}'>
+                <a class='d-none d-md-flex align-items-center gap-2' href='{{ route('admin.dashboard') }}'>
                     <img src="assets/images/brand/logo/logo-icon.svg" alt="" />
                     <span class="fw-bold fs-4  site-logo-text">Kaoural</span>
                 </a>
@@ -80,7 +84,7 @@
             <ul class="navbar-nav flex-column  ">
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <a class='nav-link' href='{{ route('superadmin.dashboard') }}'><span class="nav-icon"><svg
+                    <a class='nav-link' href='{{ route('admin.dashboard') }}'><span class="nav-icon"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="currentColor"
@@ -131,10 +135,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.vente.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.vente.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.vente.create') }}">Ajouter</a>
+                            <a class="nav-link" href="{{ route('admin.vente.create') }}">Ajouter</a>
                         </li>
                     </ul>
                 </li>
@@ -171,10 +175,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.stock.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.stock.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.stock.create') }}">Ajouter</a>
+                            <a class="nav-link" href="{{ route('admin.stock.create') }}">Ajouter</a>
                         </li>
                     </ul>
                 </li>
@@ -213,10 +217,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.fournisseur.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.fournisseur.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.fournisseur.create') }}">Ajouter</a>
+                            <a class="nav-link" href="{{ route('admin.fournisseur.create') }}">Ajouter</a>
                         </li>
                     </ul>
                 </li>
@@ -253,10 +257,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.facture.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.facture.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.facture.create') }}">Créer</a>
+                            <a class="nav-link" href="{{ route('admin.facture.create') }}">Créer</a>
                         </li>
                     </ul>
                 </li>
@@ -294,10 +298,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.bon.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.bon.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.bon.create') }}">Créer</a>
+                            <a class="nav-link" href="{{ route('admin.bon.create') }}">Créer</a>
                         </li>
                     </ul>
                 </li>
@@ -342,10 +346,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.quincaillerie.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.quincaillerie.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.quincaillerie.create') }}">Ajouter</a>
+                            <a class="nav-link" href="{{ route('admin.quincaillerie.create') }}">Ajouter</a>
                         </li>
                     </ul>
                 </li>
@@ -383,10 +387,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.creance.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.creance.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.creance.create') }}">Ajouter</a>
+                            <a class="nav-link" href="{{ route('admin.creance.create') }}">Ajouter</a>
                         </li>
                     </ul>
                 </li>
@@ -436,10 +440,10 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.order.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.order.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.order.status') }}">Status</a>
+                            <a class="nav-link" href="{{ route('admin.order.status') }}">Status</a>
                         </li>
                     </ul>
                 </li>
@@ -455,7 +459,7 @@
                         <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
                                 <!-- Icône Demande de devis -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" <svg
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"
@@ -482,7 +486,7 @@
 
                     <ul class="dropdown-menu flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.demande.index') }}">Listes</a>
+                            <a class="nav-link" href="{{ route('admin.demande.index') }}">Listes</a>
                         </li>
                     </ul>
                 </li>
@@ -495,7 +499,7 @@
                 </li>
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <a class='nav-link' href='{{ route('superadmin.blog.index') }}'><span class="nav-icon"><svg
+                    <a class='nav-link' href='{{ route('admin.blog.index') }}'><span class="nav-icon"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -513,7 +517,7 @@
 
 
                 <li class="nav-item">
-                    <a class='nav-link' href='{{ route('superadmin.produit.index') }}'><span class="nav-icon">
+                    <a class='nav-link' href='{{ route('admin.produit.index') }}'><span class="nav-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round"
@@ -528,7 +532,7 @@
                 </li>
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <a class='nav-link' href='{{ route('superadmin.categorie.index') }}'><span class="nav-icon">
+                    <a class='nav-link' href='{{ route('admin.categorie.index') }}'><span class="nav-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round"
@@ -543,21 +547,7 @@
 
 
                 <!-- Nav item -->
-                <li class="nav-item">
-                    <a class='nav-link' href='{{ route('superadmin.user.index') }}'><span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icon-tabler-users-group">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <circle cx="9" cy="7" r="4" />
-                                <circle cx="17" cy="7" r="4" />
-                                <path d="M6 21v-2a4 4 0 0 1 4 -4h0a4 4 0 0 1 4 4v2" />
-                                <path d="M14 21v-2a4 4 0 0 1 4 -4h0a4 4 0 0 1 4 4v2" />
-                            </svg>
-                        </span> <span class="text">Utilisateurs</span></a>
 
-                </li>
 
                 <li class="nav-item">
                     <div class="nav-heading">Mon Compte</div>
@@ -565,7 +555,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class='nav-link' href='{{ route('superadmin.monprofil') }}'><span class="nav-icon">
+                    <a class='nav-link' href='{{ route('admin.monprofil') }}'><span class="nav-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round"
@@ -612,408 +602,511 @@
             </div>
             <div class="offcanvas-body p-0">
 
-                <ul class="navbar-nav flex-column  ">
-                    <!-- Nav item -->
-                    <li class="nav-item">
-                        <a class='nav-link' href='{{ route('superadmin.dashboard') }}'><span class="nav-icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="currentColor"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-chart-histogram">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M3 3v18h18" />
-                                    <path d="M20 18v3" />
-                                    <path d="M16 16v5" />
-                                    <path d="M12 13v8" />
-                                    <path d="M8 16v5" />
-                                    <path d="M3 11c6 0 5 -5 9 -5s3 5 9 5" />
-                                </svg> <span class="text">Tableau de bord</span></a>
-                    </li>
+             <ul class="navbar-nav flex-column  ">
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class='nav-link' href='{{ route('admin.dashboard') }}'><span class="nav-icon"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="currentColor"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-chart-histogram">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M3 3v18h18" />
+                                <path d="M20 18v3" />
+                                <path d="M16 16v5" />
+                                <path d="M12 13v8" />
+                                <path d="M8 16v5" />
+                                <path d="M3 11c6 0 5 -5 9 -5s3 5 9 5" />
+                            </svg> <span class="text">Tableau de bord</span></a>
+                </li>
 
-                    <li class="nav-item">
-                        <div class="nav-heading">Gestion Kaoural</div>
-                        <hr class="mx-5 nav-line mb-1" />
-                    </li>
+                <li class="nav-item">
+                    <div class="nav-heading">Gestion Kaoural</div>
+                    <hr class="mx-5 nav-line mb-1" />
+                </li>
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
+                                    <circle cx="6" cy="19" r="2" />
+                                    <circle cx="17" cy="19" r="2" />
+                                    <path d="M17 17h-11l-1 -12h-2" />
+                                    <path d="M6 5h16l-1 7h-13" />
                                 </svg>
                             </span>
+
                             <span class="text">Ventes</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Listes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Ajouter</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
+                        <!-- ICÔNE FLÈCHE PERSONNALISÉE -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
+
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.vente.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.vente.create') }}">Ajouter</a>
+                        </li>
+                    </ul>
+                </li>
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
+                                <!-- Icône Stocks -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                                    class="icon icon-tabler icon-tabler-box">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
+                                    <path d="M12 3l8 4l-8 4l-8 -4z" />
+                                    <path d="M4 7v10l8 4l8 -4v-10" />
+                                    <path d="M12 11v10" />
                                 </svg>
                             </span>
+
                             <span class="text">Stocks</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Listes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Ajouter</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
+                        <!-- ICÔNE FLÈCHE -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
+
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.stock.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.stock.create') }}">Ajouter</a>
+                        </li>
+                    </ul>
+                </li>
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
+                                <!-- Icône Fournisseurs -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                                    class="icon icon-tabler icon-tabler-users">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M17 11a4 4 0 1 0 -4 -4" />
+                                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    <path d="M15 21v-2a4 4 0 0 1 4 -4h2a4 4 0 0 1 4 4v2" />
                                 </svg>
                             </span>
+
                             <span class="text">Fournisseurs</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Listes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Ajouter</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
 
-                    <!-- Nav item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.fournisseur.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.fournisseur.create') }}">Ajouter</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
+                                <!-- Icône Factures -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-invoice">
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M14 3v4a1 1 0 0 0 1 1h4" />
                                     <path
                                         d="M19 12v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-14a2 2 0 0 1 2 -2h7l5 5v4.25" />
                                 </svg>
                             </span>
+
                             <span class="text">Factures</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/invoice/invoice-list.html'>Listes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/invoice/invoice-detail.html'>Créer</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
-                    <!-- Nav item -->
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
 
-                    <!-- Nav item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.facture.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.facture.create') }}">Créer</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Nav item -->
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
+                                <!-- Icône Bons de commande -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 4h16v16h-16z" />
+                                    <path d="M8 8h8" />
+                                    <path d="M8 12h8" />
+                                    <path d="M8 16h5" />
+                                </svg>
+                            </span>
+
+                            <span class="text">Bons de commande</span>
+                        </div>
+
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
+
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.bon.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.bon.create') }}">Créer</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
+
+
+                <!-- Nav item -->
+
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="nav-icon">
+                                <!-- Icône Quincaillerie -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                                    class="icon icon-tabler icon-tabler-tool">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
+                                    <path d="M14 6l7 7l-4 4l-7 -7" />
+                                    <path d="M8 8l-5 5l4 4l5 -5" />
+                                    <path d="M9 17l-2 2l-4 -4l2 -2" />
                                 </svg>
                             </span>
-                            <span class="text">Bons</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Listes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Créer</a>
-                            </li>
 
-                        </ul>
-                    </li>
-
-
-
-                    <!-- Nav item -->
-
-
-                    <!-- Nav item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <span class="nav-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
-                                </svg>
-                            </span>
                             <span class="text">Quincaillerie partenaire</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Status</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
+
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.quincaillerie.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.quincaillerie.create') }}">Ajouter</a>
+                        </li>
+                    </ul>
+                </li>
 
 
 
-                    <!-- Nav item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
+                                <!-- Icône Créances -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
+                                    <path d="M12 3v18" />
+                                    <path d="M16 7h-5a3 3 0 0 0 0 6h2a3 3 0 0 1 0 6h-5" />
                                 </svg>
                             </span>
+
                             <span class="text">Gestion des créances</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Status</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
 
-                    <!-- Nav item -->
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.creance.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.creance.create') }}">Ajouter</a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <!-- Nav item -->
 
-                    <!-- Nav item -->
-                    <li class="nav-item">
-                        <div class="nav-heading">Commande</div>
-                        <hr class="mx-5 nav-line mb-1" />
-                    </li>
-                    <!-- Nav item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                <!-- Nav item -->
+
+                <!-- Nav item -->
+
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <div class="nav-heading">Commande</div>
+                    <hr class="mx-5 nav-line mb-1" />
+                </li>
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
+                                <!-- Icône Commande -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                                    class="icon icon-tabler icon-tabler-file-text">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
+                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                    <line x1="9" y1="9" x2="10" y2="9" />
+                                    <line x1="9" y1="13" x2="15" y2="13" />
+                                    <line x1="9" y1="17" x2="15" y2="17" />
                                 </svg>
                             </span>
+
                             <span class="text">Commande</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Status</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
+
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.order.index') }}">Listes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.order.status') }}">Status</a>
+                        </li>
+                    </ul>
+                </li>
 
 
 
-                    <!-- Nav item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#e-mail" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+
+                <!-- Nav item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex align-items-center justify-content-between" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                <!-- Icône Demande de devis -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                                    class="icon icon-tabler icon-tabler-table">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                                    <path d="M3 7l9 6l9 -6" />
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                    <line x1="3" y1="9" x2="21" y2="9" />
+                                    <line x1="3" y1="15" x2="21" y2="15" />
+                                    <line x1="9" y1="3" x2="9" y2="21" />
+                                    <line x1="15" y1="3" x2="15" y2="21" />
                                 </svg>
                             </span>
+
                             <span class="text">Demande de devis</span>
-                        </a>
-                        <ul class="dropdown-menu flex-column">
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail'>Status</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class='nav-link' href='apps/email/mail-details.html'>Listes</a>
-                            </li>
+                        </div>
 
-                        </ul>
-                    </li>
+                        <!-- Flèche -->
+                        <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6l6-6" />
+                        </svg>
+                    </a>
 
-                    <!-- Nav item -->
-                    <li class="nav-item">
-                        <div class="nav-heading">Site</div>
-                        <hr class="mx-5 nav-line mb-1" />
-                    </li>
-                    <!-- Nav item -->
-                    <li class="nav-item">
-                        <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-news">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
-                                    <path d="M8 8l4 0" />
-                                    <path d="M8 12l4 0" />
-                                    <path d="M8 16l4 0" />
-                                </svg></span> <span class="text">Blog</span></a>
-
-                    </li>
+                    <ul class="dropdown-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.demande.index') }}">Listes</a>
+                        </li>
+                    </ul>
+                </li>
 
 
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <div class="nav-heading">Site</div>
+                    <hr class="mx-5 nav-line mb-1" />
+                </li>
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class='nav-link' href='{{ route('admin.blog.index') }}'><span class="nav-icon"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-news">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
+                                <path d="M8 8l4 0" />
+                                <path d="M8 12l4 0" />
+                                <path d="M8 16l4 0" />
+                            </svg></span> <span class="text">Blog</span></a>
 
-                    <li class="nav-item">
-                        <a class='nav-link' href='dashboard/finance.html'><span class="nav-icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-brand-mastercard">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M14 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                    <path d="M12 9.765a3 3 0 1 0 0 4.47" />
-                                    <path
-                                        d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                                </svg></span> <span class="text">Produits</span></a>
-                    </li>
-                    <!-- Nav item -->
-                    <li class="nav-item">
-                        <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-news">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
-                                    <path d="M8 8l4 0" />
-                                    <path d="M8 12l4 0" />
-                                    <path d="M8 16l4 0" />
-                                </svg>
-                            </span> <span class="text">Catégories</span></a>
-                    </li>
+                </li>
 
 
-                    <!-- Nav item -->
-                    <li class="nav-item">
-                        <a class='nav-link' href='dashboard/blog.html'><span class="nav-icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-news">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />
-                                    <path d="M8 8l4 0" />
-                                    <path d="M8 12l4 0" />
-                                    <path d="M8 16l4 0" />
-                                </svg></span> <span class="text">Utilisateurs</span></a>
 
-                    </li>
-
-                    <li class="nav-item">
-                        <div class="nav-heading">Mon Compte</div>
-                        <hr class="mx-5 nav-line mb-1" />
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class='nav-link' href='dashboard/finance.html'><span class="nav-icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-brand-mastercard">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M14 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                    <path d="M12 9.765a3 3 0 1 0 0 4.47" />
-                                    <path
-                                        d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                                </svg></span> <span class="text">Profi</span></a>
-                    </li>
+                <li class="nav-item">
+                    <a class='nav-link' href='{{ route('admin.produit.index') }}'><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-shopping-bag">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M6 7l1 -3h10l1 3" />
+                                <path d="M3 7h18v13a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-13z" />
+                                <path d="M9 11v2" />
+                                <path d="M15 11v2" />
+                            </svg>
+                        </span> <span class="text">Produits</span></a>
+                </li>
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class='nav-link' href='{{ route('admin.categorie.index') }}'><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-grid">
+                                <rect x="4" y="4" width="6" height="6" rx="1" />
+                                <rect x="14" y="4" width="6" height="6" rx="1" />
+                                <rect x="4" y="14" width="6" height="6" rx="1" />
+                                <rect x="14" y="14" width="6" height="6" rx="1" />
+                            </svg>
+                        </span> <span class="text">Catégories</span></a>
+                </li>
 
 
-                    <li class="nav-item">
-                        <a class='nav-link' href='dashboard/finance.html'><span class="nav-icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-brand-mastercard">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M14 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                    <path d="M12 9.765a3 3 0 1 0 0 4.47" />
-                                    <path
-                                        d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                                </svg></span> <span class="text">Fermer ma section</span></a>
-                    </li>
+                <!-- Nav item -->
 
-                </ul>
+
+                <li class="nav-item">
+                    <div class="nav-heading">Mon Compte</div>
+                    <hr class="mx-5 nav-line mb-1" />
+                </li>
+
+                <li class="nav-item">
+                    <a class='nav-link' href='{{ route('admin.monprofil') }}'><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-settings">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a2 2 0 0 0 2.9 1.222c1.52 -.878 3.316 .918 2.438 2.438a2 2 0 0 0 1.222 2.9c1.756 .426 1.756 2.924 0 3.35a2 2 0 0 0 -1.222 2.9c.878 1.52 -.918 3.316 -2.438 2.438a2 2 0 0 0 -2.9 1.222c-.426 1.756 -2.924 1.756 -3.35 0a2 2 0 0 0 -2.9 -1.222c-1.52 .878 -3.316 -.918 -2.438 -2.438a2 2 0 0 0 -1.222 -2.9c-1.756 -.426 -1.756 -2.924 0 -3.35a2 2 0 0 0 1.222 -2.9c-.878 -1.52 .918 -3.316 2.438 -2.438a2 2 0 0 0 2.9 -1.222z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </span> <span class="text">Profil</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class='nav-link' href=''><span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-lock">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="5" y="11" width="14" height="10" rx="2" />
+                                <circle cx="12" cy="16" r="1" />
+                                <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
+                            </svg>
+                        </span> <span class="text">Fermer ma section</span></a>
+                </li>
+
+
+
+            </ul>
+
 
             </div>
         </div>

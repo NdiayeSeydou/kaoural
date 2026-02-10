@@ -44,9 +44,6 @@ require __DIR__.'/auth.php';
 
 //les routes de l'admin 
 require __DIR__.'/Admin/admin.php';
-require __DIR__.'/Admin/stock.php';
-require __DIR__.'/Admin/fournisseur.php';
-require __DIR__.'/Admin/produit.php';
 require __DIR__.'/Admin/bon.php';
 require __DIR__.'/Admin/facture.php';
 require __DIR__.'/Admin/materiel.php';
@@ -54,8 +51,16 @@ require __DIR__.'/Admin/profil.php';
 require __DIR__.'/Admin/transaction.php';
 require __DIR__.'/Admin/quincaillerie.php';
 require __DIR__.'/Admin/client.php';
+require __DIR__.'/Admin/stock.php';
+require __DIR__.'/Admin/produit.php';
+require __DIR__.'/Admin/vente.php';
+require __DIR__.'/Admin/newsletter.php';
+require __DIR__.'/Admin/order.php';
+require __DIR__.'/Admin/fournisseur.php';
+require __DIR__.'/Admin/creance.php';
+require __DIR__.'/Admin/demande.php';
 require __DIR__.'/Admin/blog.php';
-
+require __DIR__.'/Admin/categorie.php';
 
 
 

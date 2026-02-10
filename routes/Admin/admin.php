@@ -1,16 +1,17 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
-
-
+use App\Http\Controllers\Admin\AdminController;
 Route::prefix('admin')->group(function () {
+    
+    Route::controller(AdminController::class)->group(function () {
 
-    Route::controller(HomeController::class)->group(function () {
-        // Tableau de bord
-       Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    // Tableau de bord du supermAdmin
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    
 
 
-
-   
     });
+
+
 });
