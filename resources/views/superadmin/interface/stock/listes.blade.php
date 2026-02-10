@@ -392,7 +392,10 @@
 
 
 
-                                    <td>{{ $stock->ventes->sum('quantite') + $stock->retraits->sum('quantite_sortie') }}
+                                   <td>
+                                        {{ $stock->ventes->sum('quantite') +
+                                            $stock->retraits->sum('quantite_sortie') +
+                                            $stock->retraitsCreances->sum('quantite_sortie') }}
                                     </td>
 
                                     <td>{{ $stock->quantite_restante }}</td>

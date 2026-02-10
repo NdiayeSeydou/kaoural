@@ -44,7 +44,7 @@
         <div class="row mb-6 gy-6">
             <div class="col-xl-8 col-12">
                 <!-- card -->
-               
+
                 <!-- row -->
                 <div class="row gy-6">
                     <div class="col-md-4 col-12">
@@ -55,8 +55,8 @@
                                 <div class="d-flex justify-content-between mb-10">
                                     <!-- heading -->
                                     <span>Post régardés</span>
-                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Info" class="text-reset">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Info"
+                                        class="text-reset">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -99,8 +99,8 @@
                                 <div class="d-flex justify-content-between mb-10">
                                     <!-- heading -->
                                     <span>Open Rate</span>
-                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Info" class="text-reset">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Info"
+                                        class="text-reset">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -199,10 +199,10 @@
                         <div>
                             <div class="mb-5">
                                 <h3 class="fs-4">John Doe</h3>
-                               
+
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
-                                <a href="{{ route('superadmin.monprofil')}}" class="btn btn-primary">voir mon Profile</a>
+                                <a href="{{ route('superadmin.monprofil') }}" class="btn btn-primary">voir mon Profile</a>
                                 <div class="dropdown dropstart">
                                     <a class="btn btn-icon btn-ghost btn-sm rounded-circle" href="#!" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -231,298 +231,108 @@
             </div>
         </div>
         <!-- row -->
-      
+
 
         <div class="row mb-6">
             <div class="col-12">
-                <!-- card -->
                 <div class="card card-lg">
-                    <!-- card header -->
                     <div class="card-header border-bottom-0">
-                        <h5 class="mb-0">Recent Post</h5>
+                        <h5 class="mb-0">Articles Récents</h5>
                     </div>
-                    <!-- table -->
                     <div class="table-responsive">
                         <table class="table table-centered text-nowrap mb-0">
                             <thead>
                                 <tr>
-                                    <th>Blog Title</th>
-                                    <th>Post Views</th>
-                                    <th>Subscriber</th>
-                                    <th>Likes</th>
-                                    <th>Comments</th>
-                                    <th>Status</th>
-                                    <th></th>
+                                    <th>Image</th>
+                                    <th>Titre du Blog</th>
+                                    <th>Date de publication</th>
+                                    <th>Auteur</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-4">
-                                            <div>
-                                                <a href="#!"><img src="../assets/images/blog/blog-img-1.jpg"
-                                                        alt="" class="rounded-3" width="56"
-                                                        height="56" /></a>
-                                            </div>
-                                            <div>
-                                                <h5 class="mb-1 fs-6"><a href="#!" class="text-inherit">Youtube
-                                                        Growth Marketing Strategy
-                                                        2025</a></h5>
-                                                <div class="d-flex gap-3 text-secondary">
-                                                    <span>Feb 2, 2025</span>
-                                                    <span>John Doe</span>
+                                @forelse($blogs as $blog)
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-4">
+                                                <div>
+                                                    <a href="{{ route('superadmin.blog.show', $blog->public_id) }}">
+                                                        <img src="{{ asset('storage/' . $blog->image) }}" alt=""
+                                                            class="rounded-3" width="56" height="56"
+                                                            style="object-fit: cover;" />
+                                                    </a>
                                                 </div>
+
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>
-                                        <span class="badge bg-info-subtle text-info-emphasis">Scheduled</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown dropstart">
-                                            <a class="btn btn-icon btn-ghost btn-sm rounded-circle" href="#!"
-                                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                    height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Action</a>
-                                                <a class="dropdown-item d-flex align-items-center" href="#!">Another
-                                                    action</a>
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-4">
+                                        </td>
+                                        <td>
+
                                             <div>
-                                                <a href="#!"><img src="../assets/images/blog/blog-img-2.jpg"
-                                                        alt="" class="rounded-3" width="56"
-                                                        height="56" /></a>
-                                            </div>
-                                            <div>
-                                                <h5 class="mb-1 fs-6"><a href="#!" class="text-inherit">Monetization
-                                                        Tips for Blogs</a></h5>
-                                                <div class="d-flex gap-3 text-secondary">
-                                                    <span>Feb 20, 2025</span>
-                                                    <span>Alice Brown</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>1,345</td>
-                                    <td>21</td>
-                                    <td>32</td>
-                                    <td>120</td>
-                                    <td>
-                                        <span class="badge bg-primary-subtle text-primary-emphasis">Published</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown dropstart">
-                                            <a class="btn btn-icon btn-ghost btn-sm rounded-circle" href="#!"
-                                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                    height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Action</a>
-                                                <a class="dropdown-item d-flex align-items-center" href="#!">Another
-                                                    action</a>
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-4">
-                                            <div>
-                                                <a href="#!"><img src="../assets/images/blog/blog-img-3.jpg"
-                                                        alt="" class="rounded-3" width="56"
-                                                        height="56" /></a>
-                                            </div>
-                                            <div>
-                                                <h5 class="mb-1 fs-6"><a href="#!" class="text-inherit">Best
-                                                        Blogging Practices</a></h5>
-                                                <div class="d-flex gap-3 text-secondary">
-                                                    <span>Feb 14, 2025</span>
-                                                    <span>Robert Green</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>
-                                        <span class="badge bg-warning-subtle text-warning-emphasis">Draft</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown dropstart">
-                                            <a class="btn btn-icon btn-ghost btn-sm rounded-circle" href="#!"
-                                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                    height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Action</a>
-                                                <a class="dropdown-item d-flex align-items-center" href="#!">Another
-                                                    action</a>
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-4">
-                                            <div>
-                                                <a href="#!"><img src="../assets/images/blog/blog-img-4.jpg"
-                                                        alt="" class="rounded-3" width="56"
-                                                        height="56" /></a>
-                                            </div>
-                                            <div>
-                                                <h5 class="mb-1 fs-6"><a href="#!" class="text-inherit">Email
-                                                        Marketing for Bloggers</a>
+                                                <h5 class="mb-1 fs-6">
+                                                    <a href="{{ route('superadmin.blog.show', $blog->public_id) }}"
+                                                        class="text-inherit">
+                                                        {{ $blog->title }}
+                                                    </a>
                                                 </h5>
-                                                <div class="d-flex gap-3 text-secondary">
-                                                    <span>Feb 12, 2025</span>
-                                                    <span>John Doe</span>
+
+                                            </div>
+                                        </td>
+                                        <td>{{ $blog->created_at->translatedFormat('d M Y') }}</td>
+                                        <td>Superadmin</td>
+
+                                        <td>
+                                            <span class="badge bg-primary-subtle text-primary-emphasis">Publié</span>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown dropstart">
+                                                <a class="btn btn-icon btn-ghost btn-sm rounded-circle" href="#!"
+                                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-dots-vertical" width="20"
+                                                        height="20" viewBox="0 0 24 24" stroke-width="1.5"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                                        <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                                        <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                                    </svg>
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item d-flex align-items-center"
+                                                        href="{{ route('superadmin.blog.show', $blog->public_id) }}">
+                                                        <i class="fe fe-eye me-2"></i> Voir
+                                                    </a>
+                                                    <a class="dropdown-item d-flex align-items-center"
+                                                        href="{{ route('superadmin.blog.edit', $blog->public_id) }}">
+                                                        <i class="fe fe-edit me-2"></i> Modifier
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <form action="{{ route('superadmin.blog.delete', $blog->public_id) }}"
+                                                        method="POST" class="delete-form">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button"
+                                                            class="dropdown-item d-flex align-items-center text-danger btn-delete">
+                                                            <i class="fe fe-trash me-2"></i> Supprimer
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>2,345</td>
-                                    <td>21</td>
-                                    <td>42</td>
-                                    <td>314</td>
-                                    <td>
-                                        <span class="badge bg-primary-subtle text-primary-emphasis">Published</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown dropstart">
-                                            <a class="btn btn-icon btn-ghost btn-sm rounded-circle" href="#!"
-                                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                    height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Action</a>
-                                                <a class="dropdown-item d-flex align-items-center" href="#!">Another
-                                                    action</a>
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-4">
-                                            <div>
-                                                <a href="#!"><img src="../assets/images/blog/blog-img-5.jpg"
-                                                        alt="" class="rounded-3" width="56"
-                                                        height="56" /></a>
-                                            </div>
-                                            <div>
-                                                <h5 class="mb-1 fs-6"><a href="#!" class="text-inherit">SEO Best
-                                                        Practices in 2025</a></h5>
-                                                <div class="d-flex gap-3 text-secondary">
-                                                    <span>Feb 2, 2025</span>
-                                                    <span>Emily White</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>12,345</td>
-                                    <td>21</td>
-                                    <td>3.4k</td>
-                                    <td>314</td>
-                                    <td>
-                                        <span class="badge bg-primary-subtle text-primary-emphasis">Published</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown dropstart">
-                                            <a class="btn btn-icon btn-ghost btn-sm rounded-circle" href="#!"
-                                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-dots-vertical" width="20"
-                                                    height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Action</a>
-                                                <a class="dropdown-item d-flex align-items-center" href="#!">Another
-                                                    action</a>
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                    href="#!">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center py-4 text-muted">
+                                            Aucun blog trouvé.
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
-                    <!-- card footer -->
-                   
                 </div>
             </div>
         </div>
@@ -534,3 +344,30 @@
 
 
 @endsection
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function() {
+                const form = this.closest('form');
+
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>

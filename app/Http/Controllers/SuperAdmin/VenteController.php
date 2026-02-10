@@ -2,23 +2,54 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Stock;
-use App\Models\Categorie;
 use App\Models\Vente;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class VenteController extends Controller
 {
     // Liste des ventes groupées par date
-    public function vente()
-    {
-        $ventes = Vente::orderBy('date_vente', 'desc')->orderBy('created_at', 'asc')->get()->groupBy('date_vente');
+    
 
-        return view('superadmin.interface.vente.listes', compact('ventes'));
-    }
+public function vente()
+{
+    // 🔵 VENTES BOUTIQUE (pagination indépendante)
+    $datesBoutique = Vente::where('emplacement', 'boutique')
+        ->select('date_vente')
+        ->distinct()
+        ->orderBy('date_vente', 'desc')
+        ->paginate(10, ['*'], 'boutiquePage');
+
+    $ventesBoutique = Vente::where('emplacement', 'boutique')
+        ->whereIn('date_vente', $datesBoutique->pluck('date_vente'))
+        ->orderBy('date_vente', 'desc')
+        ->orderBy('created_at', 'asc')
+        ->get()
+        ->groupBy('date_vente');
+
+    // 🔴 VENTES MAGASIN (pagination indépendante)
+    $datesMagasin = Vente::where('emplacement', 'magasin')
+        ->select('date_vente')
+        ->distinct()
+        ->orderBy('date_vente', 'desc')
+        ->paginate(10, ['*'], 'magasinPage');
+
+    $ventesMagasin = Vente::where('emplacement', 'magasin')
+        ->whereIn('date_vente', $datesMagasin->pluck('date_vente'))
+        ->orderBy('date_vente', 'desc')
+        ->orderBy('created_at', 'asc')
+        ->get()
+        ->groupBy('date_vente');
+
+    return view(
+        'superadmin.interface.vente.listes',
+        compact('ventesBoutique', 'ventesMagasin', 'datesBoutique', 'datesMagasin')
+    );
+}
+
 
     // Détails d'une vente
     public function detailsVente($public_id)
@@ -62,30 +93,29 @@ class VenteController extends Controller
                     if ($item['quantite'] > $stock->quantite_restante) {
 
                         throw new \Exception("Stock insuffisant pour : {$stock->designation} (Disponible: {$stock->quantite_restante})");
-
                     }
 
                     Vente::create([
 
-                        'public_id'    => Str::random(10),
+                        'public_id' => Str::random(10),
 
-                        'date_vente'   => $request->date_vente,
+                        'date_vente' => $request->date_vente,
 
-                        'stock_id'     => $stock->id,
+                        'stock_id' => $stock->id,
 
-                        'designation'  => $stock->designation,
+                        'designation' => $stock->designation,
 
                         'code_article' => $stock->code_article,
 
-                        'image'        => $stock->image,
+                        'image' => $stock->image,
 
-                        'quantite'     => $item['quantite'],
+                        'quantite' => $item['quantite'],
 
-                        'prix_unitaire'=> $item['prix_unitaire'],
+                        'prix_unitaire' => $item['prix_unitaire'],
 
-                        'prix_total'   => $item['quantite'] * $item['prix_unitaire'],
+                        'prix_total' => $item['quantite'] * $item['prix_unitaire'],
 
-                        'emplacement'  => $stock->emplacement,
+                        'emplacement' => $stock->emplacement,
                     ]);
 
                     // Mise à jour du stock
@@ -104,97 +134,96 @@ class VenteController extends Controller
 
         } catch (\Exception $e) {
 
-            return back()->withInput()->with('errorventenew', 'Erreur : ' . $e->getMessage());
+            return back()->withInput()->with('errorventenew', 'Erreur : '.$e->getMessage());
         }
     }
 
     // Formulaire de modification
- public function editVente($public_id)
-{
-    $vente = Vente::with('stock')->where('public_id', $public_id)->firstOrFail();
+    public function editVente($public_id)
+    {
+        $vente = Vente::with('stock')->where('public_id', $public_id)->firstOrFail();
 
-    $stocks = Stock::where('quantite_restante', '>', 0)->orWhere('id', $vente->stock_id)->get();
-                   
-    return view('superadmin.interface.vente.edit', compact('vente', 'stocks'));
-}
+        $stocks = Stock::where('quantite_restante', '>', 0)->orWhere('id', $vente->stock_id)->get();
 
-public function updateVente(Request $request, $public_id)
-{
-    $vente = Vente::where('public_id', $public_id)->firstOrFail();
-
-    $request->validate([
-
-        'date_vente'    => 'required|date',
-
-        'stock_id'      => 'required|exists:stocks,id',
-
-        'quantite'      => 'required|numeric|min:0.01',
-
-        'prix_unitaire' => 'required|numeric|min:0',
-    ]);
-
-    try {
-        DB::transaction(function () use ($request, $vente) {
-
-            $ancienStock = Stock::lockForUpdate()->find($vente->stock_id);
-
-            if ($ancienStock) {
-
-                $ancienStock->quantite_sortie -= $vente->quantite;
-
-                $ancienStock->quantite_restante += $vente->quantite;
-
-                $this->updateStockStatus($ancienStock);
-
-                $ancienStock->save();
-            }
-
-
-            $nouveauStock = Stock::lockForUpdate()->findOrFail($request->stock_id);
-
-            if ($request->quantite > $nouveauStock->quantite_restante) {
-
-                throw new \Exception("Stock insuffisant pour {$nouveauStock->designation}. Disponible : {$nouveauStock->quantite_restante}");
-            }
-
-            $nouveauStock->quantite_sortie += $request->quantite;
-
-            $nouveauStock->quantite_restante -= $request->quantite;
-
-            $this->updateStockStatus($nouveauStock);
-
-            $nouveauStock->save();
-
-            $vente->update([
-
-                'date_vente'   => $request->date_vente,
-
-                'stock_id'     => $nouveauStock->id,
-
-                'designation'  => $nouveauStock->designation,
-
-                'code_article' => $nouveauStock->code_article,
-
-                'image'        => $nouveauStock->image,
-
-                'quantite'     => $request->quantite,
-
-                'prix_unitaire'=> $request->prix_unitaire,
-
-                'prix_total'   => $request->quantite * $request->prix_unitaire,
-
-                'emplacement'  => $nouveauStock->emplacement,
-            ]);
-
-        });
-
-        return redirect()->route('superadmin.vente.index')->with('ventupdt', 'Vente mise à jour avec succès');
-
-    } catch (\Exception $e) {
-
-        return back()->with('errupt', $e->getMessage());
+        return view('superadmin.interface.vente.edit', compact('vente', 'stocks'));
     }
-}
+
+    public function updateVente(Request $request, $public_id)
+    {
+        $vente = Vente::where('public_id', $public_id)->firstOrFail();
+
+        $request->validate([
+
+            'date_vente' => 'required|date',
+
+            'stock_id' => 'required|exists:stocks,id',
+
+            'quantite' => 'required|numeric|min:0.01',
+
+            'prix_unitaire' => 'required|numeric|min:0',
+        ]);
+
+        try {
+            DB::transaction(function () use ($request, $vente) {
+
+                $ancienStock = Stock::lockForUpdate()->find($vente->stock_id);
+
+                if ($ancienStock) {
+
+                    $ancienStock->quantite_sortie -= $vente->quantite;
+
+                    $ancienStock->quantite_restante += $vente->quantite;
+
+                    $this->updateStockStatus($ancienStock);
+
+                    $ancienStock->save();
+                }
+
+                $nouveauStock = Stock::lockForUpdate()->findOrFail($request->stock_id);
+
+                if ($request->quantite > $nouveauStock->quantite_restante) {
+
+                    throw new \Exception("Stock insuffisant pour {$nouveauStock->designation}. Disponible : {$nouveauStock->quantite_restante}");
+                }
+
+                $nouveauStock->quantite_sortie += $request->quantite;
+
+                $nouveauStock->quantite_restante -= $request->quantite;
+
+                $this->updateStockStatus($nouveauStock);
+
+                $nouveauStock->save();
+
+                $vente->update([
+
+                    'date_vente' => $request->date_vente,
+
+                    'stock_id' => $nouveauStock->id,
+
+                    'designation' => $nouveauStock->designation,
+
+                    'code_article' => $nouveauStock->code_article,
+
+                    'image' => $nouveauStock->image,
+
+                    'quantite' => $request->quantite,
+
+                    'prix_unitaire' => $request->prix_unitaire,
+
+                    'prix_total' => $request->quantite * $request->prix_unitaire,
+
+                    'emplacement' => $nouveauStock->emplacement,
+                ]);
+
+            });
+
+            return redirect()->route('superadmin.vente.index')->with('ventupdt', 'Vente mise à jour avec succès');
+
+        } catch (\Exception $e) {
+
+            return back()->with('errupt', $e->getMessage());
+        }
+    }
 
     // Suppression et restauration du stock
     public function destroy($public_id)
@@ -225,11 +254,10 @@ public function updateVente(Request $request, $public_id)
 
         } catch (\Exception $e) {
 
-            return back()->with('error', 'Erreur lors de la suppression : ' . $e->getMessage());
+            return back()->with('error', 'Erreur lors de la suppression : '.$e->getMessage());
         }
     }
 
-  
     private function updateStockStatus($stock)
     {
         if ($stock->quantite_restante <= 0) {
@@ -245,5 +273,4 @@ public function updateVente(Request $request, $public_id)
             $stock->status = 'disponible';
         }
     }
-
 }

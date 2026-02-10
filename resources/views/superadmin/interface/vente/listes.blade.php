@@ -53,7 +53,7 @@
 
 
 
-    
+
 
 
     <div class="custom-container">
@@ -74,44 +74,45 @@
 
 
         <div class="card mb-5 shadow-sm">
-    <div class="card-body">
-        <form action="{{ route('superadmin.vente.index') }}" method="GET">
-            <div class="row g-3 align-items-end">
+            <div class="card-body">
+                <form action="{{ route('superadmin.vente.index') }}" method="GET">
+                    <div class="row g-3 align-items-end">
 
-                <div class="col-lg-3 col-md-6">
-                    <label class="form-label fw-semibold">Date de vente</label>
-                    <input type="date" name="date" class="form-control" value="{{ request('date') }}">
-                </div>
+                        <div class="col-lg-3 col-md-6">
+                            <label class="form-label fw-semibold">Date de vente</label>
+                            <input type="date" name="date" class="form-control" value="{{ request('date') }}">
+                        </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <label class="form-label fw-semibold">Produit</label>
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" 
-                               placeholder="Désignation ou code article..." 
-                               value="{{ request('search') }}">
-                        <button class="btn btn-light border" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8" />
-                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                            </svg>
-                        </button>
+                        <div class="col-lg-4 col-md-6">
+                            <label class="form-label fw-semibold">Produit</label>
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control"
+                                    placeholder="Désignation ou code article..." value="{{ request('search') }}">
+                                <button class="btn btn-light border" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12 d-flex gap-2">
+                            <button type="submit" class="btn btn-primary w-100">
+                                Filtrer les ventes
+                            </button>
+
+                            <a href="{{ route('superadmin.vente.index') }}" class="btn btn-outline-danger w-100">
+                                Réinitialiser
+                            </a>
+                        </div>
+
                     </div>
-                </div>
-
-                <div class="col-lg-5 col-md-12 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary w-100">
-                        Filtrer les ventes
-                    </button>
-                    
-                    <a href="{{ route('superadmin.vente.index') }}" class="btn btn-outline-danger w-100">
-                        Réinitialiser
-                    </a>
-                </div>
-
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
         <div class="d-flex justify-content-center gap-3 mb-4">
             <button id="btnBoutique" class="btn btn-dark px-4 shadow-none">Boutique</button>
@@ -121,13 +122,14 @@
 
 
 
-        
+
 
         <div id="ventesBoutique">
             @php $hasGlobalBoutique = false; @endphp
+
             <div class="accordion" id="accordionBoutique">
-                @foreach ($ventes as $date => $items)
-                    @php $itemsBoutique = $items->where('emplacement', 'boutique'); @endphp
+                @foreach ($ventesBoutique as $date => $itemsBoutique)
+                    @php $itemsBoutique = $itemsBoutique->where('emplacement', 'boutique'); @endphp
                     @if ($itemsBoutique->count() > 0)
                         @php $hasGlobalBoutique = true; @endphp
                         <div class="accordion-item mb-3 border shadow-sm">
@@ -180,7 +182,8 @@
                                                                     height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" fill="none"
                                                                     stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                        fill="none" />
                                                                     <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
                                                                     <path
                                                                         d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
@@ -194,7 +197,8 @@
                                                                     height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" fill="none"
                                                                     stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                        fill="none" />
                                                                     <path
                                                                         d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                                                                     <path d="M13.5 6.5l4 4" />
@@ -243,13 +247,36 @@
                     <p class="text-muted">Aucune vente enregistrée pour la boutique.</p>
                 </div>
             @endif
+            @if ($hasGlobalBoutique && $datesBoutique->lastPage() > 1)
+                <nav aria-label="Page navigation example" class="mt-4">
+                    <ul class="pagination justify-content-center mb-0">
+                        {{-- Lien précédent --}}
+                        <li class="page-item {{ $datesBoutique->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $datesBoutique->previousPageUrl() }}">Précedent</a>
+                        </li>
+
+                        {{-- Pages --}}
+                        @foreach ($datesBoutique->getUrlRange(1, $datesBoutique->lastPage()) as $page => $url)
+                            <li class="page-item {{ $datesBoutique->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        {{-- Lien suivant --}}
+                        <li class="page-item {{ $datesBoutique->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $datesBoutique->nextPageUrl() }}">Suivant</a>
+                        </li>
+                    </ul>
+                </nav>
+            @endif
         </div>
+
+
 
         <div id="ventesMagasin" class="d-none">
             @php $hasGlobalMagasin = false; @endphp
             <div class="accordion" id="accordionMagasin">
-                @foreach ($ventes as $date => $items)
-                    @php $itemsMagasin = $items->where('emplacement', 'magasin'); @endphp
+                @foreach ($ventesMagasin as $date => $itemsMagasin)
                     @if ($itemsMagasin->count() > 0)
                         @php $hasGlobalMagasin = true; @endphp
                         <div class="accordion-item mb-3 border shadow-sm">
@@ -359,7 +386,32 @@
                     <p class="text-muted">Aucune vente enregistrée pour le magasin.</p>
                 </div>
             @endif
+
+            @if ($hasGlobalMagasin && $datesMagasin->lastPage() > 1)
+                <nav aria-label="Page navigation example" class="mt-4">
+                    <ul class="pagination justify-content-center mb-0">
+                        {{-- Lien précédent --}}
+                        <li class="page-item {{ $datesMagasin->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $datesMagasin->previousPageUrl() }}">Précedent</a>
+                        </li>
+
+                        {{-- Pages --}}
+                        @foreach ($datesMagasin->getUrlRange(1, $datesMagasin->lastPage()) as $page => $url)
+                            <li class="page-item {{ $datesMagasin->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        {{-- Lien suivant --}}
+                        <li class="page-item {{ $datesMagasin->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $datesMagasin->nextPageUrl() }}">Suivant</a>
+                        </li>
+                    </ul>
+                </nav>
+            @endif
         </div>
+
+
     </div>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

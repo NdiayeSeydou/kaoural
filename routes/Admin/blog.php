@@ -15,9 +15,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/creer/blog', [BlogController::class, 'addBlog'])->name('admin.blog.create');
 
         // modifier un blog
-        Route::get('/modifier/blog', [BlogController::class, 'editBlog'])->name('admin.blog.edit');
+        Route::get('/modifier/blog/{public_id}', [BlogController::class, 'editBlog'])->name('admin.blog.edit');
 
         // voir le details d'un blog 
-        Route::get('/details/blog', [BlogController::class, 'showBlog'])->name('admin.blog.show');
+        Route::get('/details/blog/{public_id}', [BlogController::class, 'showBlog'])->name('admin.blog.show');
     });
 });
