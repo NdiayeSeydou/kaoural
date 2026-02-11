@@ -84,7 +84,7 @@
 
                         <div class="text-center mt-3">
                             <!-- Nav Brand -->
-                            <a href="index-1.html" class="nav-brand d-inline-block">
+                            <a href="{{ route('home') }}" class="nav-brand d-inline-block">
                                 <img src="{{ asset('kaoural/img/logo kaoural.png') }}" alt="logo"
                                     class="img-fluid rounded" width="80" height="80">
                             </a>

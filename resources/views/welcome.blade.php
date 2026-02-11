@@ -60,7 +60,7 @@
                     <p class="text-light mb-4 fs-5 animated fadeInUp">
                         Qualité garantie et livraison rapide pour tous vos travaux.
                     </p>
-                    <a href="#" class="btn btn-primary py-2 px-4 animated zoomIn">
+                    <a href="#" class="btn btn-primary">
                         Commander maintenant
                     </a>
                 </div>
