@@ -11,7 +11,7 @@
                         <!-- Header Top -->
                         <header class="col-12 pb-9">
                             <a href="{{ route('home') }}">
-                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="40" alt="logo">
+                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="40" alt="Logo de kaoural">
                             </a>
                         </header>
 
@@ -53,7 +53,7 @@
                 <div class="overflow-hidden position-relative position-xl-fixed top-0 bottom-0 start-0 end-50 d-flex align-items-center">
                     <div class="overflow-hidden position-absolute z-n1 top-0 end-0 bottom-0 start-0 m-sm-3 m-xl-4 border border-body-secondary rounded-top-5 rounded-sm-5 rounded-xl-6">
                         <!-- Background image -->
-                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" class="position-absolute z-n1 top-0 h-100 w-100 object-fit-cover filter brightness-150 contrast-125 grayscale-100" alt="Reset Password's testimonial">
+                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" class="position-absolute z-n1 top-0 h-100 w-100 object-fit-cover filter brightness-150 contrast-125 grayscale-100" alt="Logo de kaoural">
 
                         <!-- Colorize the image -->
                         <div class="position-absolute z-n1 top-0 h-100 w-100 bg-header mix-blend-multiply"></div>
@@ -112,7 +112,7 @@
                     <!-- Client Review -->
                     <div class="mx-auto max-w-4xl text-center px-6 px-sm-8 py-10">
                         <!-- Client's Logo Company -->
-                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="48" alt="Company's logo">
+                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="48" alt="Logo de kaoural">
 
                         <figure class="m-0 mt-7">
                             <blockquote class="text-body-emphasis text-pretty text-2xl leading-9 fw-semibold">
@@ -124,7 +124,7 @@
 
                             <figcaption class="m-0 mt-7">
                                 <!-- Client's Photoshoot -->
-                                <img src="{{ asset('kaoural/img/bg-img/1.jpg') }}" class="rounded-circle border" width="40" height="40" alt="Client's photoshoot">
+                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}" class="rounded-circle border" width="40" height="40" alt="Logo de kaoural">
 
                                 <div class="mt-4 d-flex align-items-center justify-content-center text-base">
                                     <!-- Client's Name -->

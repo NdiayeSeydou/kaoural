@@ -164,10 +164,7 @@
                             <!-- Search -->
 
 
-                            <!-- Wishlist -->
-                            <div class="wishlist-area">
-                                <a href="" class="wishlist-btn"><i class="icofont-heart"></i></a>
-                            </div>
+                           
 
                             <!-- Cart -->
                             <div class="cart-area">
@@ -214,7 +211,7 @@
                                         </ul>
                                     </div>
                                     <div class="cart-box">
-                                        <a href="" class="btn btn-primary d-block">Paiement</a>
+                                        <a href="{{ route('panier') }}" class="btn btn-primary d-block">Mon panier</a>
                                     </div>
                                 </div>
                             </div>

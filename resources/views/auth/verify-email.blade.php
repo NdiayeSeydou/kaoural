@@ -10,7 +10,7 @@
                         <!-- Header Top -->
                         <header class="col-12 pb-9">
                             <a href="{{ route('home') }}">
-                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="40" alt="logo">
+                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="40" alt="Logo de kaoural">
                             </a>
                         </header>   
 
@@ -136,7 +136,7 @@
                     <!-- Client Review -->
                     <div class="mx-auto max-w-4xl text-center px-6 px-sm-8 py-10">
                         <!-- Client's Logo Company -->
-                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="48" alt="Company's logo">
+                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="48" alt="Logo de kaoural">
 
                         <figure class="m-0 mt-7">
                             <blockquote class="text-body-emphasis text-pretty text-2xl leading-9 fw-semibold">
@@ -148,8 +148,8 @@
 
                             <figcaption class="m-0 mt-7">
                                 <!-- Client's Photoshoot -->
-                                <img src="{{ asset('kaoural/img/bg-img/1.jpg') }}" class="rounded-circle border"
-                                    width="40" height="40" alt="Client's photoshoot">
+                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}" class="rounded-circle border"
+                                    width="40" height="40" alt="Logo de kaoural">
 
                                 <div class="mt-4 d-flex align-items-center justify-content-center text-base">
                                     <!-- Client's Name -->

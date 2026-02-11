@@ -84,26 +84,7 @@
                                             </p>
                                         </div>
 
-                                        {{-- <div class="col-12">
-                                        <div class="position-relative mt-6 mt-sm-7 mb-5">
-                                            <hr class="text-body-emphasis opacity-10 m-0">
-                                            <span class="text-sm fst-italic position-absolute start-50 top-0 translate-middle px-4 bg-body"> ou </span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Sign in with other apps -->
-                                    <div class="col-12">
-                                        <div class="d-flex gap-4 justify-content-between">
-                                            <button type="submit" class="btn text-body text-body-emphasis-hover bg-body-secondary bg-body-tertiary-hover border text-center w-100 rounded-pill transition ease-in-out delay-150 duration-1000 transform scale-105-hover">
-                                                <svg width="1rem" height="1rem" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"> <g> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path> </g> </svg>
-                                            </button>
-
-                                            <button type="submit" class="btn text-body text-body-emphasis-hover bg-body-secondary bg-body-tertiary-hover border text-center w-100 rounded-pill transition ease-in-out delay-150 duration-1000 transform scale-105-hover">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" viewBox="0 0 16 16"> <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/> </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                     --}}
+                                  
                                     </div>
                             </div>
                         </div>
@@ -184,7 +165,7 @@
                     <!-- Client Review -->
                     <div class="mx-auto max-w-4xl text-center px-6 px-sm-8 py-10">
                         <!-- Client's Logo Company -->
-                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="48" alt="Company's logo">
+                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" height="48" alt="Logo de kaoural">
 
                         <figure class="m-0 mt-7">
                             <blockquote class="text-body-emphasis text-pretty text-2xl leading-9 fw-semibold">
@@ -198,9 +179,9 @@
 
                             <figcaption class="m-0 mt-7">
                                 <!-- Client's Photoshoot -->
-                                <img src="{{ asset('conn/assets/img/clients-photoshoot/small/member2.jpg') }}"
+                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}"
                                     class="rounded-circle border" width="40" height="40"
-                                    alt="Client's photoshoot">
+                                    alt="Logo de kaoural">
 
                                 <div class="mt-4 d-flex align-items-center justify-content-center text-base">
                                     <!-- Client's Name -->

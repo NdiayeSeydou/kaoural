@@ -22,6 +22,13 @@
         font-size: 0.95rem;
     }
 
+       .btn-primary:hover {
+        background-color: #e6c200;
+        border-color: #e6c200;
+        color: #000;
+        transform: scale(1.02);
+    }
+
     /* Style des icônes */
     .single-service-area i {
         font-size: 40px;

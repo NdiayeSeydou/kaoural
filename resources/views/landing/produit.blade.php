@@ -927,6 +927,13 @@
         overflow-x: auto;
     }
 
+       .btn-primary:hover {
+        background-color: #e6c200;
+        border-color: #e6c200;
+        color: #000;
+        transform: scale(1.02);
+    }
+
     .quickview_thumbnails img {
         width: 65px;
         height: 65px;

@@ -4,7 +4,7 @@
 
     <style>
         /* Importation de la police (si elle n'est pas installée localement,
-           le navigateur cherchera une police manuscrite similaire) */
+               le navigateur cherchera une police manuscrite similaire) */
         @font-face {
             font-family: 'MV Boli';
             src: local('MV Boli'), local('Comic Sans MS');
@@ -18,18 +18,16 @@
             background-repeat: no-repeat;
             background-size: cover;
 
-            /* RÉDUCTION DE LA TAILLE : on passe de 80vh à 50vh */
+          
             min-height: 50vh;
 
             display: flex;
             align-items: center;
-            /* Application de la police MV Boli à toute la section */
             font-family: 'MV Boli', 'Comic Sans MS', cursive;
         }
 
         .hero-header h1 {
             font-weight: bold;
-            /* Un petit effet d'ombre pour que le texte ressorte encore mieux */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
@@ -41,6 +39,13 @@
         .hero-header .btn {
             font-family: 'MV Boli', sans-serif;
             font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #e6c200;
+            border-color: #e6c200;
+            color: #000;
+            transform: scale(1.02);
         }
     </style>
 

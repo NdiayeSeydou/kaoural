@@ -8,6 +8,7 @@ use App\Http\Controllers\Landing\ContactController;
 use App\Http\Controllers\Landing\HomeController;
 use App\Http\Controllers\Landing\ProduitController;
 use App\Http\Controllers\Landing\BlogController;
+use App\Http\Controllers\Landing\PanierController;
 
 
 
@@ -23,18 +24,34 @@ use App\Http\Controllers\Landing\BlogController;
 
 
 Route::get('/about',[AboutController::class,'about'])->name('about');
+
 Route::get('/services',[ServiceController::class,'service'])->name('service');
+
 Route::get('/contact',[ContactController::class,'contact'])->name('contact');
+
 Route::get('/',[HomeController::class,'home'])->name('home');
+
 Route::get('/produit',[ProduitController::class,'produit'])->name('produit');
+
 Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 
+Route::get('/mon_panier',[PanierController::class,'panier'])->name('panier');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
+
+
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+
+
+
+
+
 
 
 
