@@ -68,6 +68,12 @@
             <h1 class="h2">Liste des ventes</h1>
             <a href="{{ route('superadmin.vente.create') }}" class="btn btn-dark">+ Ajouter une vente</a>
         </div>
+         <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('superadmin.dashboard') }}">Accueil</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Ventes</li>
+                  </ol>
+                </nav>
 
 
 

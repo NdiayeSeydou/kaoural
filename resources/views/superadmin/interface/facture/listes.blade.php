@@ -216,29 +216,7 @@
             <div class="row">
                 <div class="col-12">
                     <!-- card -->
-                    <div class="card card-lg" id="invoiceList"
-                        data-list="invoice_number,invoice_status,invoice_info,invoice_date,invoice_email,invoice_amount">
-                        <div class="card-header border-bottom-0">
-                            <div class="row gy-2">
-                                <div class="col-lg-4">
-                                    <input type="search" class="form-control listjs-search" placeholder="Rechercher" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="d-flex gap-2 justify-content-md-end">
-                                        <div class="col-lg-4">
-                                            <select class="form-select" data-choices="Status">
-                                                <option value="Paid">Payé</option>
-                                                <option value="Pending">Impayé</option>
-                                                <option value="Refunded">Pro-format</option>
-                                            </select>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="table-responsive table-checkbox" data-simplebar style="height: 600px">
                         <table class="table text-nowrap table-centered table-hover mb-0" data-check-container>
@@ -256,7 +234,7 @@
                             <tbody class="list">
                                 <tr>
 
-                                    <td class="ps-0 invoice_number">
+                                    <td class="">
                                         <a href="#!">#88120</a>
                                     </td>
                                     <td class="invoice_status">
@@ -368,7 +346,7 @@
 
                                 <tr>
 
-                                    <td class="ps-0 invoice_number">
+                                    <td class="">
                                         <a href="#!">#88119</a>
                                     </td>
                                     <td class="invoice_status">

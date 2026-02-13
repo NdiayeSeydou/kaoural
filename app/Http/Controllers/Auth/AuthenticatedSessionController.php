@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,14 +31,30 @@ class AuthenticatedSessionController extends Controller
 
         $authUserRole = Auth::user()->role;
 
-        if($authUserRole ==0){
-        return redirect()->intended(route('superadmin.dashboard', absolute: false));
-            
-        }elseif($authUserRole == 1){
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
 
-        }else{
-        return redirect()->intended(route('client.dashboard', absolute: false));
+        if (! $user->is_active) {
+
+            Auth::logout(); 
+
+            throw ValidationException::withMessages([
+
+                'email' => 'Votre compte est désactivé. Veuillez contacter la quincaillerie kaoural.',
+
+            ]);
+        }
+
+        if ($authUserRole == 0) {
+
+            return redirect()->intended(route('superadmin.dashboard', absolute: false));
+
+        } elseif ($authUserRole == 1) {
+
+            return redirect()->intended(route('admin.dashboard', absolute: false));
+
+        } else {
+
+            return redirect()->intended(route('client.dashboard', absolute: false));
 
         }
 
@@ -47,7 +64,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): RedirectResponse
+        public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
@@ -55,6 +72,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login')->with('success', 'vous avez épuisé votre session de connexion avec succès!');
     }
 }

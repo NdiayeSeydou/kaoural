@@ -432,7 +432,8 @@
                                         </a>
                                         <a href="{{ route('superadmin.stock.edit', $stock->public_id) }}"
                                             class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="editOne"> <svg xmlns="http://www.w3.org/2000/svg"
+                                            data-template="editOne"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-edit" width="16" height="16"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                 fill="none" stroke-linecap="round" stroke-linejoin="round">

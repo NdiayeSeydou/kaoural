@@ -53,21 +53,12 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <label class="form-label">Nom du client</label>
                                 <input type="text" class="form-control" placeholder="Nom du client">
                             </div>
 
-                            <div class="col-md-4">
-                                <label class="form-label">Adresse du client</label>
-                                <input type="text" class="form-control" placeholder="Adresse complète">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label class="form-label">Téléphone</label>
-                                <input type="tel" class="form-control" placeholder="+221 77 000 00 00">
-                            </div>
-
+                           
                            
 
                         </div>
