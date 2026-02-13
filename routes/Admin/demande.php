@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DemandeController;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
     Route::controller(DemandeController::class)->group(function () {
 

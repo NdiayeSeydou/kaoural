@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SuperAdmin\BlogController;
 
-Route::prefix('superadmin')->group(function () {
+Route::prefix('superadmin')->middleware(['auth', 'verified', 'rolemanager:superadmin'])->group(function () {
 
    
-    Route::controller(BlogController::class)->group(function () {
+    Route::controller(BlogController::class)->middleware(['auth', 'verified', 'rolemanager:client'])->group(function () {
 
         
         Route::get('/blogs', 'blog')->name('superadmin.blog.index');

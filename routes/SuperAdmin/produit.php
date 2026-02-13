@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\ProduitController;
 
-Route::prefix('superadmin')->group(function () {
+Route::prefix('superadmin')->middleware(['auth', 'verified', 'rolemanager:superadmin'])->group(function () {
 
     Route::controller(ProduitController::class)->group(function () {
 

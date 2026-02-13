@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\StockController;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
     Route::controller(StockController::class)->group(function () {
 

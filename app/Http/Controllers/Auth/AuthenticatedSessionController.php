@@ -72,6 +72,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'vous avez épuisé votre session de connexion avec succès!');
+        return redirect('/')->with('success', 'vous avez épuisé votre session de connexion avec succès!');
     }
 }

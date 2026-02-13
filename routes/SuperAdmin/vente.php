@@ -3,13 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\VenteController;
 
-/*
-|--------------------------------------------------------------------------
-| Routes des Ventes - SuperAdmin
-|--------------------------------------------------------------------------
-*/
 
-Route::prefix('superadmin')->group(function () {
+
+Route::prefix('superadmin')->middleware(['auth', 'verified', 'rolemanager:superadmin'])->group(function () {
 
     Route::controller(VenteController::class)->group(function () {
 

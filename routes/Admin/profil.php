@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProfilController;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
-    Route::controller(ProfilController::class)->group(function () {  
+    Route::controller(ProfilController::class)->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {  
         // Listes des stocks
         Route::get('/mon-profil', [ProfilController::class, 'profil'])->name('admin.monprofil');
 

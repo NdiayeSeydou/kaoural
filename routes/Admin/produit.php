@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProduitController;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
-    Route::controller(ProduitController::class)->group(function () {
+    Route::controller(ProduitController::class)->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
         // Listes des produits 
         Route::get('/produits', [ProduitController::class, 'produit'])->name('admin.produit.index');

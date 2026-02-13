@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\OrderController;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
-    Route::controller(OrderController::class)->group(function () {
+    Route::controller(OrderController::class)->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
         // Listes des commandes passées
         Route::get('/commandes', [OrderController::class, 'commande'])->name('admin.order.index');

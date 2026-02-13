@@ -38,27 +38,39 @@
 <body>
 
     <style>
-    /* 1. Définition de la police (Sécurité pour les systèmes sans MV Boli) */
-    @font-face {
-        font-family: 'MV Boli';
-        src: local('MV Boli'), local('Comic Sans MS');
-    }
+        /* 1. Définition de la police (Sécurité pour les systèmes sans MV Boli) */
+        @font-face {
+            font-family: 'MV Boli';
+            src: local('MV Boli'), local('Comic Sans MS');
+        }
 
-    /* 2. Application à TOUTE la page */
-    html, body, 
-    h1, h2, h3, h4, h5, h6, 
-    p, span, a, div, 
-    input, button, select, textarea {
-        font-family: 'MV Boli', 'Comic Sans MS', cursive !important;
-    }
+        /* 2. Application à TOUTE la page */
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span,
+        a,
+        div,
+        input,
+        button,
+        select,
+        textarea {
+            font-family: 'MV Boli', 'Comic Sans MS', cursive !important;
+        }
 
-    /* 3. Ajustement optionnel : la police manuscrite est souvent petite, 
+        /* 3. Ajustement optionnel : la police manuscrite est souvent petite,
        on augmente légèrement la lisibilité globale */
-    body {
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-    }
-</style>
+        body {
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
 
     <!-- Preloader -->
     <div id="preloader">
@@ -143,18 +155,21 @@
                                             Contact
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('login') }}"
-                                            class="{{ request()->routeIs('login') ? 'btn btn-primary' : '' }}">
-                                            Connexion
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('register') }}"
-                                            class="{{ request()->routeIs('register') ? 'btn btn-primary' : '' }}">
-                                            Inscription
-                                        </a>
-                                    </li>
+                                    @guest
+                                        <li>
+                                            <a href="{{ route('login') }}"
+                                                class="{{ request()->routeIs('login') ? 'btn btn-primary' : '' }}">
+                                                Connexion
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('register') }}"
+                                                class="{{ request()->routeIs('register') ? 'btn btn-primary' : '' }}">
+                                                Inscription
+                                            </a>
+                                        </li>
+                                    @endguest
+
                                 </ul>
                             </div>
                         </div>
@@ -164,7 +179,7 @@
                             <!-- Search -->
 
 
-                           
+
 
                             <!-- Cart -->
                             <div class="cart-area">
@@ -219,16 +234,55 @@
                             <!-- Account -->
                             <div class="account-area">
                                 <div class="user-thumbnail">
-                                    <img src="{{ asset('kaoural/img/bg-img/user.jpg') }}" alt="">
+                                    @auth
+                                        <!-- Affiche les initiales de l'utilisateur connecté -->
+                                        @php
+                                            $initials = strtoupper(
+                                                substr(Auth::user()->surname, 0, 1) . substr(Auth::user()->name, 0, 1),
+                                            );
+                                        @endphp
+                                        <div class="avatar-initials bg-primary text-white d-flex align-items-center justify-content-center rounded-circle"
+                                            style="width: 48px; height: 48px; font-weight: bold; font-size: 1.2rem;">
+                                            {{ $initials }}
+                                        </div>
+                                    @else
+                                        <!-- Affiche le logo si non connecté -->
+                                        <img src="{{ asset('kaoural/img/logo kaoural.png') }}" alt="Logo Kaoural">
+                                    @endauth
                                 </div>
+
+
                                 <ul class="user-meta-dropdown">
-                                    <li class="user-title"><span>Salut,</span> Seydou</li>
-                                    <li><a href="">Mon compte</a></li>
-                                    <li><a href="">Historique des commandes</a></li>
-                                    <li><a href="">Favoris</a></li>
-                                    <li><a href=""><i class="icofont-logout"></i> Se deconnecter</a></li>
+                                    @auth
+                                        <li class="user-title">
+                                            <span>Salut,</span> {{ Auth::user()->surname }} {{ Auth::user()->name }}
+                                        </li>
+
+                                        <li>
+                                            <a
+                                                href="{{ Auth::user()->role == 0
+                                                    ? route('superadmin.dashboard')
+                                                    : (Auth::user()->role == 1
+                                                        ? route('admin.dashboard')
+                                                        : route('client.dashboard')) }}">
+                                                Mon compte
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript:void(0);" onclick="confirmLogout()">
+                                                <i class="icofont-logout"></i> Se déconnecter
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a href="{{ route('login') }}">Connexion</a></li>
+                                        <li><a href="{{ route('register') }}">Inscription</a></li>
+                                    @endauth
                                 </ul>
                             </div>
+
+
+
                         </div>
                     </nav>
                 </div>
@@ -361,3 +415,32 @@
 </body>
 
 </html>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Déconnexion',
+            text: "Voulez-vous vraiment vous déconnecter ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Oui, déconnecter',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Crée un formulaire temporaire pour envoyer la requête POST
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = "{{ route('logout') }}";
+                const token = document.createElement('input');
+                token.type = 'hidden';
+                token.name = '_token';
+                token.value = "{{ csrf_token() }}";
+                form.appendChild(token);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    }
+</script>

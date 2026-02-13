@@ -3,7 +3,7 @@
 use App\Http\Controllers\SuperAdmin\ProfilController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('superadmin')->group(function () {
+Route::prefix('superadmin')->middleware(['auth', 'verified', 'rolemanager:superadmin'])->group(function () {
 
     Route::controller(ProfilController::class)->group(function () {
         // Listes des stocks

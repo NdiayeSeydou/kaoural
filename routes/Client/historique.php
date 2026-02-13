@@ -3,7 +3,7 @@
 use App\Http\Controllers\Client\HistoriqueController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('client')->group(function () {
+Route::prefix('client')->middleware(['auth', 'verified', 'rolemanager:client'])->group(function () {
 
     Route::controller(HistoriqueController::class)->group(function () {
         

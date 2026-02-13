@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\CreanceController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
     Route::controller(CreanceController::class)->group(function () {
 
