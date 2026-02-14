@@ -1147,23 +1147,75 @@
                         <!-- Dropdown -->
                         <li class="ms-3 dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="assets/images/avatar/avatar-1.jpg" alt=""
-                                    class="avatar avatar-sm rounded-circle" />
+                                @auth
+                                    @php
+                                        $initials = strtoupper(
+                                            substr(Auth::user()->surname, 0, 1) . substr(Auth::user()->name, 0, 1),
+                                        );
+                                    @endphp
+                                    <div class="avatar avatar-sm rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                        style="font-weight: bold; font-size: 0.9rem; width: 40px; height: 40px;">
+                                        {{ $initials }}
+                                    </div>
+                                @else
+                                    <img src="{{ asset('kaoural/img/logo kaoural.png') }}" alt="logo de kaoural"
+                                        class="avatar avatar-sm rounded-circle" />
+                                @endauth
+
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-md p-0">
                                 <div>
                                     <div
                                         class="d-flex gap-3 align-items-center border-dashed border-bottom px-4 py-4">
-                                        <img src="assets/images/avatar/avatar-1.jpg" alt=""
-                                            class="avatar avatar-md rounded-circle" />
+                                        @auth
+                                            @php
+                                                $initials = strtoupper(
+                                                    substr(Auth::user()->surname, 0, 1) .
+                                                        substr(Auth::user()->name, 0, 1),
+                                                );
+                                            @endphp
+                                            <div class="avatar avatar-sm rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                                style="font-weight: bold; font-size: 0.9rem; width: 40px; height: 40px;">
+                                                {{ $initials }}
+                                            </div>
+                                        @else
+                                            <img src="{{ asset('kaoural/img/logo kaoural.png') }}"
+                                                alt="logo de kaoural" class="avatar avatar-sm rounded-circle" />
+                                        @endauth
                                         <div>
-                                            <h4 class="mb-0 fs-5">Jitu Chauhan</h4>
-                                            <p class="mb-0 text-secondar small">@imjituchauhan</p>
+                                            @auth
+                                                @php
+                                                    $fullName = Auth::user()->surname . ' ' . Auth::user()->name;
+                                                    $displayName =
+                                                        strlen($fullName) > 15
+                                                            ? substr($fullName, 0, 15) . '…'
+                                                            : $fullName;
+                                                @endphp
+                                                <h4 class="mb-0 fs-5">{{ $displayName }}</h4>
+                                            @else
+                                                <h4 class="mb-0 fs-5">Kaoural</h4>
+                                            @endauth
+
+                                            @auth
+                                                @php
+                                                    $roles = [
+                                                        0 => 'Superadmin',
+                                                        1 => 'Admin',
+                                                        2 => 'Client',
+                                                    ];
+                                                    $userRole = $roles[Auth::user()->role] ?? 'Utilisateur';
+                                                @endphp
+                                                <p class="mb-0 text-primary small">{{ $userRole }}</p>
+                                            @else
+                                                <p class="mb-0 text-secondary small">Koural</p>
+                                            @endauth
+
                                         </div>
                                     </div>
                                     <div class="p-3 d-flex flex-column gap-1">
-                                        <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
+                                        <a href="{{ route('home') }}"
+                                            class="dropdown-item d-flex align-items-center gap-2">
                                             <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                     height="20" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="1.5"
@@ -1175,81 +1227,103 @@
                                                     <path d="M10 12h4v4h-4z" />
                                                 </svg>
                                             </span>
-                                            <span>Home</span>
+                                            <span>Accueil</span>
                                         </a>
-                                        <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
-                                            <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                    height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-inbox">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                                                    <path d="M4 13h3l3 3h4l3 -3h3" />
-                                                </svg>
-                                            </span>
-                                            <span> Inbox</span>
-                                        </a>
-                                        <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
-                                            <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                    height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-message">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M8 9h8" />
-                                                    <path d="M8 13h6" />
-                                                    <path
-                                                        d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
-                                                </svg>
-                                            </span>
-                                            <span> Chat</span>
-                                        </a>
-                                        <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
-                                            <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                    height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-activity">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 12h4l3 8l4 -16l3 8h4" />
-                                                </svg>
-                                            </span>
-                                            <span> Activity</span>
-                                        </a>
-                                        <a href="#!" class="dropdown-item d-flex align-items-center gap-2">
-                                            <span><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                    height="20" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-                                                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                                                </svg>
-                                            </span>
-                                            <span> Account Settings</span>
-                                        </a>
-                                    </div>
-                                    <div class="border-dashed border-top mb-4 pt-4 px-6">
-                                        <a href="#!" class="text-secondary d-flex align-items-center gap-2">
+                                        <a href="{{ route('superadmin.vente.index') }}"
+                                            class="dropdown-item d-flex align-items-center gap-2">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                     height="20" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-login-2">
+                                                    stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
-                                                    <path d="M3 12h13l-3 -3" />
-                                                    <path d="M13 15l3 -3" />
+                                                    <circle cx="6" cy="19" r="2" />
+                                                    <circle cx="17" cy="19" r="2" />
+                                                    <path d="M17 17h-11l-1 -12h-2" />
+                                                    <path d="M6 5h16l-1 7h-13" />
                                                 </svg>
                                             </span>
-                                            <span>Logout</span></a>
+                                            <span> Ventes</span>
+                                        </a>
+                                        <a href="{{ route('superadmin.stock.index') }}"
+                                            class="dropdown-item d-flex align-items-center gap-2">
+                                            <span> <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                    height="20" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-box">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M12 3l8 4l-8 4l-8 -4z" />
+                                                    <path d="M4 7v10l8 4l8 -4v-10" />
+                                                    <path d="M12 11v10" />
+                                                </svg>
+                                            </span>
+                                            <span> Stocks</span>
+                                        </a>
+
+                                        <a href="{{ route('superadmin.monprofil') }}"
+                                            class="dropdown-item d-flex align-items-center gap-2">
+                                            <span> <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                    height="20" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-settings">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a2 2 0 0 0 2.9 1.222c1.52 -.878 3.316 .918 2.438 2.438a2 2 0 0 0 1.222 2.9c1.756 .426 1.756 2.924 0 3.35a2 2 0 0 0 -1.222 2.9c.878 1.52 -.918 3.316 -2.438 2.438a2 2 0 0 0 -2.9 1.222c-.426 1.756 -2.924 1.756 -3.35 0a2 2 0 0 0 -2.9 -1.222c-1.52 .878 -3.316 -.918 -2.438 -2.438a2 2 0 0 0 -1.222 -2.9c-1.756 -.426 -1.756 -2.924 0 -3.35a2 2 0 0 0 1.222 -2.9c-.878 -1.52 .918 -3.316 2.438 -2.438a2 2 0 0 0 2.9 -1.222z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg>
+                                            </span>
+                                            <span>Mon compte</span>
+                                        </a>
                                     </div>
+                                    @auth
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            <div class="border-dashed border-top mb-4 pt-4 px-6">
+                                                <a href="#!" class="text-secondary d-flex align-items-center gap-2"
+                                                    onclick="confirmLogout(event)">
+                                                    <span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="1.5"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-login-2">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path
+                                                                d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+                                                            <path d="M3 12h13l-3 -3" />
+                                                            <path d="M13 15l3 -3" />
+                                                        </svg>
+                                                    </span>
+                                                    <span>Se déconnecter</span>
+                                                </a>
+                                            </div>
+                                        </form>
+
+                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                        <script>
+                                            function confirmLogout(event) {
+                                                event.preventDefault(); 
+                                                Swal.fire({
+                                                    title: 'Déconnexion',
+                                                    text: "Voulez-vous vraiment vous déconnecter ?",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#d33',
+                                                    cancelButtonColor: '#6c757d',
+
+                                                    confirmButtonText: 'Oui, me déconnecter',
+                                                    cancelButtonText: 'Annuler'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        document.getElementById('logout-form').submit();
+                                                    }
+                                                });
+                                            }
+                                        </script>
+                                    @endauth
                                 </div>
                             </div>
                         </li>

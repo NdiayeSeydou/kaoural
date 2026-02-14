@@ -1,23 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProfilController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
-    Route::controller(ProfilController::class)->middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {  
-        // Listes des stocks
+    Route::controller(ProfilController::class)->group(function () {
+
         Route::get('/mon-profil', [ProfilController::class, 'profil'])->name('admin.monprofil');
 
-
-        // Ajouter un stock
-        Route::get('/utilisateur/ajouter', [ProfilController::class, 'addUser'])->name('admin.user.create');
-        // Modifier un stock
-        Route::get('/utilisateur/modifier', [ProfilController::class, 'editUser'])->name('admin.user.edit');
-
-        // Voir les détails d'un stock
-        Route::get('/utilisateur/details', [ProfilController::class, 'detailsUser'])->name('admin.user.show');
+        
+        Route::post('/mon-profil/update', 'updateProfil')->name('admin.profil.update');
 
     });
-    
+
 });

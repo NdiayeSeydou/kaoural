@@ -15,47 +15,58 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-           'name' => 'Test',
-            'surname' => 'Users',
-            'email' => 'test@gmail.com',
-            'password' => Hash::make('Testusers@123'),
-            'telephone' => '+22300000000',
-            'adresse' => 'Bamako, Mali',
-            'role' => 2,
-        ]);
-
+      
+        // admin
          User::create([
+
             'name' => 'Mountaga',
+
             'surname' => 'Ndiaye',
+
             'email' => 'mountaga@gmail.com',
-            'password' => Hash::make('Mountaga@123'),
-            'telephone' => '+22376369679',
+
+            'password' => Hash::make('Mountaga@76369679'),
+
+            'telephone' => '+223 76 36 96 79',
+
             'adresse' => 'Bamako, Mali',
+
             'role' => 1,
         ]);
 
-        // admin
+        // superadmin
         User::create([
+
             'name' => 'Seydou',
+
             'surname' => 'Ndiaye',
-            'email' => 'seydou@gmail.com',
-            'password' => Hash::make('Seydoundiaye@123'),
-            'telephone' => '+22379578636',
+
+            'email' => 'ndiayeseydouyongui@gmail.com',
+
+            'password' => Hash::make('Seydoundiaye@79578636'),
+
+            'telephone' => '+223 79 57 86 36',
+
             'adresse' => 'Bamako, Mali',
+
             'role' => 0,
         ]);
 
         // client
         User::create([
-            'name' => 'Aminata',
+
+            'name' => 'Salia',
+
             'surname' => 'Traoré',
-            'email' => 'aminata@gmail.com',
-            'password' => Hash::make('Aminatatraore@123'),
-            'telephone' => '+22372202009',
+
+            'email' => 'salia@gmail.com',
+
+            'password' => Hash::make('Saliatraore@65026232'),
+
+            'telephone' => '+223 65 02 62 32',
+
             'adresse' => 'Bamako, Mali',
+
             'role' => 2,
         ]);
     }

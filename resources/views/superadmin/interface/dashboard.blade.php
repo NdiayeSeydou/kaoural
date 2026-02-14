@@ -11,9 +11,14 @@
     <div class="row mb-6 g-6">
         <div class="col-xl-8 col-lg-6">
             <div class="bg-gradient-mixed p-8 py-10 rounded-3 p-lg-7">
+
+                @php
+                    use Illuminate\Support\Str;
+                    $fullName = Auth::user()->surname . ' ' . Auth::user()->name;
+                @endphp
                 <!--heading-->
-                <h1 class="fs-3">👋 Bonjour Superadmin,</h1>
-                <p class="mb-0">Bienvenue sur le tableau de bord de la Quincaillerie Kaoural !</p>
+                <h1 class="fs-3">👋 Bonjour {{ Str::length($fullName) > 20 ? Auth::user()->surname : $fullName }},</h1>
+                <p class="mb-0">Bienvenue sur votre tableau de bord de la Quincaillerie Kaoural !</p>
                 <p>Suivez vos ventes, gérez vos stocks et gardez le contrôle sur vos opérations.</p>
 
             </div>
@@ -36,7 +41,7 @@
                                         Publiez facilement vos articles et partagez vos idées.
                                     </p>
                                     <div class="mt-4">
-                                        <a href="#" class="btn btn-primary px-4">Créer un blog</a>
+                                        <a href="{{ route('superadmin.blog.create') }}" class="btn btn-primary px-4">Créer un blog</a>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +54,7 @@
                                         Gérez votre contenu et atteignez plus de lecteurs.
                                     </p>
                                     <div class="mt-4">
-                                        <a href="#" class="btn btn-primary px-4">Créer un blog</a>
+                                        <a href="{{ route('superadmin.blog.create') }}" class="btn btn-primary px-4">Créer un blog</a>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +67,7 @@
                                         Lancez votre espace de publication en quelques clics.
                                     </p>
                                     <div class="mt-4">
-                                        <a href="#" class="btn btn-primary px-4">Créer un blog</a>
+                                        <a href="{{ route('superadmin.blog.create') }}" class="btn btn-primary px-4">Créer un blog</a>
                                     </div>
                                 </div>
                             </div>
