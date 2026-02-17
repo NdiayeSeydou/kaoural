@@ -29,6 +29,9 @@ Route::get('/produit',[ProduitController::class,'produit'])->name('produit');
 
 Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 
+Route::get('/details/{public_id}/blog',[BlogController::class,'detailsBlog'])->name('detailsblog');
+
+
 Route::get('/mon_panier',[PanierController::class,'panier'])->name('panier');
 
 Route::post('/panier/add/{public_id}', [PanierController::class, 'add'])->name('cart.add');

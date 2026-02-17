@@ -7,7 +7,7 @@ use App\Http\Controllers\SuperAdmin\BlogController;
 Route::prefix('superadmin')->middleware(['auth', 'verified', 'rolemanager:superadmin'])->group(function () {
 
    
-    Route::controller(BlogController::class)->middleware(['auth', 'verified', 'rolemanager:client'])->group(function () {
+    Route::controller(BlogController::class)->group(function () {
 
         
         Route::get('/blogs', 'blog')->name('superadmin.blog.index');
