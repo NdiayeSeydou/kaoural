@@ -4,7 +4,7 @@
 
     <style>
         /* Importation de la police (si elle n'est pas installée localement,
-               le navigateur cherchera une police manuscrite similaire) */
+                           le navigateur cherchera une police manuscrite similaire) */
         @font-face {
             font-family: 'MV Boli';
             src: local('MV Boli'), local('Comic Sans MS');
@@ -18,7 +18,7 @@
             background-repeat: no-repeat;
             background-size: cover;
 
-          
+
             min-height: 50vh;
 
             display: flex;
@@ -60,7 +60,7 @@
                     <p class="text-light mb-4 fs-5 animated fadeInUp">
                         Qualité garantie et livraison rapide pour tous vos travaux.
                     </p>
-                    <a href="#" class="btn btn-primary">
+                    <a href="{{ route('produit') }}" class="btn btn-primary">
                         Commander maintenant
                     </a>
                 </div>
@@ -149,643 +149,207 @@
             <div class="row">
                 <div class="col-12">
                     <div class="tabs_area">
-                        <!-- Tabs -->
                         <ul class="nav nav-tabs" role="tablist" id="product-tab">
-                            <li class="nav-item">
-                                <a href="#top-sellers" class="nav-link" data-toggle="tab" role="tab">Nos Meilleures
-                                    Ventes</a>
-                            </li>
-
                             <li class="nav-item">
                                 <a href="#on-sale" class="nav-link active" data-toggle="tab" role="tab">Produit à
                                     vendre</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#top-sellers" class="nav-link" data-toggle="tab" role="tab">Nos Meilleures
+                                    Ventes</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
 
-
-                            <!--nos meilleures ventes-->
-                            <div role="tabpanel" class="tab-pane fade" id="top-sellers">
-                                <div class="top_sellers_area">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/top-1.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>KID’s Fashion</h5>
-                                                    <h6>$49.39 <span>$55.31</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/top-2.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Beach Cap</h5>
-                                                    <h6>$20 <span>$25</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/top-3.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Gold Neckless</h5>
-                                                    <h6>$69 <span>$71</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="wishlist.html" data-toggle="tooltip"
-                                                                data-placement="top" title="Wishlist"><i
-                                                                    class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/top-4.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Diamond Neckless</h5>
-                                                    <h6>$300 <span>$310</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="compare.html" data-toggle="tooltip"
-                                                                data-placement="top" title="Compare"><i
-                                                                    class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/top-5.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Sport Shoes</h5>
-                                                    <h6>$30 <span>$34</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/top-6.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Pin Up Bikini</h5>
-                                                    <h6>$27 <span>$29</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="compare.html" data-toggle="tooltip"
-                                                                data-placement="top" title="Compare"><i
-                                                                    class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!---->
-
-                            <!--produit a vendre-->
                             <div role="tabpanel" class="tab-pane fade show active" id="on-sale">
                                 <div class="on_sale_area">
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/onsale-1.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Speaker</h5>
-                                                    <h6>$60 <span>$70</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        @forelse($produitsAVendre as $produit)
+                                            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                                                <div class="single_top_sellers">
+                                                    <div class="top_seller_image">
+                                                        <img src="{{ asset('storage/' . $produit->image) }}"
+                                                            alt="{{ $produit->designation }}" class="product-img-fixed">
                                                     </div>
+                                                    <div class="top_seller_desc">
+                                                        <h5>{{ Str::limit($produit->designation, 20) }}</h5>
+                                                        <h6>{{ number_format($produit->prix_unitaire, 0, ',', ' ') }} FCFA
+                                                        </h6>
 
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="compare.html" data-toggle="tooltip"
-                                                                data-placement="top" title="Compare"><i
-                                                                    class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
+                                                        <div
+                                                            class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
+                                                            <div class="ts_product_add_to_cart">
+                                                                <a href="#" title="Ajouter au panier"><i
+                                                                        class="icofont-shopping-cart"></i></a>
+                                                            </div>
+                                                            <div class="ts_product_quick_view px-2">
+                                                                <a href="#" data-toggle="modal"
+                                                                    data-target="#quickview-{{ $produit->id }}"><i
+                                                                        class="icofont-eye-alt"></i></a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/onsale-2.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Fancy Lamp</h5>
-                                                    <h6>$34 <span>$40</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
+                                        @empty
+                                            <div class="col-12 text-center py-5">
+                                                <div class="no-product-message">
+                                                    <i class="icofont-box" style="font-size: 3rem; color: #ccc;"></i>
+                                                    <p class="mt-3 text-muted">Aucun produit n'est disponible pour le moment
+                                                        dans cette section.</p>
+                                                    <a href="{{ route('home') }}" class="btn btn-primary btn-sm">Actualiser
+                                                        la page</a>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/onsale-3.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Sport Bra</h5>
-                                                    <h6>$63 <span>$70</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/onsale-4.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>S'well Water</h5>
-                                                    <h6>$12 <span>$13</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/onsale-5.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>Slipper</h5>
-                                                    <h6>$24 <span>$36</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-lg-4">
-                                            <div class="single_top_sellers">
-                                                <div class="top_seller_image">
-                                                    <img src="{{ asset('kaoural/img/product-img/onsale-6.png') }}"
-                                                        alt="Top-Sellers">
-                                                </div>
-                                                <div class="top_seller_desc">
-                                                    <h5>T-shirt</h5>
-                                                    <h6>$96 <span>$120</span></h6>
-                                                    <div class="top_seller_product_rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                    </div>
-
-                                                    <!-- Info -->
-                                                    <div
-                                                        class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
-                                                        <!-- Add to cart -->
-                                                        <div class="ts_product_add_to_cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                                title="Add To Cart"><i
-                                                                    class="icofont-shopping-cart"></i></a>
-                                                        </div>
-
-                                                        <!-- Wishlist -->
-                                                        <div class="ts_product_wishlist">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Wishlist"><i class="icofont-heart"></i></a>
-                                                        </div>
-
-                                                        <!-- Compare -->
-                                                        <div class="ts_product_compare">
-                                                            <a href="" data-toggle="tooltip" data-placement="top"
-                                                                title="Compare"><i class="icofont-exchange"></i></a>
-                                                        </div>
-
-                                                        <!-- Quick View -->
-                                                        <div class="ts_product_quick_view">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#quickview"><i
-                                                                    class="icofont-eye-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
 
+                            <div role="tabpanel" class="tab-pane fade" id="top-sellers">
+                                <div class="top_sellers_area">
+                                    <div class="row">
+                                        @forelse($meilleuresVentes as $produit)
+                                            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                                                <div class="single_top_sellers">
+                                                    <div class="top_seller_image">
+                                                        <img src="{{ asset('storage/' . $produit->image) }}"
+                                                            alt="{{ $produit->designation }}" class="product-img-fixed">
+                                                    </div>
+                                                    <div class="top_seller_desc">
+                                                        <h5>{{ Str::limit($produit->designation, 20) }}</h5>
+                                                        <h6>{{ number_format($produit->prix_unitaire, 0, ',', ' ') }} FCFA
+                                                        </h6>
+
+                                                        <div
+                                                            class="ts-seller-info mt-3 d-flex align-items-center justify-content-between">
+                                                            <div class="ts_product_add_to_cart">
+                                                                <a href="#" title="Ajouter au panier"><i
+                                                                        class="icofont-shopping-cart"></i></a>
+                                                            </div>
+                                                            <div class="ts_product_quick_view px-2">
+                                                                <a href="#" data-toggle="modal"
+                                                                    data-target="#quickview-{{ $produit->id }}"><i
+                                                                        class="icofont-eye-alt"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @push('modals')
+                                                @if (session('cartadd'))
+                                                    <div class="alert alert-success alert-dismissible fade show">
+                                                        {{ session('cartadd') }}
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="alert"></button>
+                                                    </div>
+                                                @endif
+                                                <div class="modal fade" id="quickview-{{ $produit->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="quickview" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                                        <div class="modal-content" style="position: relative;"> <button
+                                                                type="button" class="close btn" data-dismiss="modal"
+                                                                aria-label="Close"
+                                                                style="position: absolute; right: 15px; top: 10px; z-index: 999; font-size: 30px; opacity: 1;">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+
+
+
+                                                            <div class="modal-body">
+                                                                <div class="quickview_body">
+                                                                    <div class="container">
+                                                                        <div class="row">
+
+
+                                                                            <div class="col-12 col-lg-5">
+                                                                                <div class="quickview_pro_img">
+
+
+                                                                                    <img src="{{ asset('storage/' . $produit->image) }}"
+                                                                                        alt="{{ $produit->designation }}"
+                                                                                        style="width: 100%; border-radius: 5px;">
+
+
+                                                                                    <div class="product_badge">
+                                                                                        <span class="badge-new">Nouveau</span>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                            <div class="col-12 col-lg-7">
+                                                                                <div class="quickview_pro_des">
+                                                                                    <h4 class="title">
+                                                                                        {{ $produit->designation }}</h4>
+
+                                                                                    <div
+                                                                                        class="top_seller_product_rating mb-15">
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                    </div>
+
+                                                                                    <h5 class="price">
+                                                                                        {{ number_format($produit->prix_unitaire, 0, ',', ' ') }}
+                                                                                        FCFA
+                                                                                    </h5>
+
+                                                                                    <p>
+                                                                                        {{ $produit->description ?? 'Aucune description disponible pour ce produit.' }}
+                                                                                    </p>
+
+
+                                                                                </div>
+
+                                                                                <!-- Add to Cart Form -->
+                                                                                <form class="cart mt-4" method="POST"
+                                                                                    action="{{ route('cart.add', $produit->public_id) }}">
+                                                                                    @csrf
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            name="quantity" value="1"
+                                                                                            min="1"
+                                                                                            style="width: 80px; margin-right: 10px;">
+
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-primary">
+                                                                                            Ajouter au panier
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </form>
+
+
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endpush
+                                        @empty
+                                            <div class="col-12 text-center py-5">
+                                                <div class="no-product-message">
+                                                    <i class="icofont-frown" style="font-size: 3rem; color: #ccc;"></i>
+                                                    <p class="mt-3 text-muted">Désolé, nous n'avons pas encore de
+                                                        meilleures ventes à afficher.</p>
+                                                </div>
+                                            </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -795,116 +359,24 @@
 
         </div>
         <div class="text-center">
-            <a href="#" class="btn btn-primary">Voir Plus de produits</a>
+            <a href="{{ route('produit') }}" class="btn btn-primary">Voir Plus de produits</a>
         </div>
     </section>
 
-    <!-- fin de notre produit -->
+    <style>
+        .product-img-fixed {
+            width: 100%;
+            /* Prend toute la largeur de la carte */
+            height: 250px;
+            /* Définit une hauteur fixe pour tout le monde */
+            object-fit: cover;
+            /* Recadre l'image pour remplir l'espace sans la déformer */
+            display: block;
+        }
+    </style>
 
 
     <!-- modal de produit -->
-    <div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-
-                <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
-                <div class="modal-body">
-                    <div class="quickview_body">
-                        <div class="container">
-                            <div class="row">
-
-                                <!-- IMAGES PRODUIT -->
-                                <div class="col-12 col-lg-5">
-                                    <div class="quickview_pro_img">
-
-                                        <!-- Image principale -->
-                                        <img class="first_img" id="mainProductImage"
-                                            src="{{ asset('kaoural/img/product-img/1.jpg') }}" alt="">
-
-                                        <!-- Image hover (design original conservé) -->
-
-
-                                        <!-- Miniatures défilantes -->
-                                        <div class="quickview_thumbnails">
-                                            <img src="{{ asset('kaoural/img/product-img/1.jpg') }}"
-                                                onclick="changeImage(this)">
-                                            <img src="{{ asset('kaoural/img/product-img/2.jpg') }}"
-                                                onclick="changeImage(this)">
-                                            <img src="{{ asset('kaoural/img/product-img/2.jpg') }}"
-                                                onclick="changeImage(this)">
-                                            <img src="{{ asset('kaoural/img/product-img/4.jpg') }}"
-                                                onclick="changeImage(this)">
-                                        </div>
-
-                                        <!-- Badge -->
-                                        <div class="product_badge">
-                                            <span class="badge-new">New</span>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- DESCRIPTION PRODUIT -->
-                                <div class="col-12 col-lg-7">
-                                    <div class="quickview_pro_des">
-                                        <h4 class="title">Boutique Silk Dress</h4>
-
-                                        <div class="top_seller_product_rating mb-15">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-
-                                        <h5 class="price">$120.99 <span>$130</span></h5>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Mollitia expedita quibusdam aspernatur, sapiente consectetur
-                                            accusantium perspiciatis praesentium eligendi, in fugiat?
-                                        </p>
-
-                                        <a href="#">View Full Product Details</a>
-                                    </div>
-
-                                    <!-- Add to Cart Form -->
-                                    <form class="cart" method="post">
-                                        <div class="quantity">
-                                            <input type="number" class="qty-text" id="qty" step="1"
-                                                min="1" max="12" name="quantity" value="1">
-                                        </div>
-
-                                        <button type="submit" name="addtocart" value="5" class="cart-submit">
-                                            Add to cart
-                                        </button>
-
-                                        <!-- Wishlist -->
-                                        <div class="modal_pro_wishlist">
-                                            <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                        </div>
-
-                                        <!-- Compare -->
-
-                                    </form>
-
-                                    <!-- Share -->
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <!-- CSS ajouté sans modifier le thème -->
     <style>
@@ -949,18 +421,18 @@
 @endsection
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        @if(session('addcom'))
+        @if (session('addcom'))
             const Toast = Swal.mixin({
                 toast: true,
-                position: 'top-end', 
+                position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000, 
+                timer: 3000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 },
-                
+
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
                 },
@@ -971,7 +443,7 @@
 
             Toast.fire({
                 icon: 'success',
-                title: '{{ session("cartadd") }}',
+                title: '{{ session('cartadd') }}',
                 background: '#fff',
                 color: '#000',
                 customClass: {
