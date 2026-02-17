@@ -947,3 +947,37 @@
 
 
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('addcom'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end', 
+                showConfirmButton: false,
+                timer: 3000, 
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                },
+                
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session("cartadd") }}',
+                background: '#fff',
+                color: '#000',
+                customClass: {
+                    popup: 'border-radius-xl'
+                }
+            });
+        @endif
+    });
+</script>

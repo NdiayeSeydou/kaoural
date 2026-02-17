@@ -183,50 +183,78 @@
 
                             <!-- Cart -->
                             <div class="cart-area">
-                                <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity">2</span>
+                                <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity">{{ session('cart') ? count(session('cart')) : 0 }}</span>
                                 </div>
 
                                 <!-- Cart Dropdown Content -->
                                 <div class="cart-dropdown-content">
                                     <ul class="cart-list">
-                                        <li>
-                                            <div class="cart-item-desc">
-                                                <a href="#" class="image">
-                                                    <img src="{{ asset('kaoural/img/ampoule ingelec china.webp') }}"
-                                                        class="cart-thumb" alt="">
-                                                </a>
-                                                <div>
-                                                    <a href="#">Ampoule led 9w Ingelec</a>
-                                                    <p>1x <span class="price">1000 FCFA</span></p>
-                                                </div>
-                                            </div>
-                                            <span class="dropdown-product-remove"><i class="icofont-bin"></i></span>
-                                        </li>
-                                        <li>
-                                            <div class="cart-item-desc">
-                                                <a href="#" class="image">
-                                                    <img src="{{ asset('kaoural/img/spray.jpeg') }}" class="cart-thumb"
-                                                        alt="">
-                                                </a>
-                                                <div>
-                                                    <a href="#">Spray Colorant Bleu</a>
-                                                    <p>1x <span class="price">1000 FCFA</span></p>
-                                                </div>
-                                            </div>
-                                            <span class="dropdown-product-remove"><i class="icofont-bin"></i></span>
-                                        </li>
+                                        @php $totalGeneral = 0; @endphp
+
+                                        @if (session('cart') && count(session('cart')) > 0)
+                                            {{-- On récupère les 3 derniers produits ajoutés --}}
+                                            @foreach (array_reverse(session('cart'), true) as $id => $details)
+                                                @php $totalGeneral += $details['prix'] * $details['quantity']; @endphp
+
+                                                {{-- On limite l'affichage à 3 produits pour ne pas rallonger le menu --}}
+                                                @if ($loop->iteration <= 3)
+                                                    <li>
+                                                        <div class="cart-item-desc">
+                                                            <a href="#" class="image">
+                                                                <img src="{{ asset('storage/' . $details['image']) }}"
+                                                                    class="cart-thumb"
+                                                                    alt="{{ $details['designation'] }}">
+                                                            </a>
+                                                            <div>
+                                                                <a href="#">{{ $details['designation'] }}</a>
+                                                                <p>{{ $details['quantity'] }}x - <span
+                                                                        class="price">{{ number_format($details['prix'], 0, ',', ' ') }}
+                                                                        FCFA</span></p>
+                                                            </div>
+                                                        </div>
+                                                        {{-- Bouton pour supprimer rapidement --}}
+                                                        <form action="{{ route('cart.remove') }}" method="POST"
+                                                            style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="public_id"
+                                                                value="{{ $id }}">
+                                                            <button type="submit" class="dropdown-product-remove"
+                                                                style="border:none; background:none;">
+                                                                <i class="icofont-bin"></i>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <li class="text-center p-3">Votre panier est vide</li>
+                                        @endif
                                     </ul>
+
                                     <div class="cart-pricing my-4">
                                         <ul>
-
                                             <li>
                                                 <span>Total:</span>
-                                                <span>20000 FCFA</span>
+                                                {{-- On recalcule le total de tous les articles, même ceux non affichés dans le top 3 --}}
+                                                @php
+                                                    $totalReel = 0;
+                                                    if (session('cart')) {
+                                                        foreach (session('cart') as $item) {
+                                                            $totalReel += $item['prix'] * $item['quantity'];
+                                                        }
+                                                    }
+                                                @endphp
+                                                <span
+                                                    class="text-primary font-weight-bold">{{ number_format($totalReel, 0, ',', ' ') }}
+                                                    FCFA</span>
                                             </li>
                                         </ul>
                                     </div>
+
                                     <div class="cart-box">
-                                        <a href="{{ route('panier') }}" class="btn btn-primary d-block">Mon panier</a>
+                                        <a href="{{ route('panier') }}" class="btn btn-primary d-block">Voir tout le
+                                            panier</a>
                                     </div>
                                 </div>
                             </div>
@@ -271,11 +299,13 @@
 
                                         <li>
                                             <a href="javascript:void(0);" onclick="confirmLogout()">
+
                                                 <i class="icofont-logout"></i> Se déconnecter
                                             </a>
                                         </li>
                                     @else
                                         <li><a href="{{ route('login') }}">Connexion</a></li>
+
                                         <li><a href="{{ route('register') }}">Inscription</a></li>
                                     @endauth
                                 </ul>
@@ -296,6 +326,9 @@
 
     @yield('suite')
     <!-- Fin du header -->
+
+
+    @stack('modals')
 
 
 

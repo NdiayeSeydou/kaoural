@@ -31,7 +31,15 @@ Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 
 Route::get('/mon_panier',[PanierController::class,'panier'])->name('panier');
 
+Route::post('/panier/add/{public_id}', [PanierController::class, 'add'])->name('cart.add');
 
+Route::patch('/panier/update', [PanierController::class, 'update'])->name('cart.update');   
+
+Route::delete('/panier/remove', [PanierController::class, 'remove'])->name('cart.remove');
+
+Route::get('/panier/clear', [PanierController::class, 'clear'])->name('cart.clear');
+
+Route::post('/commande/valider', [PanierController::class, 'store'])->name('commande.store');
 
 //les routes pour l'authentification avec breeze
 

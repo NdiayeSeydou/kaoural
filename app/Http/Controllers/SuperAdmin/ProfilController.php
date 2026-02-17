@@ -27,6 +27,8 @@ class ProfilController extends Controller
 
                 'name' => ['required', 'string', 'min:3', 'max:255'],
 
+                'email' => ['required', 'email', 'unique:users,email,'.$user->id],
+
                 'telephone' => [
 
                     'required',
@@ -46,6 +48,12 @@ class ProfilController extends Controller
 
                 'name.min' => 'Le nom doit contenir au moins 3 caractères.',
 
+                'email.required' => 'L’adresse email est obligatoire.',
+
+                'email.email' => 'Veuillez fournir une adresse email valide.',
+
+                'email.unique' => 'Cette adresse email existe déjà.',
+
                 'telephone.required' => 'Le numéro de téléphone est obligatoire.',
 
                 'telephone.regex' => 'Le numéro doit être au format international (ex: +223...).',
@@ -60,6 +68,8 @@ class ProfilController extends Controller
                 'surname' => mb_convert_case($request->surname, MB_CASE_TITLE, 'UTF-8'),
 
                 'name' => mb_convert_case($request->name, MB_CASE_TITLE, 'UTF-8'),
+
+                'email' => strtolower($request->email),
 
                 'telephone' => $request->telephone,
 

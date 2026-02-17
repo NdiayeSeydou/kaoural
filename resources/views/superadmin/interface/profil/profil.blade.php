@@ -145,6 +145,15 @@
                                             </div>
 
                                             <div class="col-lg-12">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="text" name="email" class="form-control" id="email"
+                                                    value="{{ old('adresse', auth()->user()->email) }}" required />
+                                                @error('email')
+                                                    <div class="text-danger small">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                             <div class="col-lg-12">
                                                 <label for="address" class="form-label">Adresse</label>
                                                 <input type="text" name="adresse" class="form-control" id="address"
                                                     value="{{ old('adresse', auth()->user()->adresse) }}" required />

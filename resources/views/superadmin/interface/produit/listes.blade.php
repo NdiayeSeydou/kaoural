@@ -244,29 +244,7 @@
             <div class="row">
                 <div class="col-12">
                     <!-- card -->
-                    <div class="card card-lg" id="invoiceList"
-                        data-list="invoice_number,invoice_status,invoice_info,invoice_date,invoice_email,invoice_amount">
-                        <div class="card-header border-bottom-0">
-                            <div class="row gy-2">
-                                <div class="col-lg-4">
-                                    <input type="search" class="form-control listjs-search" placeholder="Rechercher" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="d-flex gap-2 justify-content-md-end">
-                                        <div class="col-lg-4">
-                                            <select class="form-select" data-choices="Status">
-                                                <option value="Paid">Payé</option>
-                                                <option value="Pending">Impayé</option>
-                                                <option value="Refunded">Pro-format</option>
-                                            </select>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                 
 
                     <div class="table-responsive table-checkbox" data-simplebar style="height: 600px">
                         <table class="table text-nowrap table-centered table-hover mb-0" data-check-container>
@@ -380,25 +358,25 @@
 
                         </table>
 
-                        <nav aria-label="Page navigation example" class="mt-4">
-                            <ul class="pagination justify-content-center mb-0">
-                                <li class="page-item {{ $produits->onFirstPage() ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ $produits->previousPageUrl() }}">Précedent</a>
-                                </li>
 
-                                @foreach ($produits->getUrlRange(1, $produits->lastPage()) as $page => $url)
-                                    <li class="page-item {{ $produits->currentPage() == $page ? 'active' : '' }}">
-                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                    </li>
-                                @endforeach
-
-                                <li class="page-item {{ $produits->hasMorePages() ? '' : 'disabled' }}">
-                                    <a class="page-link" href="{{ $produits->nextPageUrl() }}">Suivant</a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
+                    <nav aria-label="Page navigation example" class="mt-4">
+                        <ul class="pagination justify-content-center mb-0">
+                            <li class="page-item {{ $produits->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $produits->previousPageUrl() }}">Précedent</a>
+                            </li>
 
+                            @foreach ($produits->getUrlRange(1, $produits->lastPage()) as $page => $url)
+                                <li class="page-item {{ $produits->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+
+                            <li class="page-item {{ $produits->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $produits->nextPageUrl() }}">Suivant</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
