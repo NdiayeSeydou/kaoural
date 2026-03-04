@@ -12,6 +12,8 @@ class LigneCommande extends Model
 
         'designation', 
 
+        'produit_id',
+
         'quantite', 
 
         'prix_unitaire'
@@ -22,4 +24,9 @@ class LigneCommande extends Model
     {
         return $this->belongsTo(Commande::class);
     }
+
+    public function produit() {
+    return $this->belongsTo(Produit::class, 'produit_id'); 
+    // Vérifiez que le nom de la colonne est bien produit_id
+}
 }

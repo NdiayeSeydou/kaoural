@@ -3,12 +3,11 @@
 @section('suite')
 
     <style>
-        /* Importation de la police (si elle n'est pas installée localement,
-                           le navigateur cherchera une police manuscrite similaire) */
         @font-face {
             font-family: 'MV Boli';
+
             src: local('MV Boli'), local('Comic Sans MS');
-            /* Fallback si absent */
+
         }
 
         .hero-header {
@@ -35,7 +34,7 @@
             color: #ffc107 !important;
         }
 
-        /* Style du bouton pour qu'il s'accorde à la police */
+
         .hero-header .btn {
             font-family: 'MV Boli', sans-serif;
             font-weight: bold;
@@ -68,18 +67,14 @@
         </div>
     </div>
 
-    <!--fin du carousel -->
 
-    <!-- avantages de la quincaillerie kaoural-->
     <style>
-        /* Application de la police MV Boli aux titres de cette section */
         .advantages-title,
         .service-item h5 {
             font-family: 'MV Boli', 'Comic Sans MS', cursive;
             font-weight: bold;
         }
 
-        /* Effet au survol des cartes */
         .service-item {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border-bottom: 3px solid transparent !important;
@@ -91,7 +86,6 @@
             border-bottom: 3px solid #FFD700 !important;
         }
 
-        /* Animation de l'icône lors du survol */
         .service-item:hover i {
             transform: scale(1.1);
             transition: 0.3s;
@@ -143,7 +137,7 @@
     </div>
 
 
-    <!-- nos produits -->
+
     <section class="best_rated_onsale_top_sellares section_padding_100_70">
         <div class="container">
             <div class="row">
@@ -307,7 +301,6 @@
 
                                                                                 </div>
 
-                                                                                <!-- Add to Cart Form -->
                                                                                 <form class="cart mt-4" method="POST"
                                                                                     action="{{ route('cart.add', $produit->public_id) }}">
                                                                                     @csrf
@@ -366,19 +359,17 @@
     <style>
         .product-img-fixed {
             width: 100%;
-            /* Prend toute la largeur de la carte */
+
             height: 250px;
-            /* Définit une hauteur fixe pour tout le monde */
+
             object-fit: cover;
-            /* Recadre l'image pour remplir l'espace sans la déformer */
+
             display: block;
         }
     </style>
 
 
-    <!-- modal de produit -->
 
-    <!-- CSS ajouté sans modifier le thème -->
     <style>
         .quickview_thumbnails {
             display: flex;
@@ -409,7 +400,6 @@
         }
     </style>
 
-    <!-- JS simple -->
     <script>
         function changeImage(el) {
             document.getElementById('mainProductImage').src = el.src;

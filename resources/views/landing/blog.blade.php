@@ -14,20 +14,40 @@
                                 <div class="single_blog_area mb-5">
                                     <div class="blog_post_thumb">
                                         <a href="{{ route('detailsblog', $blog->public_id) }}">
+
                                             <img src="{{ asset('storage/' . $blog->image) }}" alt="blog-post-thumb">
                                         </a>
                                         <div class="post-date">
-                                          <a href="{{ route('detailsblog', $blog->public_id) }}">{{ $blog->created_at->translatedFormat('d M') }}</a>
-                                            <span>{{ $blog->lecture_time ?? '3' }} min lecture</span>
+                                            <a
+                                                href="{{ route('detailsblog', $blog->public_id) }}">{{ 
+
+                                                $blog->created_at->translatedFormat('d M') }}</a>
+
+                                            <span>
+
+                                                @php
+
+                                                    $mots = str_word_count(strip_tags($blog->contenu));
+
+                                                    $tempsLecture = ceil($mots / 200);
+
+                                                @endphp
+
+                                                {{ $tempsLecture < 1 ? 1 : $tempsLecture }} min
+
+                                            </span>
                                         </div>
 
 
                                     </div>
                                     <div class="blog_post_content">
+
                                         <a href="{{ route('detailsblog', $blog->public_id) }}" class="blog_title">
+                                            
                                             {{ $blog->titre }}
                                         </a>
                                         <p>{{ Str::limit($blog->description, 100) }}</p>
+
                                         <a href="{{ route('detailsblog', $blog->public_id) }}">
                                             Continuer la lecture <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                         </a>
@@ -51,16 +71,17 @@
                         <nav aria-label="Page navigation">
                             @if ($blogs->hasPages())
                                 <ul class="pagination pagination-sm justify-content-center">
-                                    {{-- Bouton Précédent --}}
+                                   
                                     @if ($blogs->onFirstPage())
                                         <li class="page-item disabled"><span class="page-link"><i
                                                     class="fa fa-angle-left"></i></span></li>
                                     @else
-                                        <li class="page-item"><a class="page-link" href="{{ $blogs->previousPageUrl() }}"><i
-                                                    class="fa fa-angle-left"></i></a></li>
+                                        <li class="page-item"><a class="page-link"
+                                                href="{{ $blogs->previousPageUrl() }}"><i class="fa fa-angle-left"></i></a>
+                                        </li>
                                     @endif
 
-                                    {{-- Éléments de pagination (Numéros) --}}
+                                 
                                     @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
                                         @if ($page == $blogs->currentPage())
                                             <li class="page-item active"><span class="page-link">{{ $page }}</span>
@@ -71,7 +92,7 @@
                                         @endif
                                     @endforeach
 
-                                    {{-- Bouton Suivant --}}
+                                   
                                     @if ($blogs->hasMorePages())
                                         <li class="page-item"><a class="page-link" href="{{ $blogs->nextPageUrl() }}"><i
                                                     class="fa fa-angle-right"></i></a></li>
@@ -91,11 +112,17 @@
 
     <style>
         .btn-primary:hover {
+
             background-color: #e6c200;
+
             border-color: #e6c200;
+
             color: #000;
+
             transform: scale(1.02);
         }
     </style>
 
 @endsection
+
+

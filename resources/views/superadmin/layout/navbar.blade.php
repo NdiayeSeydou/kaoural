@@ -443,7 +443,7 @@
                             <a class="nav-link" href="{{ route('superadmin.order.index') }}">Listes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('superadmin.order.status') }}">Status</a>
+                            <a class="nav-link" href="{{ route('superadmin.order.kanban') }}">Status</a>
                         </li>
                     </ul>
                 </li>
@@ -459,7 +459,7 @@
                         <div class="d-flex align-items-center gap-2">
                             <span class="nav-icon">
                                 <!-- Icône Demande de devis -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" <svg
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"

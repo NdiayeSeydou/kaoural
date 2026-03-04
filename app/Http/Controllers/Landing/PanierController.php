@@ -164,17 +164,21 @@ class PanierController extends Controller
                 'statut' => 'en_attente',
             ]);
 
-            foreach ($cart as $item) {
 
-                $commande->lignes()->create([
+            
 
-                    'designation' => $item['designation'],
+           foreach ($cart as $idEnSession => $item) {
+    // 1. On cherche le produit en base via son public_id
+    $produit = Produit::where('public_id', $idEnSession)->first();
 
-                    'quantite' => $item['quantity'],
-
-                    'prix_unitaire' => $item['prix'],
-                ]);
-            }
+    // 2. On enregistre la ligne AVEC le produit_id
+    $commande->lignes()->create([
+        'produit_id'    => $produit ? $produit->id : null, // C'est CA qui permet de retrouver l'image !
+        'designation'   => $item['designation'],
+        'quantite'      => $item['quantity'],
+        'prix_unitaire' => $item['prix'],
+    ]);
+}
 
             DB::commit();
 

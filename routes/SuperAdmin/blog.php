@@ -20,10 +20,7 @@ Route::prefix('superadmin')->middleware(['auth', 'verified', 'rolemanager:supera
       
         Route::post('/creer/blog/store', 'storeBlog')->name('superadmin.blog.store');
 
-
-   
         Route::get('/modifier/blog/{public_id}', 'editBlog')->name('superadmin.blog.edit');
-        
        
         Route::put('/modifier/blog/{public_id}/update', 'updateBlog')->name('superadmin.blog.update');
 

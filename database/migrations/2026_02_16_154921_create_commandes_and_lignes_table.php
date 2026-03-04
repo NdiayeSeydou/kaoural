@@ -27,7 +27,7 @@ return new class extends Migration
 
             $table->decimal('montant_total', 15,2);
 
-            $table->string('statut')->default('en_attente');
+            $table->string('statut')->default('en attente');
 
             $table->timestamps();
 

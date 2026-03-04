@@ -84,7 +84,7 @@
                                             </p>
                                         </div>
 
-                                  
+
                                     </div>
                             </div>
                         </div>
@@ -113,10 +113,10 @@
                                 <!-- Define the gradient -->
                                 <defs>
                                     <!--
-                                                                    Gradient direction:
-                                                                    Starts at the top-start corner (x1="0%", y1="0%")
-                                                                    Ends at the bottom-end corner (x2="100%", y2="100%")
-                                                                -->
+                                                                        Gradient direction:
+                                                                        Starts at the top-start corner (x1="0%", y1="0%")
+                                                                        Ends at the bottom-end corner (x2="100%", y2="100%")
+                                                                    -->
                                     <linearGradient id="gradientHeaderBody1" x1="0%" y1="0%" x2="100%"
                                         y2="100%">
                                         <!-- Start color -->
@@ -141,10 +141,10 @@
                                 <!-- Define the gradient -->
                                 <defs>
                                     <!--
-                                                                    Gradient direction:
-                                                                    Starts at the bottom-end corner (x1="100%", y1="100%")
-                                                                    Ends at the top-start corner (x2="0%", y2="0%")
-                                                                -->
+                                                                        Gradient direction:
+                                                                        Starts at the bottom-end corner (x1="100%", y1="100%")
+                                                                        Ends at the top-start corner (x2="0%", y2="0%")
+                                                                    -->
                                     <linearGradient id="gradientHeaderBody2" x1="100%" y1="100%" x2="0%"
                                         y2="0%">
                                         <!-- Start color -->
@@ -179,9 +179,8 @@
 
                             <figcaption class="m-0 mt-7">
                                 <!-- Client's Photoshoot -->
-                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}"
-                                    class="rounded-circle border" width="40" height="40"
-                                    alt="Logo de kaoural">
+                                <img src="{{ asset('kaoural/img/logo kaoural.png') }}" class="rounded-circle border"
+                                    width="40" height="40" alt="Logo de kaoural">
 
                                 <div class="mt-4 d-flex align-items-center justify-content-center text-base">
                                     <!-- Client's Name -->

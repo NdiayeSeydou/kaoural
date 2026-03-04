@@ -96,11 +96,7 @@ require __DIR__.'/SuperAdmin/bon.php';
 
 require __DIR__.'/SuperAdmin/facture.php';
 
-require __DIR__.'/SuperAdmin/materiel.php';
-
 require __DIR__.'/SuperAdmin/profil.php';
-
-require __DIR__.'/SuperAdmin/transaction.php';
 
 require __DIR__.'/SuperAdmin/quincaillerie.php';
 

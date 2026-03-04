@@ -19,8 +19,6 @@
     @endif
 
 
-
-
     @if (session('quindel'))
         <div class="alert alert-success alert-dismissible fade show">
             {{ session('quindel') }}
@@ -31,7 +29,7 @@
     <div class="custom-container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
-                <!-- Page header -->
+                
                 <div class="mb-8 d-md-flex justify-content-between align-items-center">
                     <div>
                         <h1 class="mb-3 h2">Listes des quincailleries partenaires</h1>
@@ -67,8 +65,7 @@
         </div>
 
         <div>
-            <!-- row -->
-
+            
             <div class="row g-6 mb-6">
                 <div class="col-xl-3 col-md-6 col-12">
                     <div class="card card-lg">
@@ -315,21 +312,19 @@
                                         </td>
 
 
-                                        {{-- Téléphone --}}
+                                     
                                         <td class="text-center">
                                             {{ $quincaillerie->telephone
                                                 ? preg_replace('/(\+\d{3})(\d{2})(\d{2})(\d{2})(\d{2})/', '$1 $2 $3 $4 $5', $quincaillerie->telephone)
                                                 : 'non renseigné' }}
                                         </td>
 
-                                        {{-- Adresse --}}
+                                   
                                         <td class="text-center">
                                             {{ $quincaillerie->adresse ?? 'non renseigné' }}
                                         </td>
 
-                                        {{-- Nom --}}
-
-                                        {{-- Actions --}}
+                                       
                                         <td>
                                             <div class="dropdown">
                                                 <a class="btn btn-ghost btn-icon rounded-circle" href="#!"
@@ -339,25 +334,25 @@
 
                                                 <div class="dropdown-menu">
 
-                                                    {{-- Détails --}}
+                                                 
                                                     <a class="dropdown-item"
                                                         href="{{ route('superadmin.quincaillerie.show', $quincaillerie->public_id) }}">
                                                         Détails
                                                     </a>
 
-                                                    {{-- Modifier --}}
+                                                  
                                                     <a class="dropdown-item"
                                                         href="{{ route('superadmin.quincaillerie.edit', $quincaillerie->public_id) }}">
                                                         Modifier
                                                     </a>
 
-                                                    {{-- Retrait --}}
+                                                  
                                                     <a class="dropdown-item"
                                                         href="{{ route('superadmin.quincaillerie.retrait', $quincaillerie->public_id) }}">
                                                         Ajouter un retrait
                                                     </a>
 
-                                                    {{-- Supprimer --}}
+
                                                     <form method="POST"
                                                         action="{{ route('superadmin.quincaillerie.delete', $quincaillerie->public_id) }}"
                                                         onsubmit="return confirm('Supprimer cette quincaillerie ?')">
